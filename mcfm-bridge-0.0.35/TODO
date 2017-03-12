@@ -1,0 +1,32 @@
+Hmmm, mcfm have been changing their mxpart variable between version 
+6.7 and 6.8, so we have changed it in the bridge, which means that 
+it will no longer work with 6.7. 
+
+We need some way to automatically set this - because we use the common 
+blocks from mcfm directly, this needs to be hard coded.
+
+If we want to set this automatically, we will therefore need to set 
+this using eg 
+
+	-D=$(shell grep mxpart $mcfmdir/src/Inc/constants.f | grep parameter | sed 's/.*mxpart=\(.*\))/\1/')
+
+Or we could implement some additional 
+
+  mcfm-config 
+
+script, so that we could eg use 
+
+  -D=$(shell mcfm-config --mxpart )
+
+This might be the most elegant solution.
+
+In either case it will (unfortunately) add a dependence on the 
+mcfm code directly, so it will mean that mcfm will need to be installed 
+first and that we will need to add the mcfm dependence into the 
+mcfm-bridge configure code.
+
+This means that we should finally factor off the standSimple.cxx code 
+into a separate package so that it does not have an implicit dependence
+on the mcfm code.
+
+   

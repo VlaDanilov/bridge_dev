@@ -1,0 +1,48 @@
+#! /usr/bin/env bash
+
+# These variables need to exist
+prefix=@prefix@
+
+if [[ $# -eq 0 || -n $( echo $* | egrep -- "--help|-h" ) ]]; then
+    echo "mcfmbridge-config: configuration tool for the APPLgrid - mcfm bridge"
+    echo "                 http://projects.hepforge.org/applgrid/"
+    echo
+    echo "Usage: mcfmbridge-config [[--help|-h] | [--prefix] | [...]]"
+    echo "Options:"
+    echo "  --help | -h    : this help"
+    echo
+    echo "  --prefix       : installation prefix (cf. autoconf)"
+    echo "  --incdir       : path to the bridge header directory"
+    echo "  --libdir       : path to the bridge library directory"
+    echo "  --cxxflags     : compiler flags for the C preprocessor"
+    echo "  --ldflags      : compiler flags for the linker "
+    echo
+    echo "  --version      : release version number"
+fi
+
+OUT=""
+
+tmp=$( echo "$*" | egrep -- '--\<prefix\>')
+test -n "$tmp" && OUT="$OUT @prefix@"
+
+tmp=$( echo "$*" | egrep -- '--\<incdir\>')
+test -n "$tmp" && OUT="$OUT @includedir@"
+
+tmp=$( echo "$*" | egrep -- '--\<cxxflags\>')
+test -n "$tmp" && OUT="$OUT -I@includedir@"
+
+tmp=$( echo "$*" | egrep -- '--\<libdir\>')
+test -n "$tmp" && OUT="$OUT @exec_prefix@@libdir@"
+
+symbol=$( nm @exec_prefix@@libdir@/libmcfmbridge.a | sed -n 's/.* T \(.*setup_mcfmbridge\)/\1/p' | head -1 )
+applgrid_ldflags=$( applgrid-config --ldflags )
+root_ldflags=$( root-config --ldflags )
+root_libs=$( root-config --libs )
+tmp=$( echo "$*" | egrep -- '--\<ldflags\>')
+test -n "$tmp" && OUT="$OUT -u $symbol  -L@exec_prefix@@libdir@  -lmcfmbridge  $applgrid_ldflags  $root_ldflags $root_libs -lstdc++" 
+
+## Version
+tmp=$( echo "$*" | egrep -- '--\<version\>')
+test -n "$tmp" && OUT="$OUT @PACKAGE_VERSION@"
+
+echo $OUT

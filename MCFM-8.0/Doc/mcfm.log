@@ -1,0 +1,1865 @@
+This is pdfTeXk, Version 3.141592-1.40.3 (Web2C 7.5.6) (format=latex 2016.11.4)  8 MAR 2017 17:13
+entering extended mode
+ %&-line parsing enabled.
+**mcfm
+(./mcfm.tex
+LaTeX2e <2005/12/01>
+Babel <v3.8h> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, arabic, basque, bulgarian, coptic, welsh, czech, slovak, german, ng
+erman, danish, esperanto, spanish, catalan, galician, estonian, farsi, finnish,
+ french, greek, monogreek, ancientgreek, croatian, hungarian, interlingua, ibyc
+us, indonesian, icelandic, italian, latin, mongolian, dutch, norsk, polish, por
+tuguese, pinyin, romanian, russian, slovenian, uppersorbian, serbian, swedish, 
+turkish, ukenglish, ukrainian, loaded.
+(/usr/share/texmf/tex/latex/base/article.cls
+Document Class: article 2005/09/16 v1.4f Standard LaTeX document class
+(/usr/share/texmf/tex/latex/base/size12.clo
+File: size12.clo 2005/09/16 v1.4f Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texmf/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2007/02/07 v6.75r Hypertext links for LaTeX
+
+(/usr/share/texmf/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+\@linkdim=\dimen103
+\Hy@linkcounter=\count87
+\Hy@pagecounter=\count88
+
+(/usr/share/texmf/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2007/02/07 v6.75r Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/share/texmf/tex/latex/config/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+(/usr/share/texmf/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2006/08/22 v2.4 Connects package keyval with LaTeX options (
+HO)
+)
+Package hyperref Info: Hyper figures OFF on input line 2288.
+Package hyperref Info: Link nesting OFF on input line 2293.
+Package hyperref Info: Hyper index ON on input line 2296.
+Package hyperref Info: Plain pages OFF on input line 2303.
+Package hyperref Info: Backreferencing OFF on input line 2308.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 2444.
+(/usr/local/share/texmf/tex/latex/latex2html/url.sty
+Package: url 1996/02/06  ver 1.1  Verb mode for urls, email addresses, and file
+ names
+)
+LaTeX Info: Redefining \url on input line 2599.
+\Fld@menulength=\count89
+\Field@Width=\dimen104
+\Fld@charsize=\dimen105
+\Choice@toks=\toks15
+\Field@toks=\toks16
+Package hyperref Info: Hyper figures OFF on input line 3102.
+Package hyperref Info: Link nesting OFF on input line 3107.
+Package hyperref Info: Hyper index ON on input line 3110.
+Package hyperref Info: backreferencing OFF on input line 3117.
+Package hyperref Info: Link coloring OFF on input line 3122.
+\Hy@abspage=\count90
+\c@Item=\count91
+\c@Hfootnote=\count92
+)
+*hyperref using default driver hdvips*
+(/usr/share/texmf/tex/latex/hyperref/hdvips.def
+File: hdvips.def 2007/02/07 v6.75r Hyperref driver for dvips
+
+(/usr/share/texmf/tex/latex/hyperref/pdfmark.def
+File: pdfmark.def 2007/02/07 v6.75r Hyperref definitions for pdfmark specials
+\pdf@docset=\toks17
+\pdf@box=\box26
+\pdf@toks=\toks18
+\pdf@defaulttoks=\toks19
+\Fld@listcount=\count93
+)) (./mcfm.aux)
+\openout1 = `mcfm.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 4.
+LaTeX Font Info:    ... okay on input line 4.
+Package hyperref Info: Link coloring OFF on input line 4.
+
+(/usr/share/texmf/tex/latex/hyperref/nameref.sty
+Package: nameref 2006/12/27 v2.28 Cross-referencing by name of section
+
+(/usr/share/texmf/tex/latex/oberdiek/refcount.sty
+Package: refcount 2006/02/20 v3.0 Data extraction from references (HO)
+)
+\c@section@level=\count94
+)
+LaTeX Info: Redefining \ref on input line 4.
+LaTeX Info: Redefining \pageref on input line 4.
+ (./mcfm.out) (./mcfm.out)
+\@outlinefile=\write3
+\openout3 = `mcfm.out'.
+
+
+[1
+
+] (./mcfm.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 3.
+ [2] [3]
+Overfull \hbox (23.53104pt too wide) in paragraph at lines 92--92
+ [][] [] []  
+ []
+
+[4])
+\tf@toc=\write4
+\openout4 = `mcfm.toc'.
+
+ [5]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 60.
+ (/usr/share/texmf/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 60.
+
+Overfull \hbox (5.8571pt too wide) in paragraph at lines 74--78
+[]\OT1/cmr/m/n/12 As of v8.0 MCFM can also com-pute se-lected color-singlet pro
+-cesses through
+ []
+
+[6] [7] [8]
+Overfull \hbox (56.70538pt too wide) in paragraph at lines 191--212
+ [] 
+ []
+
+[9] [10] [11]
+Overfull \hbox (60.77522pt too wide) in paragraph at lines 353--353
+[]\OT1/cmtt/m/n/12 ./mcfm: error while loading shared libraries: libLHAPDF.so.0
+: cannot open[] 
+ []
+
+
+Overfull \hbox (15.99513pt too wide) in paragraph at lines 370--373
+[]\OT1/cmr/m/n/12 One may al-ways re-turn to the built-in dis-tri-bu-tions by r
+e-set-ting \OT1/cmtt/m/n/12 PDFROUTINES
+ []
+
+[12] [13]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 447.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 447.
+ [14] [15] [16]
+Overfull \hbox (84.17683pt too wide) in paragraph at lines 622--637
+ [] 
+ []
+
+[17] [18] [19] [20]
+Overfull \hbox (4.98042pt too wide) in paragraph at lines 791--795
+[]\OT1/cmtt/m/n/12 ptlepton(2nd+)[]min, |etalepton(2nd+)|[]max\OT1/cmr/m/n/12 .
+ These spec-ify the val-
+ []
+
+[21] [22] [23]
+Overfull \hbox (11.96594pt too wide) in paragraph at lines 894--898
+\OT1/cmr/m/n/12 that all photon-lepton pairs are sep-a-rated by $^^A\OML/cmm/m/
+it/12 R >$ \OT1/cmtt/m/n/12 R(photon,lept)[]min\OT1/cmr/m/n/12 .
+ []
+
+[24] [25] [26] [27] [28]
+Overfull \hbox (12.72577pt too wide) in paragraph at lines 1159--1161
+[]\OT1/cmtt/m/n/12 writetop\OT1/cmr/m/n/12 : write out the his-tograms as a \OT
+1/cmtt/m/n/12 TOPDRAWER \OT1/cmr/m/n/12 file, \OT1/cmtt/m/n/12 outputname.top\O
+T1/cmr/m/n/12 . 
+ []
+
+
+Overfull \hbox (5.12712pt too wide) in paragraph at lines 1164--1169
+[]\OT1/cmtt/m/n/12 writegnu\OT1/cmr/m/n/12 : write out the his-tograms as a \OT
+1/cmtt/m/n/12 gnuplot \OT1/cmr/m/n/12 file[], \OT1/cmtt/m/n/12 outputname.gnu\O
+T1/cmr/m/n/12 .
+ []
+
+
+Overfull \hbox (25.43188pt too wide) in paragraph at lines 1164--1169
+\OT1/cmr/m/n/12 This can be pro-cessed by run-ning the com-mand `\OT1/cmtt/m/n/
+12 gnuplot outputname.gnu\OT1/cmr/m/n/12 ',
+ []
+
+[29]
+Overfull \hbox (37.81134pt too wide) in paragraph at lines 1191--1201
+\OT1/cmr/m/n/12 kine-matic quan-ti-ties. In that case a fur-ther rou-tine is ca
+lled, e.g. \OT1/cmtt/m/n/12 nplotter[]W[]only.f
+ []
+
+[30] [31] [32]
+Overfull \hbox (23.23796pt too wide) in paragraph at lines 1310--1323
+\OT1/cmr/m/n/12 In or-der to ob-tain \OT1/cmr/m/it/12 un-weighted \OT1/cmr/m/n/
+12 events, one must change the value of \OT1/cmtt/m/n/12 nevtrequested
+ []
+
+[33]
+Overfull \hbox (43.46689pt too wide) in paragraph at lines 1374--1378
+[]\OT1/cmtt/m/n/12 subroutine userwriteinfo(unitno,comment[]string,xsec,xsec[]e
+rr,itno)
+ []
+
+[34]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.4> on input line 1411.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1411.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1411.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1419.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1419.
+
+[35]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1428.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1428.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1447.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1447.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1460.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1460.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1460.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 1460.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1460.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1467.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 1467.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1467.
+
+[36]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1483.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 1483.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1483.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1483.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 1483.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1483.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1496.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1496.
+
+[37]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1532.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1532.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1541.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 1541.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1541.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1541.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 1541.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1541.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1551.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1551.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1564.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1564.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1567.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 1567.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1567.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1567.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 1567.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 1567.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1567.
+
+[38]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1578.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1578.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1591.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1591.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1612.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1612.
+
+[39]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1622.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 1622.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1622.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1633.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 1633.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1633.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1633.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 1633.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1633.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1646.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 1646.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1646.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1646.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 1646.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1646.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1657.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 1657.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1657.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1657.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 1657.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1657.
+
+[40]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1694.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1694.
+
+[41]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1724.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1724.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1730.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1730.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1745.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1745.
+
+[42]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1777.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1777.
+
+[43]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1850.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1850.
+
+
+Overfull \hbox (17.22913pt too wide) in paragraph at lines 1853--1865
+\OT1/cmr/m/n/12 de-cays into a bot-tom quark pair (\OT1/cmtt/m/n/12 nproc=91, 9
+6\OT1/cmr/m/n/12 ), a pair of $\OML/cmm/m/it/12 W$ \OT1/cmr/m/n/12 bosons (\OT1
+/cmtt/m/n/12 nproc=92,
+ []
+
+[44]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1868.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1868.
+
+
+Overfull \hbox (2.11298pt too wide) in paragraph at lines 1890--1899
+\OT1/cmr/m/n/12 pair of pho-tons (\OT1/cmtt/m/n/12 nproc=119\OT1/cmr/m/n/12 ) a
+nd the $\OML/cmm/m/it/12 Z^^M$ \OT1/cmr/m/n/12 de-cay are in-cluded (\OT1/cmtt/
+m/n/12 nproc=120,121\OT1/cmr/m/n/12 ). 
+ []
+
+[45]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1951.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\to' on input line 1951.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 1951.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 1951.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1951.
+
+[46]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1982.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\to' on input line 1982.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\to' on input line 1982.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 1982.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 1982.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 1982.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 1982.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 1982.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 1982.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 1982.
+
+[47]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2011.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2011.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2040.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2040.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2040.
+
+[48]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2088.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2088.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2088.
+
+[49]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2094.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2094.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2094.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2132.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\overline' on input line 2132.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2132.
+
+[50]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2138.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2138.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2138.
+
+
+Overfull \hbox (7.4047pt too wide) in paragraph at lines 2152--2160
+[]\OT1/cmr/m/n/12 Single top pro-duc-tion is di-vided as usual into $\OML/cmm/m
+/it/12 s$\OT1/cmr/m/n/12 -channel (pro-cesses \OT1/cmtt/m/n/12 171-177\OT1/cmr/
+m/n/12 )
+ []
+
+[51]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2207.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2207.
+
+[52]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2253.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2253.
+
+[53]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2315.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\tau' on input line 2315.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2315.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\tau' on input line 2315.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2315.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2315.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2327.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2327.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2327.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\nu' on input line 2327.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 2327.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 2327.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2327.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\nu' on input line 2327.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 2327.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 2327.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2327.
+
+
+Overfull \hbox (47.4662pt too wide) in alignment at lines 2330--2334
+ [][][] []
+ []
+
+[54]
+Overfull \hbox (34.49402pt too wide) in paragraph at lines 2336--2336
+[]$\OML/cmm/m/it/14.4 ^^W[]e[]^^V[]^^V[]$\OT1/cmr/bx/n/14.4 -pair pro-duc-tion 
+via WBF, pro-cesses 223,2231 
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2336.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\nu' on input line 2336.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 2336.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2336.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 2336.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2336.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 2336.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2336.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2336.
+
+
+Overfull \hbox (56.08981pt too wide) in alignment at lines 2339--2342
+ [][][] []
+ []
+
+
+Overfull \hbox (31.22505pt too wide) in paragraph at lines 2344--2344
+[]$\OML/cmm/m/it/14.4 e[][]^^W[]^^V[]$\OT1/cmr/bx/n/14.4 -pair pro-duc-tion via
+ WBF, pro-cesses 224,2241 
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2344.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2344.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2344.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\nu' on input line 2344.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 2344.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\nu' on input line 2344.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 2344.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 2344.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 2344.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2344.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2344.
+
+
+Overfull \hbox (64.2602pt too wide) in alignment at lines 2347--2350
+ [][][] []
+ []
+
+
+Overfull \hbox (34.49402pt too wide) in paragraph at lines 2352--2352
+[]$\OML/cmm/m/it/14.4 e[][]^^V[]^^V[]$\OT1/cmr/bx/n/14.4 -pair pro-duc-tion via
+ WBF, pro-cesses 225,2251 
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2352.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2352.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2352.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\nu' on input line 2352.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 2352.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 2352.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2352.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 2352.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2352.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2352.
+
+
+Overfull \hbox (56.08981pt too wide) in alignment at lines 2355--2358
+ [][][] []
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2361.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2361.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2361.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2361.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\nu' on input line 2361.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 2361.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\nu' on input line 2361.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 2361.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2361.
+
+
+Overfull \hbox (30.89252pt too wide) in alignment at lines 2364--2366
+ [][][] []
+ []
+
+
+Overfull \hbox (31.22505pt too wide) in paragraph at lines 2368--2368
+[]$\OML/cmm/m/it/14.4 ^^W[]e[]^^W[]^^V[]$\OT1/cmr/bx/n/14.4 -pair pro-duc-tion 
+via WBF, pro-cesses 228,2281 
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2368.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\nu' on input line 2368.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 2368.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2368.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\nu' on input line 2368.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 2368.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 2368.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 2368.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2368.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2368.
+
+
+Overfull \hbox (64.2602pt too wide) in alignment at lines 2371--2374
+ [][][] []
+ []
+
+[55]
+Overfull \hbox (31.22505pt too wide) in paragraph at lines 2375--2375
+[]$\OML/cmm/m/it/14.4 e[][]^^V[][]$\OT1/cmr/bx/n/14.4 -pair pro-duc-tion via WB
+F, pro-cesses 229,2291 
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2375.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2375.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2375.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\nu' on input line 2375.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 2375.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 2375.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2375.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2375.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\nu' on input line 2375.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `subscript' on input line 2375.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mu' on input line 2375.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2375.
+
+
+Overfull \hbox (64.2602pt too wide) in alignment at lines 2378--2381
+ [][][] []
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2383.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2383.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2383.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2383.
+
+[56]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2419.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2419.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2419.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2419.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2429.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2429.
+
+[57]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2467.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2467.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2480.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2480.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2494.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2494.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2494.
+
+[58]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2506.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2506.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2506.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2519.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2519.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2519.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2519.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2551.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2551.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2551.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2551.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2551.
+
+[59]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2571.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2571.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2571.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2571.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2571.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2571.
+
+[60]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2594.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2594.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2594.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2614.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2614.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2614.
+
+[61]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2648.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2648.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2648.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2675.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2675.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2675.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2675.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2675.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2675.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2675.
+
+[62]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2717.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2717.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2717.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2717.
+
+
+Overfull \hbox (8.39394pt too wide) in paragraph at lines 2719--2730
+\OT1/cmtt/m/n/12 zerowidth \OT1/cmr/m/n/12 and \OT1/cmtt/m/n/12 removebr \OT1/c
+mr/m/n/12 are set to \OT1/cmtt/m/n/12 .false. \OT1/cmr/m/n/12 the de-cay $\OML/
+cmm/m/it/12 Z \OMS/cmsy/m/n/12 ! \OML/cmm/m/it/12 e[]e[]$ \OT1/cmr/m/n/12 (\OT1
+/cmtt/m/n/12 nproc=301\OT1/cmr/m/n/12 )
+ []
+
+
+Overfull \hbox (54.68423pt too wide) in paragraph at lines 2719--2730
+\OT1/cmr/m/n/12 will in-clude pho-ton ra-di-a-tion from both lep-tons, so that 
+a non-zero \OT1/cmtt/m/n/12 R(photon,lept)[]min
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2731.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2731.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2731.
+
+
+Overfull \hbox (5.54468pt too wide) in paragraph at lines 2733--2748
+\OT1/cmr/m/n/12 quently de-cays into ei-ther an $\OML/cmm/m/it/12 e[]e[]$ \OT1/
+cmr/m/n/12 pair (\OT1/cmtt/m/n/12 nproc=302\OT1/cmr/m/n/12 ) or neu-tri-nos (\O
+T1/cmtt/m/n/12 nproc=307\OT1/cmr/m/n/12 ).
+ []
+
+[63]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2750.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2750.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2750.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2750.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2750.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2750.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2750.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2770.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2770.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2785.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2785.
+
+[64]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2799.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2799.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2835.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\overline' on input line 2835.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\to' on input line 2835.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `superscript' on input line 2835.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2835.
+
+[65]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2846.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2846.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\gamma' on input line 2846.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2846.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2861.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2861.
+
+[66]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2899.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2899.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2910.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2910.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2919.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2919.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2919.
+
+[67]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2930.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2930.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2930.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2964.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2964.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2964.
+
+[68]
+Overfull \hbox (26.48895pt too wide) in paragraph at lines 2982--2987
+\OT1/cmr/m/n/12 tered by chang-ing the value of the vari-able \OT1/cmtt/m/n/12 
+notag \OT1/cmr/m/n/12 in the file \OT1/cmtt/m/n/12 src/User/setnotag.f\OT1/cmr/
+m/n/12 . 
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2990.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2990.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2990.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 2990.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 2990.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 3006.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 3006.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 3006.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 3006.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 3006.
+
+
+Overfull \hbox (26.48895pt too wide) in paragraph at lines 3019--3024
+\OT1/cmr/m/n/12 tered by chang-ing the value of the vari-able \OT1/cmtt/m/n/12 
+notag \OT1/cmr/m/n/12 in the file \OT1/cmtt/m/n/12 src/User/setnotag.f\OT1/cmr/
+m/n/12 . 
+ []
+
+[69]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 3025.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 3025.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 3038.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\mathaccent' on input line 3038.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `math shift' on input line 3038.
+
+
+Overfull \hbox (11.64471pt too wide) in paragraph at lines 3066--3066
+[]\OT1/cmr/bx/n/14.4 Dark Mat-ter Pro-cesses Mono-jet and Mono-photon
+ []
+
+[70] [71] [72] [73]
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 3222.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\f@encoding' on input line 3222.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<let>-command' on input line 3222.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 3222.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\f@family' on input line 3222.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 3222.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\f@series' on input line 3222.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 3222.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\f@shape' on input line 3222.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\<def>-command' on input line 3222.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\font@name' on input line 3222.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\OT1/cmtt/m/n/17.28' on input line 3222.
+
+
+Package hyperref Warning: Token not allowed in a PDFDocEncoded string,
+(hyperref)                removing `\ignorespaces' on input line 3222.
+
+[74] [75] [76]
+Overfull \hbox (8.20009pt too wide) in paragraph at lines 3317--3320
+[]\OT1/cmr/m/n/12 F. Caola, J. M. Camp-bell, F. Febres Cordero, L. Reina and D.
+ Wackeroth, 
+ []
+
+
+Overfull \hbox (5.76698pt too wide) in paragraph at lines 3337--3341
+\OT1/cmr/m/it/12 ``Next-to-leading or-der pre-dic-tions for Dark Mat-ter Pro-du
+c-tion at Hadron
+ []
+
+
+Overfull \hbox (23.7421pt too wide) in paragraph at lines 3351--3354
+\OT1/cmr/m/it/12 Dipho-ton Pro-duc-tion at the LHC through NNLO in QCD''\OT1/cm
+r/m/n/12 , arXiv:1603.02663
+ []
+
+[77] [78]
+
+LaTeX Warning: Float too large for page by 33.59935pt on input line 3430.
+
+[79
+
+] [80]
+Overfull \hbox (52.62982pt too wide) in paragraph at lines 3434--3481
+ [] 
+ []
+
+
+Overfull \hbox (110.82877pt too wide) in paragraph at lines 3486--3528
+ [] 
+ []
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 3542.
+
+Overfull \hbox (76.61264pt too wide) in paragraph at lines 3533--3574
+ [] 
+ []
+
+
+Overfull \hbox (80.35298pt too wide) in paragraph at lines 3579--3618
+ [] 
+ []
+
+
+Overfull \hbox (62.32176pt too wide) in paragraph at lines 3623--3653
+ [] 
+ []
+
+
+Overfull \hbox (91.98534pt too wide) in paragraph at lines 3658--3710
+ [] 
+ []
+
+
+LaTeX Warning: Float too large for page by 63.59932pt on input line 3711.
+
+
+Overfull \hbox (119.48451pt too wide) in paragraph at lines 3715--3763
+ [] 
+ []
+
+
+Overfull \hbox (91.71281pt too wide) in paragraph at lines 3768--3804
+ [] 
+ []
+
+
+Overfull \hbox (100.8995pt too wide) in paragraph at lines 3810--3850
+ [] 
+ []
+
+[81] [82] [83] [84] [85] [86] [87] [88] [89]
+Overfull \hbox (53.41382pt too wide) in paragraph at lines 3870--3912
+ [] 
+ []
+
+
+Overfull \hbox (10.00035pt too wide) in paragraph at lines 3920--3954
+ [] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[90
+
+] [91]
+Overfull \hbox (109.5941pt too wide) in paragraph at lines 3979--3981
+\OT1/cmr/m/n/12 LO, \OT1/cmtt/m/n/12 nproc=220,2201,222,2221,224,2241,226,228,2
+281,229,2291,223,2231,225,2251\OT1/cmr/m/n/12 . 
+ []
+
+
+Overfull \hbox (4.86766pt too wide) in paragraph at lines 3994--3995
+[]\OT1/cmr/m/n/12 Moved $\OML/cmm/m/it/12 H \OT1/cmr/m/n/12 + \OML/cmm/m/it/12 
+b$ \OT1/cmr/m/n/12 pro-cesses from \OT1/cmtt/m/n/12 nproc=131,132,133 \OT1/cmr/
+m/n/12 to \OT1/cmtt/m/n/12 nproc=136,137,138 
+ []
+
+[92
+
+]
+Overfull \hbox (6.07748pt too wide) in paragraph at lines 3997--3999
+\OT1/cmtt/m/n/12 nproc=126,127 \OT1/cmr/m/n/12 to the same style as $\OML/cmm/m
+/it/12 gg \OMS/cmsy/m/n/12 ! \OML/cmm/m/it/12 ZZ$\OT1/cmr/m/n/12 , \OT1/cmtt/m/
+n/12 nproc=123,124,125,126 
+ []
+
+
+Overfull \hbox (56.70766pt too wide) in paragraph at lines 4003--4004
+[]\OT1/cmr/m/n/12 Added two new cuts to the in-put file, \OT1/cmtt/m/n/12 ptmin
+[]photon(3rd) \OT1/cmr/m/n/12 and \OT1/cmtt/m/n/12 R(photon,jet)[]min 
+ []
+
+
+Overfull \hbox (37.71767pt too wide) in paragraph at lines 4005--4006
+[]\OT1/cmr/m/n/12 Changed pre-vi-ous \OT1/cmtt/m/n/12 evtgen \OT1/cmr/m/n/12 lo
+g-i-cal flag in in-put file to an in-te-ger, \OT1/cmtt/m/n/12 nevtrequested 
+ []
+
+[93] [94] [95]
+Overfull \hbox (7.28384pt too wide) in paragraph at lines 4129--4132
+[]\OT1/cmr/m/n/12 Upgraded treat-ment of $\OML/cmm/m/it/12 t[]$ \OT1/cmr/m/n/12
+ one-loop ma-trix el-e-ments for pro-cesses \OT1/cmtt/m/n/12 141-150
+ []
+
+[96]
+Overfull \hbox (1.0537pt too wide) in paragraph at lines 4176--4179
+[]\OT1/cmr/m/n/12 Reorganization of $\OML/cmm/m/it/12 Wb$ \OT1/cmr/m/n/12 cal-c
+u-la-tions in 4FNS (\OT1/cmtt/m/n/12 401\OT1/cmr/m/n/12 -\OT1/cmtt/m/n/12 408\O
+T1/cmr/m/n/12 ), 5FNS (\OT1/cmtt/m/n/12 411,
+ []
+
+[97] [98]
+Overfull \hbox (26.59845pt too wide) in paragraph at lines 4216--4218
+\OT1/cmr/m/n/12 vir-tual rou-tines (v6.0 re-sults for these pro-cesses may be c
+ompiler-dependent). 
+ []
+
+
+Underfull \hbox (badness 1163) in paragraph at lines 4243--4248
+[]\OT1/cmr/m/n/12 F. Mal-toni and T. Stelzer, JHEP \OT1/cmr/bx/n/12 0302\OT1/cm
+r/m/n/12 , 027 (2003) [arXiv:hep-
+ []
+
+[99] [100]
+Underfull \hbox (badness 2310) in paragraph at lines 4470--4475
+[]\OT1/cmr/m/n/12 F. Caola, J. M. Camp-bell, F. Febres Cordero, L. Reina and
+ []
+
+
+Underfull \hbox (badness 4859) in paragraph at lines 4513--4520
+[]\OT1/cmr/m/n/12 H. L. Lai, M. Guzzi, J. Hus-ton, Z. Li, P. M. Nadol-sky,
+ []
+
+
+Underfull \hbox (badness 1742) in paragraph at lines 4513--4520
+\OT1/cmr/m/n/12 J. Pumplin and C.-P. Yuan, Phys. Rev. D \OT1/cmr/bx/n/12 82\OT1
+/cmr/m/n/12 , 074024 (2010)
+ []
+
+[101]
+Underfull \hbox (badness 5756) in paragraph at lines 4523--4530
+[]\OT1/cmr/m/n/12 S. Du-lat \OT1/cmr/m/it/12 et al.\OT1/cmr/m/n/12 , Phys. Rev.
+ D \OT1/cmr/bx/n/12 93\OT1/cmr/m/n/12 , no. 3, 033006 (2016)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 4533--4540
+[]\OT1/cmr/m/n/12 R. D. Ball \OT1/cmr/m/it/12 et al.\OT1/cmr/m/n/12 , Nucl. Phy
+s. B \OT1/cmr/bx/n/12 867\OT1/cmr/m/n/12 , 244 (2013)
+ []
+
+[102] (./mcfm.aux) ) 
+Here is how much of TeX's memory you used:
+ 2469 strings out of 256215
+ 35064 string characters out of 1917023
+ 195888 words of memory out of 1500000
+ 5780 multiletter control sequences out of 10000+200000
+ 12279 words of font info for 46 fonts, out of 1200000 for 2000
+ 645 hyphenation exceptions out of 8191
+ 25i,10n,41p,449b,419s stack positions out of 5000i,500n,6000p,200000b,15000s
+
+Output written on mcfm.dvi (102 pages, 501420 bytes).

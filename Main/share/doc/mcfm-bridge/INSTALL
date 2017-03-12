@@ -1,0 +1,19 @@
+
+mcfm bridge
+-----------
+
+./configure --prefix=<instalation_directory>
+make
+make install
+
+THis builds and installs the library 
+
+  libmcfmbridge.a
+
+and the utility 
+
+  mcfmbridge-config
+
+which can be used to give the link options required to 
+link with applgrid and mcfm
+
