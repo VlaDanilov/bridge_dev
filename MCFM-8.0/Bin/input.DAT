@@ -4,7 +4,7 @@
 -1		[nevtrequested]
 .false.		[creatent]
 .false.		[dswhisto]
-.false.         [creategrid]
+.true.         [creategrid]
 .true.          [writerefs]
 .true.		[writetop]
 .false.		[writedat]

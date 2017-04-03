@@ -60,7 +60,7 @@
       character*72 workdir,inputfile
       character*90 line
       character*15 part
-      logical:: spira,dryrun,makecuts,creategrid,writerefs
+      logical:: spira,dryrun,makecuts,writerefs
       integer:: nmin,nmax,ii
       integer:: ih1,ih2,idum,origij
       integer:: NPTYPE,NGROUP,NSET
@@ -74,7 +74,7 @@
       parameter(mxpart=14)
 c--- APPLgrid - flag using grid
       include 'ptilde.f'
-c	      include 'APPLinclude.f'
+	      include 'APPLinclude.f'
 c--- APPLgrid - end
       
       common/writerefs/writerefs
