@@ -27,8 +27,6 @@
       include 'ipsgen.f'
       include 'iterat.f'
       include 'mpicommon.f'
-      COMMON /check/tt2,tt3,tb,te,tt1,ti1,ti2
-      real(4):: t10,t20,tt2,tt3,tb,te,tt1,ti1,ti2
       real(dp):: integ,integ_err,r,er
       logical:: dryrun
       integer:: itmxplots
@@ -36,13 +34,7 @@
       common/dryrun/dryrun
        
 * basic variable initialization, print-out
-      print *, "<<<<<   STARTING mcfm_init() HERE!!!!  >>>>>"      
-      ti1 = secnds(0.0)
       call mcfm_init(inputfile,workdir)
-      ti2 = secnds(ti1)
-      print *, "<<<<<   ENDING mcfm_init() HERE!!!!  >>>>>"  
-      print *, "<<<<<   STARTING VEGAS  HERE!!!!  >>>>>"           
-      tb = secnds (0.0)
 
 * tell VEGAS to write out pertinent information
       nprn=0
@@ -119,9 +111,6 @@ c          call fill_stdhep(p,0,0,wt)
 c         call write_stdhep(6)
 c        enddo
       endif
-      te = secnds (tb)
-      print *, "Total time of VEGAS THINGS = ",te, "seconds."
-      print *, "<<<<<   ENDING VEGAS HERE!!!!  >>>>>"
 
 * final processing and print-out
       r=integ
