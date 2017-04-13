@@ -20,7 +20,9 @@
       include 'bypart.f'
       include 'histo.f'
       include 'taucut.f'
-      include 'mpicommon.f'
+      include 'mpicommon.f'      
+      COMMON /check/tt2,tt3,tb,te,tt1,ti1,ti2,ttt1,ttt2
+      real(4):: tt2,tt3,tb,te,tt1,tsub1,tsub2,ti1,ti2,ttt1,ttt2
       integer ierr
       integer(kind=8) collect,sihis(nplot,maxnbin),siuscore(nplot),
      & sioscore(nplot),sient(nplot)
@@ -29,8 +31,8 @@
 
 c--- APPLgrid - to use grids
 c      include 'constants.f'
-c      include 'ptilde.f'
-c      include 'APPLinclude.f'
+      include 'ptilde.f'
+      include 'APPLinclude.f'
 c--- APPLgrid -end
       
       logical:: bin
@@ -241,12 +243,17 @@ c---  DSW histograms - output and close file
          endif
       endif
 c--- APPLgrid - creating grid
-c      if (creategrid)then
-c       call write_grid(xinteg)
-c      endif
+      print *, "<<<<<   CALLING write_grid() HERE!!!!  >>>>>"           
+      ttt1 = secnds (0.0)
+      if (creategrid)then
+       call write_grid(xinteg)
+      endif
+      ttt2 = secnds (ttt1)
+      print *, "Total time of writing grids = ",ttt2, "seconds."
+      print *, "<<<<<   END OF CALLING write_grid() HERE!!!!  >>>>>"
 c--- APPLgrid - end
 
-c--- Write out references 
+c--- Write out references
       if (rank == 0) then
         call writereference()
       endif

@@ -57,14 +57,10 @@
       include 'taucut.f'
       include 'iterat.f'
       include 'mpicommon.f'
-c--- APPLgrid - flag using grid
-c      include 'ptilde.f'
-c      include 'APPLinclude.f'
-c--- APPLgrid - end
       character*72 workdir,inputfile
       character*90 line
       character*15 part
-      logical:: spira,dryrun,makecuts,creategrid,writerefs
+      logical:: spira,dryrun,makecuts,writerefs
       integer:: nmin,nmax,ii
       integer:: ih1,ih2,idum,origij
       integer:: NPTYPE,NGROUP,NSET
@@ -74,6 +70,12 @@ c--- APPLgrid - end
       logical:: technicalincluded
       real(dp):: ran2,ran2nr,randummy
       real(dp):: alphas
+      integer:: mxpart
+      parameter(mxpart=14)
+c--- APPLgrid - flag using grid
+      include 'ptilde.f'
+      include 'APPLinclude.f'
+c--- APPLgrid - end
       
       common/writerefs/writerefs
       common/spira/spira

@@ -3,10 +3,21 @@
       include 'types.f'      
       include 'mpicommon.f'
       real(dp):: r,er
+      COMMON /check/tt2,tt3,tb,te,tt1,ti1,ti2,ttt1,ttt2
+      real(4):: tt2,tt3,tb,te,tt1,tsub1,tsub2,ti1,ti2,ttt1,ttt2
 c
       rank=0
       size=1
-     
+      tsub1 = secnds(0.0)
       call mcfmsub(r,er)
+      tsub2 = secnds(tsub1)      
+      
+      print *, " Time of mcfmsub.f = ",tsub2, "seconds."       
+      print *, " Time of determinefilenames() = ",tt2, "seconds."
+      print *, " Time of mcfmmain()  = ",tt3, "seconds."      
+      print *, " Time of mcfm_init() = ",ti2, "seconds."
+      print *, " Time of VEGAS THINGS = ",te, "seconds."
+      print *, " Total time of writing grids = ",ttt2, "seconds."
+      print *, " Total time of mcfm.f=mcfmsub.f = ",tsub2, "seconds."
 c
       end

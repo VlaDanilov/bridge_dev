@@ -53,8 +53,8 @@ c--- by the strings 'lstring' and 'rstring'
       include 'iterat.f'
       include 'mpicommon.f'
 c--- APPLgrid - flag using grid
-c      include 'ptilde.f'
-c      include 'APPLinclude.f'
+      include 'ptilde.f'
+      include 'APPLinclude.f'
 c--- APPLgrid - end
       character*(*) tag,lstring,rstring
       character*72 f93,f94,f95,f96,f97,f98,f99
@@ -116,15 +116,15 @@ c--- f99 floating point format
       if ((tag == 'creatent') .or. (writeall)) then
       write(unitno,fmt=f98) creatent,'creatent'
       endif
-!      if ((tag == 'skipnt') .or. (writeall)) then
-!      write(unitno,fmt=f98) skipnt,'skipnt'
-!      endif
+      if ((tag == 'skipnt') .or. (writeall)) then
+      write(unitno,fmt=f98) skipnt,'skipnt'
+      endif
       if ((tag == 'dswhisto') .or. (writeall)) then
       write(unitno,fmt=f98) dswhisto,'dswhisto'
       endif
-c      if ((tag == 'creategrid') .or. (writeall)) then
-c      write(unitno,fmt=f98) creategrid,'creategrid'
-c      endif
+      if ((tag == 'creategrid') .or. (writeall)) then
+      write(unitno,fmt=f98) creategrid,'creategrid'
+      endif
       if ((tag == 'writerefs') .or. (writeall)) then
       write(unitno,fmt=f98) writerefs,'writerefs'
       endif

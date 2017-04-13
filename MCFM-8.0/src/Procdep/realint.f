@@ -45,8 +45,15 @@
       include 'nqcdjets.f'
       include 'taucut.f'
       include 'qcdcouple.f'
-
 c--- APPLgrid - enable grids
+      include 'APPLinclude.f'
+c      include 'qcdcouple.f'
+      include 'nlooprun.f'
+      include 'couple.f'
+      double precision psCR, currason2pi, alphas
+c--- APPLgrid - end
+
+c--- APPLgrid - enable grids - lines from MCFM group
 c      include 'APPLinclude.f'
 c      include 'qcdcouple.f'
 c      real(dp):: psCR
@@ -776,6 +783,18 @@ cz //
       xmsq_bypart(nd,j,k)=0._dp
       enddo
       enddo
+
+c--- APPLgrid - initialize array
+      if (creategrid.and.bin) then
+         do j=-nf,nf
+            do k=-nf,nf
+               weightr(nd,j,k) = 0d0
+            enddo
+         enddo
+         weightfactor = 1d0
+      endif
+c--- APPLgrid - end
+
       enddo
       
       currentPDF=0
@@ -986,6 +1005,11 @@ cz // end fill index 0
 
          if (currentPDF == 0) then
            xmsq_bypart(0,sgnj,sgnk)=xmsq_bypart(0,sgnj,sgnk)+xmsqjk
+c--- APPLgrid - save weight nd = 0 
+           if (creategrid.and.bin) then
+              weightr(0,j,k) = weightr(0,j,k) + msq(j,k)
+           endif
+c--- APPLgrid - end
          endif
          do nd=1,ndmax
          if (dynamicscale) then         
@@ -996,6 +1020,11 @@ cz // end fill index 0
            xmsq(nd)=xmsq(nd)+xmsqjk
            if (currentPDF == 0) then
              xmsq_bypart(nd,sgnj,sgnk)=xmsq_bypart(nd,sgnj,sgnk)+xmsqjk
+c--- APPLgrid - save weight nd = 1,ndmax 
+             if (creategrid.and.bin) then
+                weightr(nd,j,k) = weightr(nd,j,k) + (-msqc(nd,j,k))
+             endif
+c--- APPLgrid - end
            endif
          enddo
          
@@ -1130,6 +1159,64 @@ c--- catch NaN before it enters histograms
                 
 c---if we're binning, add to histo too
         if (bin) then
+c--- APPLgrid - writing out the common block
+           if (creategrid) then
+           
+              if (dynamicscale) then
+                currason2pi = alphas(dipscale(nd),amz,nlooprun)/twopi
+              else
+                currason2pi = ason2pi
+              endif
+           
+              psCR = (1d0/currason2pi)
+              if ( (kcase==ktt_tot)
+     &        .or. (kcase==kbb_tot)
+     &        .or. (kcase==kcc_tot) 
+     &        .or. (kcase==ktt_bbl)
+     &        .or. (kcase==ktt_ldk)
+     &        .or. (kcase==ktt_bbu)
+     &        .or. (kcase==ktt_udk)
+     &        .or. (kcase==ktt_bbh)
+     &        .or. (kcase==ktt_hdk)
+     &        .or. (kcase==ktthWdk)
+     &        .or. (kcase==kqq_ttg) ) then
+                 psCR = (1d0/currason2pi)**3
+              elseif ( (kcase==kW_cjet)
+     &        .or. (kcase==kZ_1jet)
+     &        .or. (kcase==kW_1jet) ) then
+                 psCR = (1d0/currason2pi)**2
+              endif
+              do j=-nflav,nflav
+                 do k=-nflav,nflav
+                    weightr(nd,j,k)=weightr(nd,j,k)*psCR
+                 enddo
+              enddo           
+              contrib = 200
+              dipole  = nd
+              weightfactor = wgt*flux*pswt/BrnRat/dfloat(itmx)
+c              weightfactor = weightfactor * eight*pisq/gsq
+              ag_xx1       = xx1
+              ag_xx2       = xx2
+              if (dynamicscale) then
+                ag_scale     = dipscale(nd)
+              else
+                ag_scale     = facscale
+              endif
+              refwt        = val/dfloat(itmx)
+              refwt2       = val2/dfloat(itmx)
+C               print*,"*************************************************"
+C               print*, "meWeightFactor = ", weightfactor," D = ",dipole,
+C      *       " me(0, 2,-1) = " ,  weightr(0, 2 ,-1) ," ", msq(2,-1),
+C      *       " me(0, -1,2) = " ,  weightr(0, -1 ,2) ," ", msq(-1,2),
+C      *       " me(1, 2,-1) = " ,  weightr(1, 2 ,-1) ," ", -msqc(1,2,-1),
+C      *       " me(1, -1,2) = " ,  weightr(1, -1 ,2) ," ", -msqc(1,-1,2)
+C               print*, " x1 = ",xx1," x2 = ",xx2," sca = ",facscale
+C               print *, "rewt = ", refwt
+C               print*,"*************************************************"
+C               flush(6)
+           endif
+c--- APPLgrid - end
+
           call getptildejet(nd,pjet)
           call dotem(nvec,pjet,s)
           call nplotter(pjet,val,val2,nd)

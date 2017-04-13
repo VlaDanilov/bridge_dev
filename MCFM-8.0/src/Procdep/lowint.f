@@ -40,6 +40,12 @@ c---- SSend
 c --- DSW. To store flavour information :
       include 'nflav.f'
 c --- DSW.
+c--- APPLgrid - to use grids
+      include 'ptilde.f'
+      include 'APPLinclude.f'
+      include 'qcdcouple.f'
+      double precision psCR
+c--- APPLgrid - end
       include 'x1x2.f'
       include 'bypart.f'
       integer:: pflav,pbarflav
@@ -659,6 +665,17 @@ c      call checkgvec(-1,2,5,p,qq_tbg,qq_tbg_gvec)
       xmsq_bypart(j,k)=0._dp
       enddo
       enddo 
+      
+c--- APPLgrid - initialize array
+      if (creategrid.and.bin) then
+         do j=-nf,nf
+            do k=-nf,nf
+               weightb(j,k) = 0d0
+            enddo
+         enddo
+         weightfactor = 1d0
+      endif
+c--- APPLgrid - end
 
       currentPDF=0
 
@@ -809,6 +826,12 @@ c--- DEFAULT
 
       if (currentPDF == 0) then
         xmsq_bypart(sgnj,sgnk)=xmsq_bypart(sgnj,sgnk)+xmsqjk
+c--- APPLgrid - save weight
+        if(creategrid.and.bin)then
+c---- print*,j,k,msq(j,k)
+           weightb(j,k) =  weightb(j,k) + msq(j,k)
+        endif
+c--- APPLgrid - end
       endif
       
  20   continue
@@ -875,6 +898,50 @@ c---  but not if we are already unweighting ...
 
 
       if (bin) then
+c     APPLgrid - multiply by totalFactor
+            if (creategrid) then ! P.S. scale with factor
+               psCR = 1d0
+               if ( (kcase==ktt_tot)
+     &         .or. (kcase==kbb_tot)
+     &         .or. (kcase==kcc_tot) 
+     &         .or. (kcase==ktt_bbl)
+     &         .or. (kcase==ktt_ldk)
+     &         .or. (kcase==ktt_bbu)
+     &         .or. (kcase==ktt_udk)
+     &         .or. (kcase==ktt_bbh)
+     &         .or. (kcase==ktt_hdk)
+     &         .or. (kcase==ktthWdk)
+     &         .or. (kcase==kqq_ttg) ) then
+                  psCR = (1d0/ason2pi)**2
+               elseif ( (kcase==kW_cjet)) then
+                  psCR = (1d0/ason2pi)
+               endif
+               do j=-nflav,nflav
+                  do k=-nflav,nflav
+                    weightb(j,k)=weightb(j,k)*psCR
+                 enddo
+              enddo           
+              contrib      = 100
+              weightfactor = flux*pswt*wgt/BrnRat/dfloat(itmx)
+              ag_xx1       = xx(1)
+              ag_xx2       = xx(2)
+              ag_scale     = facscale
+              refwt        = val/dfloat(itmx)
+              refwt2       = val2/dfloat(itmx)
+C     print*,"  *******************************************"
+C     print*, "meWeightFactor = ", weightfactor,
+C     *             " me(2,-1) = " ,  weightb(2 ,-1) ," ", msq(2,-1),
+C     *             " me(-1,2) = " ,  weightb(-1 ,2) ," ", msq(-1,2),
+C     *             " me(1,-1) = " ,  weightb(1 ,-1) ," ", msq(1,-1),
+C     *             " me(-2,2) = " ,  weightb(-2 ,2) ," ", msq(-2,2)
+C     print*, " x1 = ",xx(1)," x2 = ",xx(2)," sca = ",facscale
+C     print *, "rewt = ", refwt
+C     print*,"  *********************************************"
+C     flush(6)
+              
+           endif
+c---  APPLgrid - end
+
          call nplotter(pjet,val,val2,0)
 c---  POWHEG-style output if requested
          if (writepwg) then
@@ -903,6 +970,17 @@ c         write(6,*) 'Keep event with weight',val
 c ---     just in case the weight was negative :
           newwt = newwt*sign(one,val)
 c         call nplotter(pjet,newwt,newwt,0)
+
+c--- APPLgrid
+c          if (creategrid) then
+c            print*,"@@@@@@@@@@@@@@@@@@@@############################"
+c          endif
+c--- APPLgrid - end
+c ---     DSW. If I'm storing the event, I need to make a decision
+c ---     about the flavours :
+c          call decide_flavour(pflav,pbarflav)
+c          call storeevent(pjet,newwt,pflav,pbarflav)
+c          call write_gg_lhe(pjet,newwt)
 !$omp critical(LowintWriteLHE)
           call mcfm_writelhe(pjet,xmsq_array,newwt)
 !$omp end critical(LowintWriteLHE)

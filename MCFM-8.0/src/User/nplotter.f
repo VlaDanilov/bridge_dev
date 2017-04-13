@@ -25,8 +25,8 @@ c---          (if applicable), otherwise equal to zero
       include 'taucut.f'
 
 c--- APPLgrid - use of grids
-c      include 'ptilde.f'
-c      include 'APPLinclude.f'
+      include 'ptilde.f'
+      include 'APPLinclude.f'
 c--- APPLgrid - end
 
 
@@ -249,7 +249,7 @@ c         call nplotter_generic(p,wt,wt2,switch)
       end select
       
 c--- APPLgrid - filling applgrid
-c      if (creategrid) call fill_grid(p)
+      if (creategrid) call fill_grid(p)
 c--- APPLgrid - end
 
       return

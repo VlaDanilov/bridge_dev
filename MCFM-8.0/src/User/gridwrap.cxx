@@ -10,7 +10,7 @@
 
 //namespace mcfm_bridge { 
 
-static const int mxpart = 12;    // mcfm parameter : max number of partons in event record. defined in Inc/constants.f
+static const int mxpart = 14;    // mcfm parameter : max number of partons in event record. defined in Inc/constants.f
 
 /// function pointer hooks - set to 0 when no functions defined and applgrid not linked
 void (*book_gridptr)()                            = 0;
