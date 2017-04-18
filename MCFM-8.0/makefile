@@ -3,15 +3,15 @@
 # Replace this with the location of Cernlib on your system (if desired)
 CERNLIB     = 
 # Replace this with the location of LHAPDF on your system (if desired)
-LHAPDFLIB   = /afs/desy.de/user/v/volinar/Top_PHYS/Main/lib/libLHAPDF.so
+LHAPDFLIB   = $(shell lhapdf-config --ldflags)
 
-LDFLAGS += $(shell mcfmbridge-config --ldflags)
+LDFLAGS += -u book_gridptr $(shell mcfmbridge-config --ldflags)
 
 FASTJETINC  = $(shell fastjet-config --cxxflags)
 FASTJETLIB  = $(shell fastjet-config --libs)
 
 # Flag for compiling with OpenMP (YES) or not (anything else)
-USEOMP = YES
+USEOMP = NO
 # Flag for compiling with MPI (YES) or not (anything else)
 # note: USEMPI -> YES automatically puts USEOMP -> YES
 USEMPI = NO
@@ -60,7 +60,8 @@ LINKONELOOP     = NO
 #   NATIVE -- internal routines
 #   PDFLIB -- PDFLIB v8.04
 #   LHAPDF -- Les Houches library
-PDFROUTINES = NATIVE
+##PDFROUTINES = NATIVE
+PDFROUTINES = LHAPDF
 
 # Set this to NO/YES/FROOT
 #   NO  -- no n-tuple output or unweighting is possible
@@ -1488,7 +1489,6 @@ durhamalg.o \
 eventhandler.o \
 etdoublebin.o \
 METHTdoublebin.o \
-fill_APPLgrid.o \
 fill_stdhep.o \
 filterW_bjet.o \
 filterWbbmas.o \
@@ -2231,8 +2231,8 @@ ifeq ($(PDFROUTINES),LHAPDF)
    alfamz_lhapdf.o \
    fdist_lhapdf.o \
    pdfwrap_lhapdf.o
-   LIBDIR += -L$(LHAPDFLIB)
-   LIBFLAGS += -lLHAPDF
+####   LIBDIR += $(LHAPDFLIB)
+   LIBFLAGS += $(shell lhapdf-config --ldflags)
    PDFMSG='   ----> MCFM compiled with LHAPDF routines <----'
 else
 ifeq ($(PDFROUTINES),NATIVE)
@@ -2337,7 +2337,7 @@ endif
 
 mcfm$(LIBEXT): $(ALLMCFM)
 	$(FC) $(FFLAGS) -L$(LIBDIR) -L$(QLDIR) -L$(FFDIR) -L$(PVDIR) -L$(RECURDIR) -L$(OVDIR) -o $@ \
-	$(patsubst %,$(OBJNAME)/%,$(ALLMCFM)) $(LIBFLAGS) 
+	$(patsubst %,$(OBJNAME)/%,$(ALLMCFM))  $(LIBFLAGS) $(LDFLAGS)
 	mv mcfm$(LIBEXT) Bin/
 	@echo $(PDFMSG)
 	@echo $(NTUPMSG)
@@ -2380,8 +2380,8 @@ mcfmlib: $(MCFMLIB)
 	$(CXX) -c $(CXXFLAGS) `fastjet-config --cxxflags` -o $(OBJNAME)/$@ $<
 
 # for c++ targets
-#%.o: %.cxx
-#	$(CXX) -c $(CXXFLAGS) -o obj/$@ $<
+%.o: %.cxx
+	$(CXX) -c $(CXXFLAGS) -o obj/$@ $<
 # -----------------------------------------------------------------------------
 # Specify other options.
 
