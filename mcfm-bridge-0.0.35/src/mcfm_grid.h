@@ -70,7 +70,8 @@ typedef struct  {
 
 
 typedef struct  {
-    int itmx1, ncall1, itmx2, ncall2;
+    long ncall1, ncall2;
+    int  itmx1, itmx2;
 } __iterat__;
 
 
