@@ -476,11 +476,13 @@ void fill_grid( const double evt[][mxpart] )
 //
 void Normalise(TH1D* h) 
 { 
+long _ent = h->GetEntries();
   for ( int ibin=1 ; ibin<=h->GetNbinsX() ; ibin++ ) 
     { 
-      double width = h->GetBinLowEdge(ibin+1) - h->GetBinLowEdge(ibin);
+      double width = h->GetBinWidth(ibin);
       h->SetBinContent( ibin, h->GetBinContent(ibin)/width );
     }
+    h->SetEntries( _ent );
   return;
 }
 
