@@ -351,6 +351,16 @@ void book_grid()  // inital grid booking
       std::exit(-1); 
     } 
   std::cout<<std::endl;
+  std::cout<<""<<std::endl;
+  std::cout<<""<<std::endl;
+  std::cout<<gridorder_.lowest_order<<std::endl;
+  std::cout<<""<<std::endl;
+  std::cout<<std::endl;
+  std::cout<<""<<std::endl;
+  std::cout << std::endl;
+  std::cout << "               ======================================================================================================================" << std::endl;
+  std::cout << "               &&&&&&&^^^^^^^*******<<<<<<Y>>>>>+++++++------------ L O W E S T O R D E R ====== " << gridorder_.lowest_order <<" ================================"<< std::endl;
+  std::cout << "               ======================================================================================================================" << std::endl;
 	 
   
 
