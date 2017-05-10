@@ -22,7 +22,7 @@
      &     contrib,dipole
      
       integer:: lowest_order
-      common/gridorder/
+     common/gridorder/
      &     lowest_order
 !$omp threadprivate(/gridweight/,/gridevent/)
       

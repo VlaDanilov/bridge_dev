@@ -899,6 +899,22 @@ c---  but not if we are already unweighting ...
 c     APPLgrid - multiply by totalFactor
             if (creategrid) then ! P.S. scale with factor
                psCR = (1d0/ason2pi)**lowest_order
+c      write(6,*) "LLLOOOWWWEEESSTTT___OOORRRDDEERR = ", lowest_order
+c               if ( (kcase==ktt_tot)
+c     &         .or. (kcase==kbb_tot)
+c     &         .or. (kcase==kcc_tot) 
+c     &         .or. (kcase==ktt_bbl)
+c     &         .or. (kcase==ktt_ldk)
+c     &         .or. (kcase==ktt_bbu)
+c     &         .or. (kcase==ktt_udk)
+c     &         .or. (kcase==ktt_bbh)
+c     &         .or. (kcase==ktt_hdk)
+c     &         .or. (kcase==ktthWdk)
+c     &         .or. (kcase==kqq_ttg) ) then
+c                  psCR = (1d0/ason2pi)**2
+c               elseif ( (kcase==kW_cjet)) then
+c                  psCR = (1d0/ason2pi)
+c               endif
                do j=-nflav,nflav
                   do k=-nflav,nflav
                     weightb(j,k)=weightb(j,k)*psCR

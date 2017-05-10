@@ -72,7 +72,9 @@ c--- for APPLgrid
 
       epinv=1.e1_dp
       epinv2=1.e1_dp
+      write(6,*) 'apoddjvhpaohhdfv09qweir092c384-50029384720748269462976493k5l'
       call reader_input(inputfile,workdir)
+      write(6,*) 'apoddjvhpaohhdfv09qweir092c384-50029384720748269462976493k5l'
       if (rank.ge.1) verbose=.false.
 
       first_time = .true. 

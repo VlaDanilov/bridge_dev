@@ -2326,6 +2326,25 @@ c--- APPLgrid - storing virt weight to common block
          if (creategrid) then
             psCR  = (1d0/ason2pi)**(lowest_order+1)
             psCR0 = (1d0/ason2pi)**lowest_order
+c            if ( (kcase==ktt_tot)
+c     &      .or. (kcase==kbb_tot)
+c     &      .or. (kcase==kcc_tot) 
+c     &      .or. (kcase==ktt_bbl)
+c     &      .or. (kcase==ktt_ldk)
+c     &      .or. (kcase==ktt_bbu)
+c     &      .or. (kcase==ktt_udk)
+c     &      .or. (kcase==ktt_bbh)
+c     &      .or. (kcase==ktt_hdk)
+c     &      .or. (kcase==ktthWdk)
+c     &      .or. (kcase==kqq_ttg) ) then
+c               psCR  = (1d0/ason2pi)**3
+c               psCR0 = (1d0/ason2pi)**2
+c            elseif ( (kcase==kW_cjet)
+c     &      .or. (kcase==kZ_1jet)
+c     &      .or. (kcase==kW_1jet) ) then
+c               psCR  = (1d0/ason2pi)**2
+c               psCR0 = (1d0/ason2pi)
+c            endif
             do j=-nflav,nflav
                do k=-nflav,nflav
                   weightb (j,k) = weightb(j,k)*psCR0

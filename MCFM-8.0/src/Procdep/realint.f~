@@ -1169,6 +1169,23 @@ c--- APPLgrid - writing out the common block
               endif
            
               psCR = (1d0/currason2pi)**(lowest_order+1)
+c              if ( (kcase==ktt_tot)
+c     &        .or. (kcase==kbb_tot)
+c     &        .or. (kcase==kcc_tot) 
+c     &        .or. (kcase==ktt_bbl)
+c     &        .or. (kcase==ktt_ldk)
+c     &        .or. (kcase==ktt_bbu)
+c     &        .or. (kcase==ktt_udk)
+c     &        .or. (kcase==ktt_bbh)
+c     &        .or. (kcase==ktt_hdk)
+c     &        .or. (kcase==ktthWdk)
+c     &        .or. (kcase==kqq_ttg) ) then
+c                 psCR = (1d0/currason2pi)**3
+c              elseif ( (kcase==kW_cjet)
+c     &        .or. (kcase==kZ_1jet)
+c     &        .or. (kcase==kW_1jet) ) then
+c                 psCR = (1d0/currason2pi)**2
+c              endif
               do j=-nflav,nflav
                  do k=-nflav,nflav
                     weightr(nd,j,k)=weightr(nd,j,k)*psCR
