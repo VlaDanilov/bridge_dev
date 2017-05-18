@@ -88,7 +88,7 @@ ARFLAGS = cru
 libmcfmbridge_a_AR = $(AR) $(ARFLAGS)
 libmcfmbridge_a_LIBADD =
 am_libmcfmbridge_a_OBJECTS = mcfm_interface.$(OBJEXT) \
-	mcfm_grid.$(OBJEXT)
+	mcfm_grid.$(OBJEXT) mcfm_procmap.$(OBJEXT)
 libmcfmbridge_a_OBJECTS = $(am_libmcfmbridge_a_OBJECTS)
 PROGRAMS = $(bin_PROGRAMS)
 am_standSimple_OBJECTS = standSimple-standSimple.$(OBJEXT)
@@ -268,7 +268,7 @@ standSimple_CXXFLAGS = -O2 -Wall -fPIC -DPDFPATH=\"$(LHAPDFPATH)\" -I. -I.. -I$(
 standSimple_LDFLAGS = $(ROOTARCH) -O2  $(ROOTLIBS) $(APPLLIBS) $(LHAPDFLIB) $(HOPPETLIB) $(FRTLLIB) $(FRTLIB) 
 # -L$(HOME)/lib -lAS
 lib_LIBRARIES = libmcfmbridge.a 
-libmcfmbridge_a_SOURCES = mcfm_interface.cxx mcfm_grid.cxx mcfm_grid.h LHAPDF.h
+libmcfmbridge_a_SOURCES = mcfm_interface.cxx mcfm_grid.cxx mcfm_grid.h LHAPDF.h mcfm_procmap.h mcfm_procmap.cxx
 
 # library_includedir=$(includedir)/mcfmbridge
 # library_include_HEADERS=

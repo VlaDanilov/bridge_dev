@@ -24,6 +24,7 @@
 #include "TVectorT.h"
 #include "TString.h"
 
+//#include "mcfm_procmap.h"
 #include "mcfm_grid.h"
 
   
@@ -103,7 +104,7 @@ static const double pt[46] =  {
     275.0, 300.0,  350.0,  400.0,  450.0,
     500.0, 750.0, 1000.0, 1500.0, 2000.0,
     2500.0
-};
+};	
 
 
 long unsigned int runs  =  0;
@@ -133,12 +134,13 @@ void book_grid()  // inital grid booking
   
   // binning information for the grid constructor
   double xLow    = 1.0e-9, xUp = 1.0;
-  int    		nXbins  = 40;
+  
+  int   nXbins  = 40;
   int    xorder  = 6;
-  double q2Low   = 1.0*1.0;
-  double q2Up    = 4000*4000;
-  int    nQ2bins = 15;
-  int    qorder  = 3;
+  double q2Low;//   = 1.0*1.0;
+  double q2Up;//    = 4000*4000;
+  int    nQ2bins;// = 15;
+  int    qorder;//  = 3;
   // set transform2 value
   double apramval=5.;
   appl::grid::transformvar(apramval);
@@ -169,6 +171,50 @@ void book_grid()  // inital grid booking
  // std::cout << "q2low " << q2lower << "\tq2up " << q2upper << std::endl;
 
   std::cout << "Process : " << nproc_.nproc << std::endl;
+  
+  if ( (nproc_.nproc >= 280) && (nproc_.nproc <= 286))
+  	{
+  	
+  		std::cout <<  nproc_.nproc << std::endl;;
+	  	std::cout<<whichProcess2(nproc_.nproc).chan<< std::endl;
+	  	pdf_function = whichProcess2(nproc_.nproc).pdf_fun;
+		glabel+=  whichProcess2(nproc_.nproc).glab;
+		q2Low   = whichProcess2(nproc_.nproc).q2low;
+		q2Up =  whichProcess2(nproc_.nproc).q2up;
+		nQ2bins = whichProcess2(nproc_.nproc).nq2bins;
+		qorder  = whichProcess2(nproc_.nproc).qOrder;
+		gridorder_.lowest_order = whichProcess2(nproc_.nproc).Lowest_Order;
+	
+		nXbins  = whichProcess2(nproc_.nproc).nxbins;
+		xorder  = whichProcess2(nproc_.nproc).xOrder;
+		Ngrids  = whichProcess2(nproc_.nproc).ngrids;
+
+		nObsBins[0] = whichProcess2(nproc_.nproc).NobsBins[0];
+		nObsBins[1] = whichProcess2(nproc_.nproc).NobsBins[1];
+		nObsBins[2] = whichProcess2(nproc_.nproc).NobsBins[2];
+	      
+		double _eta[13] = { 0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.37, 1.52, 1.8, 2.0, 2.2, 2.37 };
+		double  _pt[14] = { 100, 125, 150, 175, 200, 250, 300, 350, 400, 500, 600, 700, 800, 1000 };
+		double _ptf[11] = { 100, 125, 150, 175, 200, 250, 300, 350, 400, 500, 600 };
+
+		obsBins[0] = _eta;
+		obsBins[1] = _pt;
+		obsBins[2] = _ptf;
+	}
+else
+	{
+		std::cout << whichProcess(nproc_.nproc).chan << std::endl;
+	  	pdf_function = whichProcess(nproc_.nproc).pdf_fun;
+		glabel+=  whichProcess(nproc_.nproc).glab;
+		q2Low   = whichProcess(nproc_.nproc).q2low;
+		q2Up =  whichProcess(nproc_.nproc).q2up;
+		nQ2bins = whichProcess(nproc_.nproc).nq2bins;
+		qorder  = whichProcess(nproc_.nproc).qOrder;
+		gridorder_.lowest_order = whichProcess(nproc_.nproc).Lowest_Order;
+	}
+	
+	
+  /*
   if      ( nproc_.nproc == 1 )  
     {
       std::cout << " W+ production"; 
@@ -349,7 +395,7 @@ void book_grid()  // inital grid booking
     { 
       std::cerr << "don't know which process" << std::endl; 
       std::exit(-1); 
-    } 
+    } */
   std::cout<<std::endl;
 	 
   
