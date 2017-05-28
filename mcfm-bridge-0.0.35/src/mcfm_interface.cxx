@@ -13,6 +13,7 @@
 #include <iomanip>
 #include <string>
 #include <sys/stat.h>
+#include <map>
 
 #include <cstdlib> 
 #include <sys/time.h> 
@@ -71,7 +72,6 @@ static const char* gridFiles[_Ngrids] = {
     "_pt5.root"
 };
 
-
 static double Observable[_Ngrids] = {  0,  0,  0,  0,  0,  0 };   // observable array
 int             nObsBins[_Ngrids] = { 40, 45, 40, 45, 40, 45 }; // eta4, pt4 cental eta-bin, pt4 forward eta-bin
 
@@ -128,6 +128,7 @@ void book_grid()  // inital grid booking
   
   //  time_t _t;
   //  time(&_t);
+  std::map<int, info> myMap;
   
   std::cout<<" ***********************************************"<<std::endl;
   std::cout<<" booking the grids " << date() << std::endl;
@@ -135,271 +136,55 @@ void book_grid()  // inital grid booking
   // binning information for the grid constructor
   double xLow    = 1.0e-9, xUp = 1.0;
   
-  int   nXbins  = 40;
-  int    xorder  = 6;
-  double q2Low;//   = 1.0*1.0;
-  double q2Up;//    = 4000*4000;
-  int    nQ2bins;// = 15;
-  int    qorder;//  = 3;
   // set transform2 value
   double apramval=5.;
   appl::grid::transformvar(apramval);
 
   // lowest order in alphas	
   gridorder_.lowest_order=0;
+  
   // how many loops
   int nloops = 1;
-    // number of observables and binning for observables  
+  // number of observables and binning for observables  
   const double *obsBins[_Ngrids] = { eta, pt, eta, pt, eta, pt };
-    
-  std::string pdf_function;
 
-  glabel = "grid-40-6-15-3";
+  glabel = "grid-40-6-15-3"; 
+
+  std::cout << "Process : " << nproc_.nproc << std::endl;
+  
+  myMap[nproc_.nproc] = whichProcess(nproc_.nproc);
+  gridorder_.lowest_order=myMap[nproc_.nproc].LowestOrder;     
+  
+ /*   Here You may change the default parameters
+  myMap[nproc_.nproc].q2up=1.0;
+  myMap[nproc_.nproc].q2low=4000.0*4000.0;
+  myMap[nproc_.nproc].nq2bins=15;
+  myMap[nproc_.nproc].qOrder=3;
+  myMap[nproc_.nproc].nxbins=40;
+  myMap[nproc_.nproc].xOrder=0;
+ */
+  std::cout << "myMap[nproc_.nproc].q2low" << myMap[nproc_.nproc].q2low << std::endl;
+  std::cout << "myMap[nproc_.nproc].q2low" << myMap[nproc_.nproc].q2up << std::endl;
+  std::cout << "myMap[nproc_.nproc].q2low" << myMap[nproc_.nproc].nq2bins << std::endl;
+  std::cout << "myMap[nproc_.nproc].q2low" << myMap[nproc_.nproc].qOrder << std::endl;
+  std::cout << "myMap[nproc_.nproc].q2low" << myMap[nproc_.nproc].nxbins << std::endl;
+  std::cout << "myMap[nproc_.nproc].q2low" << myMap[nproc_.nproc].xOrder << std::endl;
 
   const char* basename = std::getenv("appl_basename");
   if ( basename && std::string(basename)!="" ) glabel = basename;
 
   const char* q2upper = std::getenv("appl_q2up");
-  if ( q2upper && std::string(q2upper)!="" ) q2Up = std::atof(q2upper);
+  if ( q2upper && std::string(q2upper)!="" ) myMap[nproc_.nproc].q2up = std::atof(q2upper);
 
   const char* q2lower = std::getenv("appl_q2low");
-  if ( q2lower && std::string(q2lower)!="" ) q2Low = std::atof(q2lower);
+  if ( q2lower && std::string(q2lower)!="" ) myMap[nproc_.nproc].q2low = std::atof(q2lower);
 
   const char* q2order = std::getenv("appl_q2order");
-  if ( q2order && std::string(q2order)!="" ) qorder = std::atoi(q2order);  
+  if ( q2order && std::string(q2order)!="" ) myMap[nproc_.nproc].qOrder = std::atoi(q2order);  
 
  // std::cout << "q2low " << q2lower << "\tq2up " << q2upper << std::endl;
-
-  std::cout << "Process : " << nproc_.nproc << std::endl;
-  
-  if ( (nproc_.nproc >= 280) && (nproc_.nproc <= 286))
-  	{
-  	
-  		std::cout <<  nproc_.nproc << std::endl;;
-	  	std::cout<<whichProcess2(nproc_.nproc).chan<< std::endl;
-	  	pdf_function = whichProcess2(nproc_.nproc).pdf_fun;
-		glabel+=  whichProcess2(nproc_.nproc).glab;
-		q2Low   = whichProcess2(nproc_.nproc).q2low;
-		q2Up =  whichProcess2(nproc_.nproc).q2up;
-		nQ2bins = whichProcess2(nproc_.nproc).nq2bins;
-		qorder  = whichProcess2(nproc_.nproc).qOrder;
-		gridorder_.lowest_order = whichProcess2(nproc_.nproc).Lowest_Order;
-	
-		nXbins  = whichProcess2(nproc_.nproc).nxbins;
-		xorder  = whichProcess2(nproc_.nproc).xOrder;
-		Ngrids  = whichProcess2(nproc_.nproc).ngrids;
-
-		nObsBins[0] = whichProcess2(nproc_.nproc).NobsBins[0];
-		nObsBins[1] = whichProcess2(nproc_.nproc).NobsBins[1];
-		nObsBins[2] = whichProcess2(nproc_.nproc).NobsBins[2];
-	      
-		double _eta[13] = { 0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.37, 1.52, 1.8, 2.0, 2.2, 2.37 };
-		double  _pt[14] = { 100, 125, 150, 175, 200, 250, 300, 350, 400, 500, 600, 700, 800, 1000 };
-		double _ptf[11] = { 100, 125, 150, 175, 200, 250, 300, 350, 400, 500, 600 };
-
-		obsBins[0] = _eta;
-		obsBins[1] = _pt;
-		obsBins[2] = _ptf;
-	}
-else
-	{
-		std::cout << whichProcess(nproc_.nproc).chan << std::endl;
-	  	pdf_function = whichProcess(nproc_.nproc).pdf_fun;
-		glabel+=  whichProcess(nproc_.nproc).glab;
-		q2Low   = whichProcess(nproc_.nproc).q2low;
-		q2Up =  whichProcess(nproc_.nproc).q2up;
-		nQ2bins = whichProcess(nproc_.nproc).nq2bins;
-		qorder  = whichProcess(nproc_.nproc).qOrder;
-		gridorder_.lowest_order = whichProcess(nproc_.nproc).Lowest_Order;
-	}
-	
-	
-  /*
-  if      ( nproc_.nproc == 1 )  
-    {
-      std::cout << " W+ production"; 
-      pdf_function = "mcfmwp.config"; 
-      glabel+="-Wplus";
-      q2Low   = 6299.99, q2Up = 6800.01;
-      nQ2bins = 3;
-      qorder  = 1;
-    }  
-  else if ( nproc_.nproc == 6 )  
-    {
-      std::cout << " W- production"; 
-      pdf_function = "mcfmwm.config"; 
-      glabel+="-Wminus";
-      q2Low   = 6399.99, q2Up = 6400.01;
-      nQ2bins = 3;
-      qorder  = 1;
-    }  
-  else if      ( nproc_.nproc == 11 )  
-    {
-      std::cout << " W+ + jet production"; 
-      pdf_function = "mcfm-wpjet"; 
-      glabel+="-WplusJet";
-    }
-  else if ( nproc_.nproc == 16 )  
-    {
-      std::cout << " W- + jet production"; 
-      pdf_function = "mcfm-wmjet"; 
-      glabel+="-WminusJet";
-    }  
-  else if ( nproc_.nproc == 31 ) 
-    {
-      std::cout << " Z production"; 
-      pdf_function = "mcfm-z"; 
-      glabel+="-Z0";
-      q2Low = 8280.99, q2Up = 8281.01;
-      nQ2bins = 3;
-      qorder  = 1;
-    }  
-  else if ( (nproc_.nproc >= 41) && (nproc_.nproc <= 43)) 
-    {
-      std::cout << " Z-jet production"; 
-      pdf_function = "mcfm-zjet"; 
-      glabel+=TString::Format("-Zjet_%d",nproc_.nproc).Data();
-      //      q2Low = 8280.99, q2Up = 8281.01;
-    }  
-  else if ( (nproc_.nproc >= 280) && (nproc_.nproc <= 286)) 
-    {
-      nXbins  = 30;
-      xorder  = 6;
-
-      //      q2Low = 8280.99, q2Up = 8281.01;
-      //      q2Up    = 7000*7000;
-      //      q2Up    = 1.01e8;
-      //      nQ2bins = 15;
-      //      qorder  = 4;
-
-      Ngrids  = 3;
-
-      nObsBins[0] = 12;
-      nObsBins[1] = 13;
-      nObsBins[2] = 10;
-      
-      double _eta[13] = { 0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.37, 1.52, 1.8, 2.0, 2.2, 2.37 };
-      double  _pt[14] = { 100, 125, 150, 175, 200, 250, 300, 350, 400, 500, 600, 700, 800, 1000 };
-      double _ptf[11] = { 100, 125, 150, 175, 200, 250, 300, 350, 400, 500, 600 };
-
-      obsBins[0] = _eta;
-      obsBins[1] = _pt;
-      obsBins[2] = _ptf;
-
-      std::cout << " Photon production"; 
-      pdf_function = "photonLO.config:photonNLO.config";
-      glabel += TString::Format("-GammaProd_%d",nproc_.nproc).Data();
-    }  
-  else if ( nproc_.nproc == 13 )  
-    {
-      std::cout << " W+ + Cbar production"; 
-      pdf_function = "mcfm-wpc"; 
-      glabel+="-WplusCbar";
-      gridorder_.lowest_order = 1;
-    }  
-  else if ( nproc_.nproc == 18 )  
-    {
-      std::cout << " W- + C production"; 
-      pdf_function = "mcfm-wmc"; 
-      glabel+="-WminusC";
-      
-      gridorder_.lowest_order = 1;
-    }
-  else if ( (nproc_.nproc == 141) || (nproc_.nproc == 142) || (nproc_.nproc==144) ||
-	    (nproc_.nproc == 145) || (nproc_.nproc == 146) || (nproc_.nproc==147) ||
-	    (nproc_.nproc == 148) || (nproc_.nproc == 149) || (nproc_.nproc==150) ||(nproc_.nproc == 151) ||
-	    (nproc_.nproc == 157) || (nproc_.nproc == 158) || (nproc_.nproc==159) )
-    {
-      gridorder_.lowest_order = 2;
-      
-      if (nproc_.nproc == 141)
-	{
-	  std::cout << " TTbar production with 2 semi-leptonic decays"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-141";
-	}
-      else if (nproc_.nproc == 142)
-	{
-	  std::cout << " TTbar production with 2 semi-leptonic decays, corrections only in decays"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-142";
-	}
-      else if (nproc_.nproc == 144)
-	{
-	  std::cout << " TTbar production with 2 semi-leptonic decays, no correlations"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-144";
-	}
-      else if (nproc_.nproc == 145)
-	{
-	  std::cout << " TTbar production with 2 semi-leptonic decays, no spin correlations in top decays"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-145";
-	}
-      else if (nproc_.nproc == 146)
-	{
-	  std::cout << " TTbar production with Tbar hadronic decay, radiative corrections in production and decay"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-146";
-	}
-      else if (nproc_.nproc == 147)
-	{
-	  std::cout << " TTbar production with Tbar hadronic decay, radiative corrections in Tbar decay"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-147";
-	}
-      else if (nproc_.nproc == 148)
-	{
-	  std::cout << " TTbar production with Tbar hadronic decay, radiative corrections in W decay"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-148";
-	}
-      else if (nproc_.nproc == 149)
-	{
-	  std::cout << " TTbar production with T hadronic decay, radiative corrections in production and decay"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-149";
-	}
-      else if (nproc_.nproc == 150)
-	{
-	  std::cout << " TTbar production with T hadronic decay, radiative corrections in T decay"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-150";
-	}
-      else if (nproc_.nproc == 151)
-	{
-	  std::cout << " TTbar production with T hadronic decay, radiative correstions in W decay"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-151";
-	}
-      else if (nproc_.nproc == 157)
-	{
-	  std::cout << " TTbar production"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar";
-	}
-      else if(nproc_.nproc == 158)
-	{
-	  std::cout << " BBbar production"; 
-	  pdf_function = "mcfm-BB"; 
-	  glabel+="-BBbar";
-	}
-      else if (nproc_.nproc == 159)
-	{
-	  std::cout << " CCbar production"; 
-	  pdf_function = "mcfm-CC"; 
-	  glabel+="-CCbar";
-	}
-    }  
-  else                    		       
-    { 
-      std::cerr << "don't know which process" << std::endl; 
-      std::exit(-1); 
-    } */
   std::cout<<std::endl;
 	 
-  
-
   /// Read the ckm matrix from mcfm to store in the grid automatically
   /// NB: we store 13 x 13 ckm matrix - mcfm only stores 11 x 11 so we 
   ///     must add 1 to each index to keep them aligned
@@ -439,16 +224,16 @@ else
 	  std::cout << "Creating NEW grid... " << std::endl;
 	  
 	  std::cout << "grid interpolation: " 
-		    << "\tQ2 " << nQ2bins << " " <<  q2Low << " " <<  q2Up << " " <<  qorder   
-		    << "\tx "  <<  nXbins << " " <<   xLow << " " <<   xUp << " " <<  xorder
+		    << "\tQ2 " << myMap[nproc_.nproc].nq2bins << " " <<  myMap[nproc_.nproc].q2low << " " <<  myMap[nproc_.nproc].q2up << " " <<  myMap[nproc_.nproc].qOrder   
+		    << "\tx "  <<  myMap[nproc_.nproc].nxbins << " " <<   xLow << " " <<   xUp << " " <<  myMap[nproc_.nproc].xOrder
 		    << std::endl; 
 	    
 
 
 	  mygrid[igrid] = new appl::mcfm_grid( nObsBins[igrid], obsBins[igrid],      // obs bins
-					       nQ2bins, q2Low, q2Up, qorder,         // Q2 bins and interpolation order
-					       nXbins,   xLow,  xUp, xorder,         // x bins and interpolation order
-					       pdf_function, gridorder_.lowest_order, nloops ); 
+					       myMap[nproc_.nproc].nq2bins, myMap[nproc_.nproc].q2low, myMap[nproc_.nproc].q2up, myMap[nproc_.nproc].qOrder,         // Q2 bins and interpolation order
+					       myMap[nproc_.nproc].nxbins,   xLow,  xUp, myMap[nproc_.nproc].xOrder,         // x bins and interpolation order
+					       myMap[nproc_.nproc].pdf_fun, gridorder_.lowest_order, nloops ); 
 	  /// try reweighting for a bit
 	  mygrid[igrid]->reweight(true);
 	  mygrid[igrid]->setCMSScale( energy_.sqrts );
@@ -473,7 +258,7 @@ else
 	  mygrid[igrid] = new appl::mcfm_grid(glabel+gridFiles[igrid]); //optimise grid x,Q2 bins
 	  //       grid_.nSubProcess = mygrid[igrid]->subProcesses();
 	  mygrid[igrid]->getReference()->Reset();
-	  mygrid[igrid]->optimise(nQ2bins, nXbins);
+	  mygrid[igrid]->optimise(myMap[nproc_.nproc].nq2bins, myMap[nproc_.nproc].nxbins);
 	  
 	  std::cout<<*(mygrid[igrid])<<std::endl;  
 	}

@@ -24,33 +24,14 @@ extern struct info{
       std::string glab;
       double q2low;
       double q2up;
-      int nq2bins;
-      int qOrder;
-      int Lowest_Order;
+      unsigned int nq2bins;
+      unsigned int qOrder;
+      unsigned int LowestOrder;      
+      unsigned int nxbins;
+      unsigned int xOrder;
 } Proc1;
 
-extern struct info2{
-      std::string chan;
-      std::string pdf_fun;
-      std::string glab;
-      double q2low;
-      double q2up;
-      int nq2bins;
-      int qOrder;
-      int Lowest_Order;
-      
-       int nxbins;
-       int xOrder;
-       int ngrids;
-       
-       int NobsBins[3];
-       double Eta[13];
-       double  Pt[14];
-       double Ptf[11];
-} Proc2;
-
  info whichProcess(int proc);
- info2 whichProcess2(int proc);
 /// end of mcfm_procmap.h
 
 /// fortran structures and common blocks...
