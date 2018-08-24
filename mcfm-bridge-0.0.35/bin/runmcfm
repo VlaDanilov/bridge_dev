@@ -1,0 +1,152 @@
+#!/bin/bash 
+##########################################################################
+#
+#   File:         runmcfm
+#
+#                 Copyright (C) M.Sutton (sutt@cern.ch) 
+#   Description:  
+#                 mcfm wrapper script for easy configuration           
+#
+#                  
+#                 
+#
+#   Created:    M.Sutton (sutt@cern.ch) Sat 26 Oct 2013 09:06:49 CEST 
+#   Modified:     
+#                   
+##########################################################################
+
+usage() { 
+    echo "Usage: $0  config.DAT  [workingdirectory] [-h|--help] [-p param value] [-p ...] ... " 
+    echo "Options:"
+    echo "    -p param value      sets parameter param to have value - overrides what"
+    echo "                        is in the config file, and can define additional "
+    echo "                        parameters for applgrid"
+    echo "    -h|--help           this help" 
+}
+
+if [ $# -lt 1 ]; then
+  usage
+  exit 0
+fi
+
+
+
+# set the work dir if required 
+WORKDIR=
+if [ $# -gt 0 ]; then
+  if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+    usage
+    exit 0
+  fi
+  if [ "$1" == "-d" ]; then
+    shift
+    WORKDIR=$1
+    shift
+  fi
+fi
+
+
+if [ $# -eq 0 ]; then
+   usage
+   exit -1
+fi
+
+
+# get the config filename  
+CONFIG=$1
+shift
+
+if [ ! -e $CONFIG ]; then 
+  echo "runmcfm: config file $CONFIG does not exist"
+  exit -1
+fi
+
+   
+TMPCONFIG=/tmp/.config-$$.DAT
+
+cp $CONFIG $TMPCONFIG
+
+# now handle extra parameters - these must override any extra 
+# parameters set in config file
+
+i=0
+while [ $# -gt 0 ]; do 
+    if [ "$1" == "-p" ]; then
+       shift
+       if [ $# -lt 2 ]; then  
+         exit -1
+       fi 
+       PAR=$1
+       VAL=$2
+       shift
+       shift
+
+       echo "setting parameter $PAR = $VAL"
+
+       OLDPAR=$(grep "\(\[$PAR\]\|\[$PAR,\)" $TMPCONFIG | awk '{print $1}') 
+
+       if [ "$OLDPAR" == "" ]; then 
+          echo "parameter $PAR not defined in $GONFIG - setting enviroment variable" 
+          export $PAR="$VAL"
+       else 
+          mv  $TMPCONFIG{,.in}
+          cat $TMPCONFIG.in | sed "s#$OLDPAR *\(.*\[$PAR\]\)#$VAL\t\1#"  > $TMPCONFIG
+          mv  $TMPCONFIG{,.in}
+          cat $TMPCONFIG.in | sed "s#$OLDPAR *\(.*\[$PAR,\)#$VAL\t\1#"   > $TMPCONFIG
+#         grep $PAR $TMPCONFIG
+       fi
+
+    fi
+done
+
+
+
+# get extra parameters from the config file - including those 
+# over-ridden by the command line arguments
+
+#IFS=$'\n'
+eval $(grep --color=never "\(\[appl_\|\[APPL_\)" $TMPCONFIG | \
+while read PARLINE; do
+   PAR=$(echo $PARLINE | sed -n -e "/^[^[]*\[\(.*\)\].*/s//\1/p")
+   VAL=$(echo $PARLINE | sed "s/ .*$//")
+   if [ "$VAL" != "" ]; then 
+     echo  export $PAR="$VAL"
+     echo export $PAR=${VAL}
+   fi
+done  
+)
+
+if [ ! -e PDFsets ]; then
+   LHAPATH=$(lhapdf-config --pdfsets-path)  
+   ln -s $LHAPATH . 
+fi 
+
+# now actually run mcfm ...
+
+if [ "$WORKDIR" != "" ]; then 
+    mcfm $TMPCONFIG $WORKDIR
+else
+    mcfm $TMPCONFIG
+fi
+
+
+# clean up ...
+
+# ls -ld $TMPCONFIG
+# diff   $TMPCONFIG $CONFIG
+
+rm $TMPCONFIG
+
+# postexecution stuff ...
+
+
+
+
+ 
+
+
+
+
+
+
+
