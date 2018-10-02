@@ -1,0 +1,16 @@
+#!/bin/bash
+# ATTENTION - should be used only in this dir!
+echo ''
+echo '   >>>   compiling mcfm-bridge   <<<   '
+echo ''
+cd /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35
+make install
+echo ''
+echo '   >>>   compiling MCFM-8.0   <<<   '
+echo ''
+sleep 1
+cd ../MCFM-8.0
+make
+cd Bin
+
+exit 0

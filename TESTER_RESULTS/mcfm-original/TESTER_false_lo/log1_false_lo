@@ -1,0 +1,332 @@
+ <<<<<   CALLING determinefilenames() and mcfmmain() HERE!!!!  >>>>>
+ <<<<<   STARTING mcfm_init() HERE!!!!  >>>>>
+ ************** MCFM - version 8.0 ****************
+ *                                                *
+ * MCFM, v8.0                     June 2nd, 2016  *
+ *                                                *
+ * Authors: John Campbell, Keith Ellis,           *
+ *          Walter Giele, Ciaran Williams         *
+ *         (johnmc@fnal.gov, ellis@fnal.gov,      *
+ *          giele@fnal.gov,ciaranwi@buffalo.edu)  *
+ *                                                *
+ * For details see:                               *
+ *                                                *
+ *  Color singlet production at NNLO in MCFM      *
+ *   R. Boughezal, J. Campbell, R.K. Ellis,       *
+ *    C. Focke, W. Giele, X. Liu, F. Petriello,   *
+ *    C. Williams,  arXiv:1605.08011              *
+ *    (overview of NNLO implementation in MCFM)   *
+ *                                                *
+ *  arXiv:1603.02663 (diphotons at NNLO)          *
+ *  arXiv:1601.00658 (VH at NNLO)                 *
+ *                                                *
+ *  arXiv:1502.02990 (VBF and VBS Higgs)          *
+ *  arXiv:1403.2641  (Triphoton production)       *
+ *  arXiv:1312.1628  (gg->WW, Higgs interference) *
+ *  arXiv:1311.3589  (gg->ZZ, Higgs interference) *
+ *  Phys.Rev.D87:114006, arXiv:1302.3856          *
+ *  (tZ, tH -- with R. Rontsch)                   *
+ *  arXiv:1211.6390 (DM, P. Fox and C. Williams)  *
+ *  JHEP 1211:162 (2012), arXiv:1208.0566         *
+ *  (Z+gam+jet,Z+gam+gam -- with H. Hartanto)     *
+ *  arXiv:1204.1513 (top production+decay)        *
+ *  JHEP 1207:052 (2012), arXiv:1204.5678 (ttW)   *
+ *  JHEP 1110:005 (2011), arXiv:1107.5569         *
+ *         (gg->WW,Higgs intference)              *
+ *  JHEP 1107:018 (2011), arXiv:1105.0020         *
+ *         (diboson update)                       *
+ *  JHEP 1103:027 (2011), arXiv:1011.6647         *
+ *         (Wbb for mb>0, with S. Badger)         *
+ *  Phys.Rev.D81:074023, arXiv:1001.4495 (H+2jet) *
+ *                                                *
+ *  P.R.L. 102:142001, arXiv:0903.0005 [hep-ph]   *
+ *    (t-channel single top + explicit b,         *
+ *      JC, R.Frederix, F.Maltoni, F.Tramontano)  *
+ *  N.P.B 726:109(2005), hep-ph/0506289 (W+t)     *
+ *  Phys.Rev.D70:094012, hep-ph/0408158 (Sngl Top)*
+ *       (with Francesco Tramontano)              *
+ *                                                *
+ *  Phys.Rev.D65:113007, hep-ph/0202176 (W,Z+2j)  *
+ *  Phys.Rev.D62:114012, hep-ph/0006304 (W,Z+bb)  *
+ *  Phys.Rev.D60:113006, hep-ph/9905386 (diboson) *
+ *                                                *
+ * On the web:  http://mcfm.fnal.gov/             *
+ **************************************************
+
+ * Using input file named input-falselo.DAT                                                       
+
+ * [Flags to specify the mode in which MCFM is run]                                          
+ *                   -1            [nevtrequested] 
+ *                    F            [creatent] 
+ *                    F            [dswhisto] 
+ *                    T            [writerefs] 
+ *                    T            [writetop] 
+ *                    F            [writedat] 
+ *                    F            [writegnu] 
+ *                    F            [writeroot] 
+ *                    F            [writepwg] 
+
+ * [General options to specify the process and execution]                                    
+ *                    1            [nproc] 
+ *                   lo            [part] 
+ * 13TeV                           [runstring] 
+ *           13000.0000            [sqrts] 
+ *                    1            [ih1] 
+ *                    1            [ih2] 
+ *             125.0000            [hmass] 
+ *              80.3850            [scale] 
+ *              80.3850            [facscale] 
+ * none                            [dynamicscale] 
+ *                    F            [zerowidth] 
+ *                    F            [removebr] 
+ *                    1            [itmx1] 
+ *               300000            [ncall1] 
+ *                    1            [itmx2] 
+ *               300000            [ncall2] 
+ *             1.00E-01            [taucut] 
+ *                 1189            [ij] 
+ *                    F            [dryrun] 
+ *                    T            [Qflag] 
+ *                    T            [Gflag] 
+
+ * [Heavy quark masses]                                                                      
+ *             173.2000            [top mass] 
+ *               4.6600            [bottom mass] 
+ *               1.2750            [charm mass] 
+
+ * [Pdf selection]                                                                           
+ *              CT14.NN            [pdlabel] 
+ *                    4            [NGROUP] 
+ *                   46            [NSET] 
+ * MSTW2008nlo90cl.LHgr            [LHAPDF group] 
+ *                   -1            [LHAPDF set] 
+
+ * [Jet definition and event cuts]                                                           
+ *               0.0000            [m34min] 
+ *           12998.7000            [m34max] 
+ *               0.0000            [m56min] 
+ *          129987.0000            [m56max] 
+ *               0.0000            [m3456min] 
+ *           13000.0000            [m3456max] 
+ *                    T            [inclusive] 
+ *                 ankt            [algorithm] 
+ *              30.0000            [ptjetmin] 
+ *               0.0000            [etajetmin] 
+ *               2.4000            [etajetmax] 
+ *               0.5000            [Rcut] 
+ *                    F            [makecuts] 
+ *              20.0000            [leptpt] 
+ *               2.4000            [leptrap] 
+ *    0.000,   0.000                [leptveto] 
+ *              30.0000            [misspt] 
+ *              20.0000            [leptpt2] 
+ *               2.4000            [leptrap2] 
+ *    0.000,   0.000                [leptveto2] 
+ *               0.0000            [mtrans34cut] 
+ *               0.0000            [Rjlmin] 
+ *               0.0000            [Rllmin] 
+ *               0.0000            [delyjjmin] 
+ *                    F            [jetsopphem] 
+ *                    0            [lbjscheme] 
+ *               0.0000            [ptbjetmin] 
+ *              99.0000            [etabjetmax] 
+
+ * [Settings for photon processes]                                                           
+ *             GdRG__LO            [fragset] 
+ *               1.0000            [frag_scale] 
+ *              40.0000            [gammpt] 
+ *               2.5000            [gammrap] 
+ *              25.0000            [gammpt2] 
+ *              25.0000            [gammpt3] 
+ *               0.0000            [Rgalmin] 
+ *               0.4000            [Rgagamin] 
+ *               0.0000            [Rgajetmin] 
+ *               0.4000            [cone_ang] 
+ *               0.5000            [epsilon_h] 
+ *               1.0000            [n_pow] 
+
+ * [Anomalous couplings of the W and Z]                                                      
+ *               0.0000            [delg1_z] 
+ *               0.0000            [delk_z] 
+ *               0.0000            [delk_g] 
+ *               0.0000            [lambda_z] 
+ *               0.0000            [lambda_g] 
+ *               0.0000            [h1Z] 
+ *               0.0000            [h1gam] 
+ *               0.0000            [h2Z] 
+ *               0.0000            [h2gam] 
+ *               0.0000            [h3Z] 
+ *               0.0000            [h3gam] 
+ *               0.0000            [h4Z] 
+ *               0.0000            [h4gam] 
+ *               2.0000            [tevscale] 
+
+ * [Anomalous width of the Higgs]                                                            
+ *               1.0000            [Gamma_H/Gamma_H(SM)] 
+
+ * [How to resume/save a run]                                                                
+ *                    F            [readin] 
+ *                    F            [writeout] 
+ *                                 [ingridfile] 
+ *                                 [outgridfile] 
+
+ * [Technical parameters that should not normally be changed]
+
+ *                    F            [debug] 
+ *                    T            [verbose] 
+ *                    F            [new_pspace] 
+ *                    F            [virtonly] 
+ *                    F            [realonly] 
+ *                    T            [spira] 
+ *                    F            [noglue] 
+ *                    F            [ggonly] 
+ *                    F            [gqonly] 
+ *                    F            [omitgg] 
+ *                    F            [vanillafiles] 
+ *                    T            [clustering] 
+ *                    F            [realwt] 
+ *                    0            [colourchoice] 
+ *             1.00E-08            [rtsmin] 
+ *             1.00E-09            [cutoff] 
+ *               1.0000            [aii] 
+ *               1.0000            [aif] 
+ *               1.0000            [afi] 
+ *               1.0000            [aff] 
+ *               1.0000            [bfi] 
+ *               1.0000            [bff] 
+
+ Chooser:process chosen by nproc=           1
+
+ *************************** f(p1)+f(p2) --> ******************************************
+ * W^+(-->nu(p3)+e^+(p4))                                                             *
+ **************************************************************************************
+
+ ************** Electroweak parameters **************
+ *                                                  *
+ *  zmass(+)   91.1876000     wmass(+)  80.3850000  *
+ * zwidth(+)    2.4952000    wwidth(+)   2.0930000  *
+ *     Gf(+) 0.116639D-04   1/aemmz    132.2319487  *
+ *     xw       0.2228972      mtop(+) 173.2000000  *
+ *   gwsq       0.4263525       esq      0.0950328  *
+ * top width    1.4747128 (LO)                      *
+ *    mb        4.6600000        mc      1.2750000  *
+ *                                                  *
+ * Parameters marked (+) are input, others derived  *
+ ****************************************************
+
+ ***************** CKM mixing matrix ****************
+ *                                                  *
+ *      Vud=.97500    Vus=.22200    Vub=0.0000      *
+ *      Vcd=.22200    Vcs=.97500    Vcb=0.0000      *
+ ****************************************************
+
+ ************* Strong coupling, alpha_s  ************
+ *                                                  *
+ *       alpha_s (scale)  0.12029297                *
+ *       alpha_s (zmass)  0.11800000                *
+ *         (using 3-loop running of alpha_s)        *
+ ****************************************************
+
+ ****************************************
+ *     Cross section in femtobarns      *
+ ****************************************
+
+ <<<<<   ENDING mcfm_init() HERE!!!!  >>>>>
+ <<<<<   STARTING VEGAS  HERE!!!!  >>>>>
+
+ input parameters for vegas:  ndim=  4  ncall=      300000.
+                              it=    0  itmx=    1
+                              nprn=  0  alph= 1.50
+                              mds=  0   nd= 100
+                              xl( 1)=   0.000     xu( 1)=   1.000    
+                              xl( 2)=   0.000     xu( 2)=   1.000    
+                              xl( 3)=   0.000     xu( 3)=   1.000    
+                              xl( 4)=   0.000     xu( 4)=   1.000    
+
+ ****************** Basic mass cuts *****************
+ *                                                  *
+ *              0.00  <   m34  < 12998.70           *
+ *              0.00  <   m56  < ********           *
+ *              0.00  <  m3456 < 13000.00           *
+ ****************************************************
+
+************* Integration by Vegas (iteration   1) **************
+*                                                               *
+*  integral  =  10039126.       accum. integral =  10039126.    *
+*  std. dev. =  12578.071       accum. std. dev =  12578.071    *
+*   max. wt. =    958.415                                       *
+*                                                               *
+**************   chi**2/iteration =  0.000       ****************
+
+
+ input parameters for vegas:  ndim=  4  ncall=      300000.
+                              it=    2  itmx=    1
+                              nprn=  0  alph= 1.50
+                              mds=  0   nd= 100
+                              xl( 1)=   0.000     xu( 1)=   1.000    
+                              xl( 2)=   0.000     xu( 2)=   1.000    
+                              xl( 3)=   0.000     xu( 3)=   1.000    
+                              xl( 4)=   0.000     xu( 4)=   1.000    
+
+************* Integration by Vegas (iteration   1) **************
+*                                                               *
+*  integral  =  10030759.       accum. integral =  10030759.    *
+*  std. dev. =  8700.0492       accum. std. dev =  8700.0492    *
+*   max. wt. =    585.113                                       *
+*                                                               *
+**************   chi**2/iteration =  0.000       ****************
+
+ Total time of VEGAS THINGS =    5.84765625     seconds.
+ <<<<<   ENDING VEGAS HERE!!!!  >>>>>
+
+Value of final        lo integral is   10.0308     +/-  0.87000E-02 nb
+ (WARNING: result in nanobarns)
+
+ Total number of shots       :                300000
+ Total no. failing cuts      :                     0
+ Number failing jet cuts     :                     0
+ Number failing process cuts :                     0
+
+   Jet efficiency : 100.00%
+   Cut efficiency : 100.00%
+ Total efficiency : 100.00%
+
+ Contribution from parton sub-processes:
+ ---------------------------------------
+       GG     |        0.0000        0.00%
+       GQ     |        0.0000        0.00%
+       GQB    |        0.0000        0.00%
+       QG     |        0.0000        0.00%
+       QBG    |        0.0000        0.00%
+       QQ     |        0.0000        0.00%
+       QBQB   |        0.0000        0.00%
+       QQB    |       0.50215E+07   50.06%
+       QBQ    |       0.50093E+07   49.94%
+ ---------------------------------------
+
+ ****************************************************
+ output files  W_only_lo_CT14.NN_80___80___13TeV
+ ****************************************************
+
+ ****************  MCFM references   ****************
+ *                                                  *
+ *  An update on vector boson pair production at    *
+ *    hadron colliders                              *
+ *   J.M. Campbell, R.K. Ellis, PRD60 (1999) 113006 *
+ *                                                  *
+ *  Vector boson pair production at the LHC         *
+ *   J.M. Campbell, R.K. Ellis, C. Williams,        *
+ *    JHEP 1107 (2011) 018                          *
+ *                                                  *
+ *  A multi-threaded version of MCFM                *
+ *   J.M. Campbell, R.K. Ellis, W. Giele,           *
+ *    EPJC 75 (2015) 246                            *
+ *                                                  *
+ ****************************************************
+  Time of mcfmsub.f =    6.60156250     seconds.
+  Time of determinefilenames() =    0.00000000     seconds.
+  Time of mcfmmain()  =    6.41015625     seconds.
+  Time of mcfm_init() =   0.550781250     seconds.
+  Time of VEGAS THINGS =    5.84765625     seconds.
+  Total time of writing grids =    0.00000000     seconds.
+  Total time of mcfm.f=mcfmsub.f =    6.60156250     seconds.
