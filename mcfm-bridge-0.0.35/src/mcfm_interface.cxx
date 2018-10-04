@@ -314,8 +314,8 @@ void fill_grid( const double evt[][mxpart] )
   getObservable( evt );
   for(int igrid = 0; igrid < ngrids; igrid++)
     if(cuts(igrid)){  
-        mygrid[igrid]->fillMCFM( std::fabs(Observable[0]) );
-        gridObs[igrid].Fill(     std::fabs(Observable[0]),gridevent_.refwt); 
+        mygrid[igrid]->fillMCFM( std::fabs(Observable[igrid]) );
+        gridObs[igrid].Fill(     std::fabs(Observable[igrid]),gridevent_.refwt); 
     }
   runs++; // !!!
 }
