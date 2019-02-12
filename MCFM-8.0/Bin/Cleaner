@@ -1,3 +1,19 @@
 #!/bin/bash
 
-rm grid* ratio* xsec* NLO* LO* *.top
+echo "Are You Sure You Want To Delete All in MCFM-8.0/Bin ???"
+echo ""
+echo "                y/n ?"
+echo ""
+read x
+if [ $x != "y" ] && [ $x != "n" ]; then 
+   echo "Wrong input!...aborting"
+   exit 0
+fi 
+case "$x" in
+     y)
+        rm -r log_1run log_2run input_* Operator_* Operator2run_* Process_* Operator1run_*  grid* ratio* xsec* NLO* LO* *.top
+        ;;
+     n)
+        exit 0
+        ;;
+esac

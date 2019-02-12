@@ -90,8 +90,6 @@ bool file_exists( const std::string& filename ) {
  
  unsigned short int maxbins=1;
  unsigned short int maxpar =1;
-
- unsigned short int Nk_zoo = k_zoo.size();
  unsigned short int Ng_zoo = g_zoo.size(); 
  // double *obsbinning;
  // ************************************************************* 
@@ -107,7 +105,7 @@ bool file_exists( const std::string& filename ) {
  std::string date() { 
   time_t _t;
   time(&_t);
-  return ctime(&_t);
+  return ctime(&_t); 
 }
 
 
@@ -118,14 +116,15 @@ void book_grid()  // inital grid booking
   std::fill(mygrid.begin(),mygrid.end(),onegrid);
   for(int w=0; w<ngrids; w++){ 
      if(maxbins<std::stoi(myStruct->customGrid(w,2))){
-        maxbins=std::stoi(myStruct->customGrid(w,2));
+     maxbins=std::stoi(myStruct->customGrid(w,2));
      }
   }
   obsBinning.resize(ngrids);
-  std::cout<< "nKinPar = " << myStruct->nKinPar() << std::endl; 
+  std::cout<< "nKinPar = " << myStruct->nKinPar() << std::endl;
+  
   for(int g=0; g<ngrids; g++){
      
-     gridFiles[g] = "_"+myStruct->customGrid(g,0)+"_"+myStruct->customGrid(g,1)+".root";
+     gridFiles[g] = "_p"+myStruct->customGrid(g,1)+"_"+myStruct->customGrid(g,0)+".root";
      std::cout << " gridFiles[g] = " << gridFiles[g] << std::endl;
      observable[g]= 0.0; 
      nobsBins[g]  = std::stoi(myStruct->customGrid(g,2));   
@@ -137,7 +136,7 @@ void book_grid()  // inital grid booking
   for(int ng = 0 ; ng < ngrids ; ng++)                          g_zoo.push_back(std::stoi(myStruct->customGrid(ng,1)));
  
   if (isBooked) return;
-  
+ 
   //GridStruct *myStruct = new GridStruct();
   double xLow          = std::stod(myStruct->xLow());
   double xUp           = std::stod(myStruct->xUp());
@@ -156,66 +155,65 @@ void book_grid()  // inital grid booking
   // set transform2 value
   double apramval=5.;
   appl::grid::transformvar(apramval);
-
+  
   // lowest order in alphas	
   gridorder_.lowest_order=0;
   
   // how many loops
   // number of observables and binning for observables  
 
-  std::cout << "Process : " << nproc_.nproc << std::endl;
-  
-  myMap[nproc_.nproc] = whichProcess(nproc_.nproc);
-  gridorder_.lowest_order=myMap[nproc_.nproc].LowestOrder;     
-  
-  //<<--------------------------   Here You may change the default parameters  -------------------->>//
-  if(myStruct->pdf_Fun()      !="default") myMap[nproc_.nproc].pdf_fun      =           myStruct->pdf_Fun()     ;
-  if(myStruct->gLab()         !="default") myMap[nproc_.nproc].glab         =           myStruct->gLab()        ;
-  if(myStruct->q2Up()         !="default") myMap[nproc_.nproc].q2up         = std::stod(myStruct->q2Up())       ;
-  if(myStruct->q2Low()        !="default") myMap[nproc_.nproc].q2low        = std::stod(myStruct->q2Low())      ;
-  if(myStruct->nQ2Bins()      !="default") myMap[nproc_.nproc].nq2bins      = std::stoi(myStruct->nQ2Bins())    ;
-  if(myStruct->qOrder()       !="default") myMap[nproc_.nproc].qOrder       = std::stoi(myStruct->qOrder())     ;
-  if(myStruct->nXBins()       !="default") myMap[nproc_.nproc].nxbins       = std::stoi(myStruct->nXBins())     ;
-  if(myStruct->xOrder()       !="default") myMap[nproc_.nproc].xOrder       = std::stoi(myStruct->xOrder())     ;
-  if(myStruct->LowestOrder()  !="default") myMap[nproc_.nproc].LowestOrder  = std::stoi(myStruct->LowestOrder());
-
-  std::cout << " Channel            = " << myMap[nproc_.nproc].chan        << std::endl;
-  std::cout << " Pdf fun            = " << myMap[nproc_.nproc].pdf_fun     << std::endl;
-  std::cout << " glab               = " << myMap[nproc_.nproc].glab        << std::endl;
-  std::cout << " Q^2 Low            = " << myMap[nproc_.nproc].q2low       << std::endl;
-  std::cout << " Q^2 Up             = " << myMap[nproc_.nproc].q2up        << std::endl;
-  std::cout << " Number of Q^2 bins = " << myMap[nproc_.nproc].nq2bins     << std::endl;
-  std::cout << " q Order            = " << myMap[nproc_.nproc].qOrder      << std::endl;
-  std::cout << " Number of x bins   = " << myMap[nproc_.nproc].nxbins      << std::endl;
-  std::cout << " x Order            = " << myMap[nproc_.nproc].xOrder      << std::endl;
-  std::cout << " Lowest order       = " << myMap[nproc_.nproc].LowestOrder << std::endl;
-
-  glabel = "grid-"+myStruct->nXBins()+"-"+myStruct->xOrder()+"-"+myStruct->nQ2Bins()+"-"+myStruct->qOrder(); 
-  
-  const char* basename = std::getenv("appl_basename");
-  if ( basename && std::string(basename)!="" ) glabel = basename;
-
-  const char* q2upper = std::getenv("appl_q2up");
-  if ( q2upper && std::string(q2upper)!="" ) myMap[nproc_.nproc].q2up = std::atof(q2upper);
-
-  const char* q2lower = std::getenv("appl_q2low");
-  if ( q2lower && std::string(q2lower)!="" ) myMap[nproc_.nproc].q2low = std::atof(q2lower);
-
-  const char* q2order = std::getenv("appl_q2order");
-  if ( q2order && std::string(q2order)!="" ) myMap[nproc_.nproc].qOrder = std::atoi(q2order);  
-
-  // std::cout << "q2low " << q2lower << "\tq2up " << q2upper << std::endl;
-	 
-  /// Read the ckm matrix from mcfm to store in the grid automatically
-  /// NB: we store 13 x 13 ckm matrix - mcfm only stores 11 x 11 so we 
-  ///     must add 1 to each index to keep them aligned
-
-  std::vector< std::vector<double> > ckm_vsq( 13, std::vector<double>( 13, 0 ) );
-  
-  for ( int ic=0 ; ic<__nf2__ ; ic++ ) { 
+   std::cout << "Process : " << nproc_.nproc << std::endl;
+       
+   myMap[nproc_.nproc] = whichProcess(nproc_.nproc);
+   gridorder_.lowest_order=myMap[nproc_.nproc].LowestOrder;  
+ 
+   //<<--------------------------   Here You may change the default parameters  -------------------->>//
+   if(myStruct->pdf_Fun()      !="default") myMap[nproc_.nproc].pdf_fun      =           myStruct->pdf_Fun()     ;
+   if(myStruct->gLab()         !="default") myMap[nproc_.nproc].glab         =           myStruct->gLab()        ;
+   if(myStruct->q2Up()         !="default") myMap[nproc_.nproc].q2up         = std::stod(myStruct->q2Up())       ;
+   if(myStruct->q2Low()        !="default") myMap[nproc_.nproc].q2low        = std::stod(myStruct->q2Low())      ;
+   if(myStruct->nQ2Bins()      !="default") myMap[nproc_.nproc].nq2bins      = std::stoi(myStruct->nQ2Bins())    ;
+   if(myStruct->qOrder()       !="default") myMap[nproc_.nproc].qOrder       = std::stoi(myStruct->qOrder())     ;
+   if(myStruct->nXBins()       !="default") myMap[nproc_.nproc].nxbins       = std::stoi(myStruct->nXBins())     ;
+   if(myStruct->xOrder()       !="default") myMap[nproc_.nproc].xOrder       = std::stoi(myStruct->xOrder())     ;
+   if(myStruct->LowestOrder()  !="default") myMap[nproc_.nproc].LowestOrder  = std::stoi(myStruct->LowestOrder());
+   
+   std::cout << " Channel            = " << myMap[nproc_.nproc].chan        << std::endl;
+   std::cout << " Pdf fun            = " << myMap[nproc_.nproc].pdf_fun     << std::endl;
+   std::cout << " glab               = " << myMap[nproc_.nproc].glab        << std::endl;
+   std::cout << " Q^2 Low            = " << myMap[nproc_.nproc].q2low       << std::endl;
+   std::cout << " Q^2 Up             = " << myMap[nproc_.nproc].q2up        << std::endl;
+   std::cout << " Number of Q^2 bins = " << myMap[nproc_.nproc].nq2bins     << std::endl;
+   std::cout << " q Order            = " << myMap[nproc_.nproc].qOrder      << std::endl;
+   std::cout << " Number of x bins   = " << myMap[nproc_.nproc].nxbins      << std::endl;
+   std::cout << " x Order            = " << myMap[nproc_.nproc].xOrder      << std::endl;
+   std::cout << " Lowest order       = " << myMap[nproc_.nproc].LowestOrder << std::endl;
+   
+   glabel = "grid-"+myStruct->nXBins()+"-"+myStruct->xOrder()+"-"+myStruct->nQ2Bins()+"-"+myStruct->qOrder(); 
+                                        
+   const char* basename = std::getenv("appl_basename");
+   if ( basename && std::string(basename)!="" ) glabel = basename;
+   
+   const char* q2upper = std::getenv("appl_q2up");
+   if ( q2upper && std::string(q2upper)!="" ) myMap[nproc_.nproc].q2up = std::atof(q2upper);
+   
+   const char* q2lower = std::getenv("appl_q2low");
+   if ( q2lower && std::string(q2lower)!="" ) myMap[nproc_.nproc].q2low = std::atof(q2lower);
+   
+   const char* q2order = std::getenv("appl_q2order");
+   if ( q2order && std::string(q2order)!="" ) myMap[nproc_.nproc].qOrder = std::atoi(q2order);  
+   
+    // std::cout << "q2low " << q2lower << "\tq2up " << q2upper << std::endl;
+                                                               	 
+    /// Read the ckm matrix from mcfm to store in the grid automatically
+    /// NB: we store 13 x 13 ckm matrix - mcfm only stores 11 x 11 so we 
+    ///     must add 1 to each index to keep them aligned
+   
+   std::vector< std::vector<double> > ckm_vsq( 13, std::vector<double>( 13, 0 ) );
+ 
+  for ( int ic=0 ; ic<__nf2__ ; ic++ ) {
     for ( int ic1=0 ; ic1<__nf2__ ; ic1++ ) ckm_vsq[ic+1][ic1+1] = ckm_.vsq[ic][ic1];
-  } 
-
+  }
   std::vector<std::vector<double> > __ckm( 3, std::vector<double>(3, 0) );
   __ckm[0][0] = cabib_.Vud;
   __ckm[0][1] = cabib_.Vus;
@@ -298,7 +296,6 @@ void book_grid()  // inital grid booking
   isBooked = true;
   std::cout<<" ***********************************************"<<std::endl;
 }
-
 
 void fill_grid( const double evt[][mxpart] )
 {

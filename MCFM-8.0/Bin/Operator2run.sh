@@ -6,10 +6,10 @@
 #$ -S /bin/zsh
 #
 # Your job name 
-#$ -N tt_seed
+# -N tt_seed
 #
 # Use current working directory
-#$ -cwd -o /nfs/dust/cms/user/volinar/tools/Test_AREA/MCFM-8.0/Bin -e /nfs/dust/cms/user/volinar/tools/Test_AREA/MCFM-8.0/Bin
+# -cwd -o /nfs/dust/cms/user/volinar/tools/Test_AREA/MCFM-8.0/Bin -e /nfs/dust/cms/user/volinar/tools/Test_AREA/MCFM-8.0/Bin
 #
 # Join stdout and stderr
 #$ -j y
@@ -21,10 +21,10 @@
 #$ -l os=sld6
 #
 # Disk space
-#$ -l h_vmem=4G
+#$ -l h_vmem=18G
 #
 # Run time 
-#$ -l h_rt=72:00:00 
+#$ -l h_rt=23:00:00 
 #
 # Exclude broken nodes (STATUS of 9.11.14):
 #$ -l hostname="!(bird212.desy.de|bird170.desy.de)"
@@ -40,21 +40,21 @@ export LHAPDFSYS=/afs/desy.de/user/v/volinar/Top_PHYS/Main
 export PATH=${PATH}:${LHAPDFSYS}/bin
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${LHAPDFSYS}/lib
 export DQ2_LOCAL_SITE_ID=DESY-HH_SCRATCHDISK
-source /cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase/user/atlasLocalSetup.sh
-echo " +++++++++++++++++++++++++++++++ + +  + + + + + +  + + + + "
-localSetupROOT --rootVersion=5.34.25-x86_64-slc6-gcc48-opt
+#source /cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase/user/atlasLocalSetup.sh
+#echo " +++++++++++++++++++++++++++++++ + +  + + + + + +  + + + + "
+#localSetupROOT --rootVersion=5.34.25-x86_64-slc6-gcc48-opt
 
 #CDPATH=.:$HOME:
-PRINTER=cmscp2
-LPDEST=$PRINTER
-export LPDEST PRINTER
-export LANGUAGE="C	"
-export LC_ALL="C"
+#PRINTER=cmscp2
+#LPDEST=$PRINTER
+#export LPDEST PRINTER
+#export LANGUAGE="C	"
+#export LC_ALL="C"
 
 #THIS IS IMPORTNAT FOR YOU
-module use -a /afs/desy.de/group/cms/modulefiles/
-module avail
-alias la='ls -a'
+#module use -a /afs/desy.de/group/cms/modulefiles/
+#module avail
+#alias la='ls -a'
 
 ############################### ROOT AT CVMFS ###############################
 #   !!!!   ROOT version should be the same as gcc   !!!!
@@ -88,12 +88,15 @@ export LHAPATH=/nfs/dust/cms/user/volinar/tools/Test_AREA/Main/share/lhapdf/PDFs
 
 date
 
-SAVEDIR=/nfs/dust/cms/user/volinar/tools/Test_AREA/MCFM-8.0/Bin
-mkdir -p ${SAVEDIR}/Process_ProcNum/DynamicScale_Scales/Order/seed_numberoftheseed
+source /cvmfs/cms.cern.ch/cmsset_default.sh
 
-cp -r /nfs/dust/cms/user/volinar/tools/Test_AREA/MCFM-8.0 $TMPDIR
-cp ${SAVEDIR}/Process_ProcNum/DynamicScale_Scales/Order/grid-40-6-15-3_LeptEta.root $TMPDIR/MCFM-8.0/Bin/
-cd $TMPDIR/MCFM-8.0/Bin/
+SAVEDIR=/nfs/dust/cms/user/volinar/tools/Test_AREA/Results_MCFM-8.0
+MCFMDIR=/nfs/dust/cms/user/volinar/tools/Test_AREA/MCFM-8.0
+#mkdir -p ${SAVEDIR}/Process_ProcNum/DynamicScale_Scales/Order/seed_numberoftheseed
+
+cp -r $MCFMDIR $TMP
+cp ${SAVEDIR}/Process_ProcNum/DynamicScale_Scales/Order/*.root $TMP/MCFM-8.0/Bin/
+cd $TMP/MCFM-8.0/Bin/
 
 echo "******************************"
 date
@@ -102,10 +105,10 @@ ls
 echo "******************************"
 
 
-./mcfm input.DAT >log_2run
-cp grid-* ${SAVEDIR}/Process_ProcNum/DynamicScale_Scales/Order/seed_numberoftheseed
-cp *.top ${SAVEDIR}/Process_ProcNum/DynamicScale_Scales/Order/seed_numberoftheseed
-cp log_2run ${SAVEDIR}/Process_ProcNum/DynamicScale_Scales/Order/seed_numberoftheseed
+./mcfm input.DAT
+mv *.root  ${SAVEDIR}/Process_ProcNum/DynamicScale_Scales/Order/seed_numberoftheseed
+mv *.top ${SAVEDIR}/Process_ProcNum/DynamicScale_Scales/Order/seed_numberoftheseed
+cp NONEXISTEN_FILE ${SAVEDIR}/Process_ProcNum/DynamicScale_Scales/Order/seed_numberoftheseed
 echo "******************************"
 date
 echo $PWD
@@ -113,7 +116,7 @@ ls
 echo "******************************"
 
 
-echo "TMPDIR = $TMPDIR"
+echo "TMPDIR = $TMP"
 echo "JOB_SCRIPT = $JOB_SCRIPT"
 echo "SGE_JOB_SPOOL_DIR = $SGE_JOB_SPOOL_DIR"
 
@@ -124,9 +127,11 @@ echo "#############"
 ls
 echo "#############"
 
-cd ${SAVEDIR}
+cd ${MCFMDIR}/Bin
 mv input.DAT ${SAVEDIR}/Process_ProcNum/DynamicScale_Scales/Order/seed_numberoftheseed
-mv Proc_ProcNum_Order_Scales_scale_seed.o* ${SAVEDIR}/Process_ProcNum/DynamicScale_Scales/Order/seed_numberoftheseed	
+
+rm Operator2run_*
+
 echo "+++++++++++++"
 ls
 echo "-------------"

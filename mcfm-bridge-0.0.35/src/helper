@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-cp mcfm_interface_vecIter.cxx mcfm_interface.cxx
+#cp mcfm_interface_vecIter.cxx mcfm_interface.cxx
 
 cd ../../MCFM-8.0/Bin/
 rm grid*
@@ -11,7 +11,7 @@ echo ''
 
 cd /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35
 make install
-sleep 2
+sleep 1
 echo ''
 echo '   >>>   compiling MCFM-8.0   <<<   '
 echo ''
@@ -21,11 +21,11 @@ cd ../MCFM-8.0
 make
 
 cd Bin
-sleep 2
+sleep 1
 ./mcfm input.DAT
 #./mcfm input.DAT
 
-root -l *.root
+#root -l *.root
 
 exit 0
 

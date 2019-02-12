@@ -25,7 +25,7 @@
 #include "TVectorT.h"
 #include "TString.h"
 
-//#include "mcfm_procmap.h"
+#include "mcfm_procmap.h"
 #include "mcfm_grid.h"
 
 info whichProcess(int  proc)

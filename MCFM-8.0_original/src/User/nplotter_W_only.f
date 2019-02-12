@@ -23,9 +23,9 @@ c---                1  --> counterterm for real radiation
       include 'histo.f'
       include 'jetlabel.f'
       include 'outputflags.f'
-      include 'nproc.f'
+      include 'nwz.f'
       real(dp):: p(mxpart,4),wt,wt2,yrap,pt,r,yraptwo,etaraptwo,
-     & y3,y4,y5,pt3,pt4,pt5,Re5,y34,eta34
+     & y3,y4,y5,pt3,pt4,pt5,Re5,y34,eta34,etarap,eta3,eta4
       integer:: switch,n,nplotmax
       integer tag
       logical, save::first=.true.
@@ -69,19 +69,21 @@ c--- W rapidity and pseudorapidity
       eta34=etaraptwo(3,4,p)
 
 c--- If nproc=1, plot e^+(4). If nproc=6, plot e^-(3).
-      if(nproc == 1) then
+      if(nwz == +1) then
          y4=yrap(4,p)
          pt4=pt(4,p)
+         eta4=etarap(4,p)
       else
          y3=yrap(3,p)
          pt3=pt(3,p)
+         eta3=etarap(3,p)
       endif
 c---      eventpart=4+jets
 c---      print*, nproc
       if(jets > 0) then
          pt5=pt(5,p)
          y5=yrap(5,p)
-         if(nproc == 1) then
+         if(nwz == +1) then
             Re5=R(p,4,5)
          else
             Re5=R(p,3,5)
@@ -130,15 +132,21 @@ c---   llplot:  equal to "lin"/"log" for linear/log scale
        n=n+1
        call bookplot(n,tag,'W ps-rap',eta34,wt,wt2,-6._dp,6._dp,0.2_dp,'lin')
        n=n+1
-      if(nproc == 1) then
+      if(nwz == +1) then
          call bookplot(n,tag,'y(lep)',y4,wt,wt2,-6._dp,6._dp,0.2_dp,'lin')
          n=n+1
          call bookplot(n,tag,'pt(lep)',pt4,wt,wt2,0._dp,100._dp,2._dp,'lin')
          n=n+1
+         call bookplot(n,tag,'|eta^+|',abs(eta4),wt,wt2,0._dp,2.4_dp,0.2_dp,
+     & 'lin')
+         n=n+1 
       else            
          call bookplot(n,tag,'y(lep)',y3,wt,wt2,-6._dp,6._dp,0.2_dp,'lin')
          n=n+1
          call bookplot(n,tag,'pt(lep)',pt3,wt,wt2,0._dp,100._dp,2._dp,'lin')
+         n=n+1
+         call bookplot(n,tag,'|eta^-|',abs(eta3),wt,wt2,0._dp,2.4_dp,0.2_dp,
+     & 'lin')
          n=n+1
       endif
       call bookplot(n,tag,'DeltaRe5',Re5,wt,wt2,0._dp,5._dp,0.4_dp,'lin')

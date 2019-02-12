@@ -17,26 +17,6 @@
 
 #include "appl_grid/appl_grid.h"
 
-/// start of mcfm_procmap.h
-extern struct info{
-      std::string chan;
-      std::string pdf_fun;
-      std::string glab;
-      double q2low;
-      double q2up;
-      unsigned int nq2bins;
-      unsigned int qOrder;
-      unsigned int LowestOrder;      
-      unsigned int nxbins;
-      unsigned int xOrder;
-      double xlow;
-      double xup;
-      unsigned int nloops;
-} Proc1;
-
- info whichProcess(int proc);
-/// end of mcfm_procmap.h
-
 /// fortran structures and common blocks...
 
 static const int __nf__   = 5;

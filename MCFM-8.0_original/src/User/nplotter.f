@@ -83,8 +83,8 @@ c-----> saves string comparison in general and important for combining SCET
       if (first) then
         first=.false.
         if     (kcase==kW_only) then
-c          plotindex=1
-          plotindex=1000 ! revert to default plotting routine
+          plotindex=1
+c---      plotindex=1000 ! revert to default plotting routine
         elseif (kcase==kZ_only) then
           plotindex=2
         elseif (kcase==kW_cjet) then
