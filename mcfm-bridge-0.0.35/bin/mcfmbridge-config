@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 # These variables need to exist
-prefix=/nfs/dust/cms/user/volinar/tools/Test_AREA/Main
+prefix=/afs/desy.de/user/s/star/xxl
 
 if [[ $# -eq 0 || -n $( echo $* | egrep -- "--help|-h" ) ]]; then
     echo "mcfmbridge-config: configuration tool for the APPLgrid - mcfm bridge"
@@ -23,7 +23,7 @@ fi
 OUT=""
 
 tmp=$( echo "$*" | egrep -- '--\<prefix\>')
-test -n "$tmp" && OUT="$OUT /nfs/dust/cms/user/volinar/tools/Test_AREA/Main"
+test -n "$tmp" && OUT="$OUT /afs/desy.de/user/s/star/xxl"
 
 tmp=$( echo "$*" | egrep -- '--\<incdir\>')
 test -n "$tmp" && OUT="$OUT ${prefix}/include"
@@ -43,6 +43,6 @@ test -n "$tmp" && OUT="$OUT -u $symbol  -L${prefix}${exec_prefix}/lib  -lmcfmbri
 
 ## Version
 tmp=$( echo "$*" | egrep -- '--\<version\>')
-test -n "$tmp" && OUT="$OUT 0.0.35"
+test -n "$tmp" && OUT="$OUT 0.0.35prim"
 
 echo $OUT

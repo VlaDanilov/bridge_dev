@@ -46,7 +46,7 @@ standSimple_LDFLAGS  = $(ROOTARCH) -O2  $(ROOTLIBS) $(APPLLIBS) $(LHAPDFLIB) $(H
 
 lib_LIBRARIES= libmcfmbridge.a 
 
-libmcfmbridge_a_SOURCES = mcfm_interface.cxx mcfm_grid.cxx mcfm_grid.h LHAPDF.h
+libmcfmbridge_a_SOURCES = mcfm_interface.cxx mcfm_grid.cxx mcfm_grid.h LHAPDF.h mcfm_procmap.cxx mcfm_procmap.h
 
 # library_includedir=$(includedir)/mcfmbridge
 # library_include_HEADERS=

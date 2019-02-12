@@ -1,4 +1,4 @@
-AC_INIT(mcfm-bridge, 0.0.35, sutt@cern.ch, mcfm-bridge, http://applgrid.hepforge.org)
+AC_INIT(mcfm-bridge, 0.0.35prim, sutt@cern.ch, mcfm-bridge, http://applgrid.hepforge.org)
 AM_INIT_AUTOMAKE
 AM_CONFIG_HEADER(amconfig.h:amconfig.in)
 #AC_PROG_FC

@@ -21,7 +21,7 @@
       unsigned int xOrder;
       double xlow;
       double xup;
-      int nloops;
+      unsigned int nloops;
 } Proc1;
  
 info whichProcess(int proc);

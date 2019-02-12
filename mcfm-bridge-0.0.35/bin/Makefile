@@ -71,27 +71,26 @@ SCRIPTS = $(bin_SCRIPTS)
 SOURCES =
 DIST_SOURCES =
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35/missing --run aclocal-1.11
-AMTAR = ${SHELL} /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35/missing --run tar
-APPLPATH = /nfs/dust/cms/user/volinar/tools/Test_AREA/Main/bin//applgrid-config
+ACLOCAL = ${SHELL} /afs/desy.de/user/s/star/work/herafitter/VladProject/bridge_dev/mcfm-bridge-0.0.35/missing --run aclocal-1.11
+AMTAR = ${SHELL} /afs/desy.de/user/s/star/work/herafitter/VladProject/bridge_dev/mcfm-bridge-0.0.35/missing --run tar
+APPLPATH = /afs/desy.de/user/s/star/xxl//bin/applgrid-config
 AR = ar
-AUTOCONF = ${SHELL} /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35/missing --run autoconf
-AUTOHEADER = ${SHELL} /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35/missing --run autoheader
-AUTOMAKE = ${SHELL} /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35/missing --run automake-1.11
+AUTOCONF = ${SHELL} /afs/desy.de/user/s/star/work/herafitter/VladProject/bridge_dev/mcfm-bridge-0.0.35/missing --run autoconf
+AUTOHEADER = ${SHELL} /afs/desy.de/user/s/star/work/herafitter/VladProject/bridge_dev/mcfm-bridge-0.0.35/missing --run autoheader
+AUTOMAKE = ${SHELL} /afs/desy.de/user/s/star/work/herafitter/VladProject/bridge_dev/mcfm-bridge-0.0.35/missing --run automake-1.11
 AWK = gawk
-CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/gcc
+CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
-CPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/gcc -E
+CPP = gcc -E
 CPPFLAGS = 
-CXX = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/g++
-CXXCPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/g++ -E
+CXX = g++
+CXXCPP = g++ -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
-DLLTOOL = false
 DSYMUTIL = 
 DUMPBIN = 
 ECHO_C = 
@@ -101,23 +100,22 @@ EGREP = /bin/grep -E
 EXEEXT = 
 FGREP = /bin/grep -F
 GREP = /bin/grep
-HOPPETPATH = /afs/desy.de/user/v/volinar/Top_PHYS/Main/bin//hoppet-config
+HOPPETPATH = /afs/desy.de/user/s/star/xxl//bin/hoppet-config
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /usr/bin/ld -m elf_x86_64
-LDFLAGS = -L/afs/desy.de/user/v/volinar/Top_PHYS/Main/lib/:-L/afs/desy.de/user/v/volinar/Top_PHYS/Main/lib/:
-LHAPDFPATH = /afs/desy.de/user/v/volinar/Top_PHYS/Main/bin//lhapdf-config
+LDFLAGS = 
+LHAPDFPATH = /afs/desy.de/user/s/star/xxl//bin/lhapdf-config
 LIBOBJS = 
 LIBS = 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35/missing --run makeinfo
-MANIFEST_TOOL = :
+MAKEINFO = ${SHELL} /afs/desy.de/user/s/star/work/herafitter/VladProject/bridge_dev/mcfm-bridge-0.0.35/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 NM = /usr/bin/nm -B
 NMEDIT = 
@@ -128,25 +126,23 @@ OTOOL64 =
 PACKAGE = mcfm-bridge
 PACKAGE_BUGREPORT = sutt@cern.ch
 PACKAGE_NAME = mcfm-bridge
-PACKAGE_STRING = mcfm-bridge 0.0.35
+PACKAGE_STRING = mcfm-bridge 0.0.35prim
 PACKAGE_TARNAME = mcfm-bridge
-PACKAGE_URL = http://applgrid.hepforge.org
-PACKAGE_VERSION = 0.0.35
+PACKAGE_VERSION = 0.0.35prim
 PATH_SEPARATOR = :
 RANLIB = ranlib
-ROOTPATH = /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/bin/root
+ROOTPATH = /cvmfs/atlas.cern.ch/repo/ATLASLocalRootBase/x86_64/root/6.08.06-x86_64-slc6-gcc49-opt/bin/root
 SED = /bin/sed
 SET_MAKE = 
 SHELL = /bin/sh
 STRIP = strip
-VERSION = 0.0.35
-abs_builddir = /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35/bin
-abs_srcdir = /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35/bin
-abs_top_builddir = /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35
-abs_top_srcdir = /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35
-ac_ct_AR = ar
-ac_ct_CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/gcc
-ac_ct_CXX = 
+VERSION = 0.0.35prim
+abs_builddir = /afs/desy.de/user/s/star/work/herafitter/VladProject/bridge_dev/mcfm-bridge-0.0.35/bin
+abs_srcdir = /afs/desy.de/user/s/star/work/herafitter/VladProject/bridge_dev/mcfm-bridge-0.0.35/bin
+abs_top_builddir = /afs/desy.de/user/s/star/work/herafitter/VladProject/bridge_dev/mcfm-bridge-0.0.35
+abs_top_srcdir = /afs/desy.de/user/s/star/work/herafitter/VladProject/bridge_dev/mcfm-bridge-0.0.35
+ac_ct_CC = gcc
+ac_ct_CXX = g++
 ac_ct_DUMPBIN = 
 am__include = include
 am__leading_dot = .
@@ -173,16 +169,17 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /nfs/dust/cms/user/volinar/tools/Test_AREA/mcfm-bridge-0.0.35/install-sh
+install_sh = ${SHELL} /afs/desy.de/user/s/star/work/herafitter/VladProject/bridge_dev/mcfm-bridge-0.0.35/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
 localstatedir = ${prefix}/var
+lt_ECHO = echo
 mandir = ${datarootdir}/man
 mkdir_p = /bin/mkdir -p
 oldincludedir = /usr/include
 pdfdir = ${docdir}
-prefix = /nfs/dust/cms/user/volinar/tools/Test_AREA/Main
+prefix = /afs/desy.de/user/s/star/xxl
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -207,9 +204,9 @@ $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	      exit 1;; \
 	  esac; \
 	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --foreign bin/Makefile'; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu bin/Makefile'; \
 	$(am__cd) $(top_srcdir) && \
-	  $(AUTOMAKE) --foreign bin/Makefile
+	  $(AUTOMAKE) --gnu bin/Makefile
 .PRECIOUS: Makefile
 Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	@case '$?' in \

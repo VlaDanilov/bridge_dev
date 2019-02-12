@@ -234,7 +234,7 @@ int usage( int i=0, std::ostream& s=std::cout ){
   s << "    -c           \t  apply the multiplicative corrections from the grid,\n";
   s << "    -v, --verbose \t  display verbose output,\n";
   s << "    -h, --help    \t  display this help\n";
-  s << "\nSee " << PACKAGE_URL << " for more details\n"; 
+//  s << "\nSee " << PACKAGE_URL << " for more details\n"; 
   s << "\nReport bugs to <" << PACKAGE_BUGREPORT << ">";
   s << std::endl;
   return i;

@@ -30,7 +30,7 @@
 #include "TClonesArray.h"
 #include "TCanvas.h"	
 
-//#include "mcfm_procmap.h"
+#include "mcfm_procmap.h"
 #include "mcfm_grid.h"
 #include "grid_struct.h"
   
@@ -479,7 +479,7 @@ extern void (*write_gridptr)(double& );
 
 
 extern "C" bool setup_mcfmbridge() { 
-  std::cout << "setup_mcfmbridge()" << std::endl;
+  std::cout << "setup_mcfmbridge() no" << std::endl;
   book_gridptr  = book_grid;
   fill_gridptr  = fill_grid;
   write_gridptr = write_grid;
@@ -487,7 +487,7 @@ extern "C" bool setup_mcfmbridge() {
 }
 
 extern "C" bool setup_mcfmbridge_() { 
-  std::cout << "setup_mcfmbridge()" << std::endl;
+  std::cout << "setup_mcfmbridge() yes" << std::endl;
   return setup_mcfmbridge();
 }
 
