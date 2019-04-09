@@ -1,0 +1,61 @@
+
+mcfm bridge
+-----------
+
+Installation
+------------
+
+./configure --prefix=<install_directory>
+make
+make install
+
+THis builds and installs the library 
+
+  libmcfmbridge.a
+
+and the utility 
+
+  mcfmbridge-config
+
+which can be used to give the link options required to 
+link with applgrid and mcfm
+
+
+To use, 
+
+   mcfmbridge-config --ldflags
+
+will produce eg 
+
+   -u _setup_mcfmbridge_ -L<install_directory> -lmcfmbridge  -L<install_directory> -lAPPLgrid ....
+
+which will contain *all* the linker options needed to link 
+against mcfmbridge and applgrid.
+
+Using this utility in this way is important since the -u option 
+will define the _setup.._ token as undefined to force the 
+setup_mcfmbridge module to be loaded from the library.
+
+Linking this module will be enough to setup the grid interface 
+functions during run time, so that linking with eg 
+
+Within a makefile use 
+
+LDFLAGS += $(shell mcfmbridge-config --ldflags )
+
+In the standard mcfm makefile there is a token:
+
+LDFLAGS
+
+If setting this with the link options mentioned above before 
+linking ...
+
+export  MCFMBRIDGE_LDFLAGS="`mcfmbridge-config --ldflags`"
+
+before running make in the mcfm directory will cause the 
+applgrid libraries to all be linked and the full applgrid enabled
+version will be built.
+
+
+
+

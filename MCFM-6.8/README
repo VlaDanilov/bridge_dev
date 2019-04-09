@@ -1,0 +1,28 @@
+Installation patch file for mcfm 6.7
+------------------------------------
+
+untar the mcfm-patch-X.Y.Z.tgz file ( where X.Y.Z is the relevant version)
+int the base directory of mcfm
+
+then simply run 
+
+ ./cleanup.sh
+ make
+
+The mcfm-patch file contains ... 
+
+TensorReduction/makefile
+TensorReduction/ov/makefile
+cleanup.sh
+makefile
+src/Procdep/realint.f
+src/Procdep/virtint.f
+src/User/gridwrap.cxx
+README
+
+NB: this version should be used for mcfm 6.8. 
+    It will not work with mcfm 6.7, since the mcfm code structure itself
+    has changed slightly
+
+ 
+ 
