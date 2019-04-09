@@ -145,7 +145,7 @@ public:
   //  fill weight from MCFM common block  
   void fillMCFM( double obs);
   void collectWeight   ( const int, const int, double* wt, int =0 );
-  void decideSubProcess( const int, const int, int&, double&, int =0 );
+  void decideSubProcess( const int, const int, int&, const int&, const int&, double&, int =0 );
   
 
 };

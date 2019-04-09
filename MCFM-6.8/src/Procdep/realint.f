@@ -38,7 +38,7 @@ c--- APPLgrid - enable grids
       include 'qcdcouple.f'
       include 'nlooprun.f'
       include 'couple.f'
-      double precision psCR, currason2pi, alphas
+      double precision psCR, currason2pi, alphas,ct0 
 c--- APPLgrid - end
 
 c---- SSbegin                                                                                                                      
@@ -682,6 +682,7 @@ c------ radiation in the decay of the anti-top quark
         if (includereal) call dkW2qqb_QQb_g(p,msq)
           call dkW2qqb_QQb_gs(p,msqc)
       else
+    
         write(6,*) 'Problem generating PS, decay1q2a=',decay1q2a
         stop
       endif
@@ -1137,7 +1138,7 @@ c        endif
         failed=.false.
         
         if (nd .eq. 0) then
-c---if there's no real contribution, record the event as failing to pass cuts
+c---if there is no real contribution, record the event as failing to pass cuts
           if (xmsq(nd) .eq. 0d0) then
              failed=.true.
              goto 996
@@ -1197,7 +1198,7 @@ c--- update PDF errors
           enddo           
         endif
                 
-c---if we're binning, add to histo too
+c---if we are binning, add to histo too
         if (bin) then
 c--- APPLgrid - writing out the common block
            if (creategrid) then
@@ -1254,6 +1255,22 @@ C               print*, " x1 = ",xx1," x2 = ",xx2," sca = ",facscale
 C               print *, "rewt = ", refwt
 C               print*,"*************************************************"
 C               flush(6)
+c 555    FORMAT('mcfm Weight real nd = ',I2,A6)
+c	write(*,555)nd,'START'
+c	do j=-nflav,nflav
+c	write(*, '(SP,2X,12ES15.6)') weightr(nd,j,:)
+c	enddo
+
+c	ct0=0d0
+c        do j=-nflav,nflav
+c           do k=-nflav,nflav
+c              ct0 = ct0 + fx1(j)*fx2(k)*weightr(nd,j,k)/psCR
+c           enddo
+c        enddo      
+c        ct0=ct0*weightfactor
+c        print*,'   : check : ',ct0,refwt,ct0/refwt
+c	write(*,555)nd,'STOP'
+
            endif
 c--- APPLgrid - end
 

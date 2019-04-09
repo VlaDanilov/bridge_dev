@@ -744,7 +744,9 @@ c     APPLgrid - multiply by totalFactor
      &         .or. (case .eq. 'tthWdk')
      &         .or. (case .eq. 'qq_ttg') ) then
                   psCR = (1d0/ason2pi)**2
-               elseif ( (case .eq. 'W_cjet')) then
+               elseif ( (case .eq. 'W_cjet')
+     &         .or.   (case .eq. 'W_1jet')
+     &         .or.   (case .eq. 'Z_1jet') ) then
                   psCR = (1d0/ason2pi)
                endif
                do j=-nflav,nflav
