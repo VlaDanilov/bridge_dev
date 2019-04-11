@@ -152,10 +152,13 @@ void book_grid()  // inital grid booking
   // how many loops
   int nloops = 1;
   
+
   // number of observables and binning for observables  
   const double *obsBins[_Ngrids] = { eta};//, pt, eta, pt, eta, pt ;
     
+  // Default pdf decomposition
   std::string pdf_function;
+  pdf_function = "basic";  
 
   glabel = "grid-40-6-15-3";
 /*
@@ -391,7 +394,6 @@ void book_grid()  // inital grid booking
     } 
   std::cout << std::endl;
 
-  //pdf_function = "basic";
   /// Read the ckm matrix from mcfm to store in the grid automatically
   /// NB: we store 13 x 13 ckm matrix - mcfm only stores 11 x 11 so we 
   ///     must add 1 to each index to keep them aligned

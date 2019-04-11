@@ -13,8 +13,8 @@
 .false.		[writepwg]
 
 [General options to specify the process and execution]
-143      	[nproc]
-'lord'  	[part 'lord','real' or 'virt','tota']
+145      	[nproc]
+'tota'  	[part 'lord','real' or 'virt','tota']
 'test'		['runstring']
 13000d0		[sqrts in GeV]
 +1		[ih1 =1 for proton and -1 for antiproton]
