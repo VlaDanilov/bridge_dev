@@ -148,7 +148,7 @@ void book_grid()  // inital grid booking
   appl::grid::transformvar(apramval);
 
   // lowest order in alphas	
-  int lowest_order = 0;
+  gridorder_.lowest_order=0;
   // how many loops
   int nloops = 1;
   
@@ -199,13 +199,26 @@ void book_grid()  // inital grid booking
       std::cout << " W+ + jet production"; 
       pdf_function = "mcfm-wpjet"; 
       glabel+="-WplusJet";
-      lowest_order = 1;
+      gridorder_.lowest_order = 1;
+    }
+  else if ( nproc_.nproc == 12 )
+    {
+      std::cout << " W+ + bbar production";
+      glabel+="-WplusBbar";
+      gridorder_.lowest_order = 1;
     }
   else if ( nproc_.nproc == 16 )  
     {
       std::cout << " W- + jet production"; 
       pdf_function = "mcfm-wmjet"; 
       glabel+="-WminusJet";
+      gridorder_.lowest_order = 1;
+    }
+  else if ( nproc_.nproc == 17 )
+    {
+      std::cout << " W- + b quark production";
+      glabel+="-WminusBquark";
+      gridorder_.lowest_order = 1;
     }  
   else if ( nproc_.nproc == 31 ) 
     {
@@ -215,13 +228,25 @@ void book_grid()  // inital grid booking
      // q2Low = 8280.99, q2Up = 8281.01;
      // nQ2bins = 3;
      // qorder  = 1;
+    }
+  else if ( nproc_.nproc == 33 )
+    {
+      std::cout << " Z0 to bbbar production";
+      //pdf_function = "mcfm-z";
+      glabel+="-Z0_to_bbbar";
     }  
+  else if ( nproc_.nproc == 36 )
+    {
+      std::cout << " Z0 to ttbar production only in LO";
+      //pdf_function = "mcfm-z";
+      glabel+="-Z0_to_ttbar";
+     }
   else if ( (nproc_.nproc >= 41) && (nproc_.nproc <= 43)) 
     {
       std::cout << " Z-jet production"; 
       pdf_function = "mcfm-zjet"; 
       glabel+=TString::Format("-Zjet_%d",nproc_.nproc).Data();
-      lowest_order = 1;
+      gridorder_.lowest_order = 1;
     }  
   else if ( (nproc_.nproc >= 280) && (nproc_.nproc <= 286)) 
     {
@@ -257,7 +282,7 @@ void book_grid()  // inital grid booking
       std::cout << " W+ + Cbar production"; 
       pdf_function = "mcfm-wpc"; 
       glabel+="-WplusCbar";
-      lowest_order = 1;
+      gridorder_.lowest_order = 1;
     }  
   else if ( nproc_.nproc == 18 )  
     {
@@ -265,14 +290,14 @@ void book_grid()  // inital grid booking
       pdf_function = "mcfm-wmc"; 
       glabel+="-WminusC";
       
-      lowest_order = 1;
+      gridorder_.lowest_order = 1;
     }
-  else if ( (nproc_.nproc == 141) || (nproc_.nproc == 142) || (nproc_.nproc==144) ||
+  else if ( (nproc_.nproc == 141) || (nproc_.nproc == 142) || (nproc_.nproc==143) || (nproc_.nproc==144) ||
 	    (nproc_.nproc == 145) || (nproc_.nproc == 146) || (nproc_.nproc==147) ||
-	    (nproc_.nproc == 148) || (nproc_.nproc == 149) || (nproc_.nproc==150) ||(nproc_.nproc == 151) ||
+	    (nproc_.nproc == 148) || (nproc_.nproc == 149) || (nproc_.nproc==150) || (nproc_.nproc==151) ||
 	    (nproc_.nproc == 157) || (nproc_.nproc == 158) || (nproc_.nproc==159) )
     {
-      lowest_order = 2;
+      gridorder_.lowest_order = 2;
       
       if (nproc_.nproc == 141)
 	{
@@ -286,6 +311,12 @@ void book_grid()  // inital grid booking
 	  pdf_function = "mcfm-TT"; 
 	  glabel+="-TTbar-142";
 	}
+      else if (nproc_.nproc == 143)
+        {
+          std::cout << " TTbar production with 2 semi-leptonic decays + jet, only in LO";
+          glabel+="-TTbar-143";
+          gridorder_.lowest_order = 3;
+        }
       else if (nproc_.nproc == 144)
 	{
 	  std::cout << " TTbar production with 2 semi-leptonic decays, no correlations"; 
@@ -355,7 +386,7 @@ void book_grid()  // inital grid booking
     }  
   else                           
     { 
-      std::cerr << "don't know which process" << std::endl; 
+      std::cerr << "don't know which process in interface" << std::endl; 
       std::exit(-1); 
     } 
   std::cout << std::endl;
@@ -409,7 +440,7 @@ void book_grid()  // inital grid booking
 	  mygrid[igrid] = new appl::mcfm_grid( nObsBins[igrid], obsBins[igrid],      // obs bins
 					       nQ2bins, q2Low, q2Up, qorder,         // Q2 bins and interpolation order
 					       nXbins,   xLow,  xUp, xorder,         // x bins and interpolation order
-					       pdf_function, lowest_order, nloops ); 
+					       pdf_function, gridorder_.lowest_order, nloops ); 
 	  /// try reweighting for a bit
 	  mygrid[igrid]->reweight(true);
 	  mygrid[igrid]->setCMSScale( energy_.sqrts );

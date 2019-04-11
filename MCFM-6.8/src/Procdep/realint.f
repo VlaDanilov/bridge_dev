@@ -1209,24 +1209,7 @@ c--- APPLgrid - writing out the common block
                 currason2pi = ason2pi
               endif
            
-              psCR = (1d0/currason2pi)
-              if ( (case .eq. 'tt_tot')
-     &        .or. (case .eq. 'bb_tot')
-     &        .or. (case .eq. 'cc_tot') 
-     &        .or. (case .eq. 'tt_bbl')
-     &        .or. (case .eq. 'tt_ldk')
-     &        .or. (case .eq. 'tt_bbu')
-     &        .or. (case .eq. 'tt_udk')
-     &        .or. (case .eq. 'tt_bbh')
-     &        .or. (case .eq. 'tt_hdk')
-     &        .or. (case .eq. 'tthWdk')
-     &        .or. (case .eq. 'qq_ttg') ) then
-                 psCR = (1d0/currason2pi)**3
-              elseif ( (case .eq. 'W_cjet')
-     &        .or. (case .eq. 'Z_1jet')
-     &        .or. (case .eq. 'W_1jet') ) then
-                 psCR = (1d0/currason2pi)**2
-              endif
+              psCR = (1d0/currason2pi)**(lowest_order+1)
               do j=-nflav,nflav
                  do k=-nflav,nflav
                     weightr(nd,j,k)=weightr(nd,j,k)*psCR

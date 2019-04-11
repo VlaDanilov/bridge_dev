@@ -2417,27 +2417,8 @@ c--- update the maximum weight so far, if necessary
 
 c--- APPLgrid - storing virt weight to common block
          if (creategrid) then
-            psCR  = 1d0/ason2pi
-            psCR0 = 1d0
-            if ( (case .eq. 'tt_tot')
-     &      .or. (case .eq. 'bb_tot')
-     &      .or. (case .eq. 'cc_tot') 
-     &      .or. (case .eq. 'tt_bbl')
-     &      .or. (case .eq. 'tt_ldk')
-     &      .or. (case .eq. 'tt_bbu')
-     &      .or. (case .eq. 'tt_udk')
-     &      .or. (case .eq. 'tt_bbh')
-     &      .or. (case .eq. 'tt_hdk')
-     &      .or. (case .eq. 'tthWdk')
-     &      .or. (case .eq. 'qq_ttg') ) then
-               psCR  = (1d0/ason2pi)**3
-               psCR0 = (1d0/ason2pi)**2
-            elseif ( (case .eq. 'W_cjet')
-     &      .or. (case .eq. 'Z_1jet')
-     &      .or. (case .eq. 'W_1jet') ) then
-               psCR  = (1d0/ason2pi)**2
-               psCR0 = (1d0/ason2pi)
-            endif
+            psCR  = (1d0/ason2pi)**(lowest_order+1)
+            psCR0 = (1d0/ason2pi)**lowest_order
             do j=-nflav,nflav
                do k=-nflav,nflav
                   weightb (j,k) = weightb(j,k)*psCR0

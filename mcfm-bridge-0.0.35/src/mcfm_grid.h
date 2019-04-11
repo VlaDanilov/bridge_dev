@@ -73,6 +73,9 @@ typedef struct  {
     int itmx1, ncall1, itmx2, ncall2;
 } __iterat__;
 
+typedef struct {
+   int lowest_order;
+  }__gridorder__;
 
  
 
@@ -84,7 +87,7 @@ extern "C" __nproc__  nproc_;
 extern "C" __nflav__  nflav_;
 extern "C" __energy__ energy_;
 extern "C" __iterat__ iterat_;
-
+extern "C" __gridorder__ gridorder_;
 
 
 namespace appl { 
