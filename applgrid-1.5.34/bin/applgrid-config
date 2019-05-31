@@ -1,0 +1,60 @@
+#! /usr/bin/env bash
+
+# These variables need to exist
+prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main
+# datadir = ${datarootdir}
+
+
+if [[ $# -eq 0 || -n $( echo $* | egrep -- "--help|-h" ) ]]; then
+    echo "applgrid-config: configuration tool for the APPLgrid"
+    echo "                 fast cross section convolution code"
+    echo "                 http://projects.hepforge.org/applgrid/"
+    echo
+    echo "Usage: applgrid-config [[--help|-h] | [--prefix] | [...]]"
+    echo "Options:"
+    echo "  --help | -h    : this help"
+    echo
+    echo "  --prefix       : installation prefix (cf. autoconf)"
+    echo "  --incdir       : path to the APPLgrid header directory"
+    echo "  --libdir       : path to the APPLgrid library directory"
+    echo "  --cxxflags     : compiler flags for the C preprocessor"
+    echo "  --ldflags      : compiler flags for the linker just for c code"
+    echo "  --ldfflags     : compiler flags for the linker including the fortan interface"
+    echo "  --share        : path to APPLgrid pdf conbination config files"
+    echo
+    echo "  --version      : release version number"
+fi
+
+OUT=""
+
+tmp=$( echo "$*" | egrep -- '--\<prefix\>')
+test -n "$tmp" && OUT="$OUT /afs/desy.de/user/v/volinar/APPLgrid_development/Main"
+
+tmp=$( echo "$*" | egrep -- '--\<incdir\>')
+test -n "$tmp" && OUT="$OUT ${prefix}/include"
+
+tmp=$( echo "$*" | egrep -- '--\<cxxflags\>')
+test -n "$tmp" && OUT="$OUT -I${prefix}/include  -pthread -std=c++11 -Wno-deprecated-declarations -m64 -I/cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/include "
+
+tmp=$( echo "$*" | egrep -- '--\<libdir\>')
+test -n "$tmp" && OUT="$OUT ${prefix}${exec_prefix}/lib"
+
+
+tmp=$( echo "$*" | egrep -- '--\<ldfflags\>')
+test -n "$tmp" && OUT="$OUT -L${prefix}${exec_prefix}/lib -lfAPPLgrid -lAPPLgrid  -m64 -L/cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/lib -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -pthread -lm -ldl -rdynamic -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main//lib -lhoppet_v1" 
+
+tmp=$( echo "$*" | egrep -- '--\<ldcflags\>')
+test -n "$tmp" && OUT="$OUT -L${prefix}${exec_prefix}/lib -lAPPLgrid  -m64 -L/cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/lib -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -pthread -lm -ldl -rdynamic -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main//lib -lhoppet_v1"
+
+tmp=$( echo "$*" | egrep -- '--\<ldflags\>')
+test -n "$tmp" && OUT="$OUT -L${prefix}${exec_prefix}/lib -lAPPLgrid -m64 -L/cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/lib -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -pthread -lm -ldl -rdynamic -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main//lib -lhoppet_v1"
+
+tmp=$( echo "$*" | egrep -- '--\<share\>')
+test -n "$tmp" && OUT="$OUT ${prefix}/share/applgrid"
+
+
+## Version
+tmp=$( echo "$*" | egrep -- '--\<version\>')
+test -n "$tmp" && OUT="$OUT 1.5.34"
+
+echo $OUT
