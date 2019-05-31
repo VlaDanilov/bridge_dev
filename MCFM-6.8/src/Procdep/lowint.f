@@ -744,20 +744,24 @@ c     APPLgrid - multiply by totalFactor
               ag_scale     = facscale
               refwt        = val/dfloat(itmx)
               refwt2       = val2/dfloat(itmx)
-C     print*,"  *******************************************"
-C     print*, "meWeightFactor = ", weightfactor,
-C     *             " me(2,-1) = " ,  weightb(2 ,-1) ," ", msq(2,-1),
-C     *             " me(-1,2) = " ,  weightb(-1 ,2) ," ", msq(-1,2),
-C     *             " me(1,-1) = " ,  weightb(1 ,-1) ," ", msq(1,-1),
-C     *             " me(-2,2) = " ,  weightb(-2 ,2) ," ", msq(-2,2)
-C     print*, " x1 = ",xx(1)," x2 = ",xx(2)," sca = ",facscale
-C     print *, "rewt = ", refwt
-C     print*,"  *********************************************"
-C     flush(6)
+c      print*,"  *******************************************"
+c      print*, "meWeightFactor = ", weightfactor,
+c     *             " me(2,-1) = " ,  weightb(2 ,-1) ," ", msq(2,-1),
+c     *             " me(-1,2) = " ,  weightb(-1 ,2) ," ", msq(-1,2),
+c     *             " me(1,-1) = " ,  weightb(1 ,-1) ," ", msq(1,-1),
+c     *             " me(-2,2) = " ,  weightb(-2 ,2) ," ", msq(-2,2)
+c      print*, " x1 = ",xx(1)," x2 = ",xx(2)," sca = ",facscale
+c      print *, "rewt = ", refwt
+c      print *, "flux = ", flux
+c      print *, "pswt = ", pswt
+c      print *, "wgt = ", wgt
+c      print *, "BrnRat = ", BrnRat
+c      print *, "itmx = ", itmx
+c      print*,"  *********************************************"
+c      flush(6)
               
            endif
 c---  APPLgrid - end
-
         call nplotter(pjet,val,val2,0)
 c--- POWHEG-style output if requested
         if (writepwg) then

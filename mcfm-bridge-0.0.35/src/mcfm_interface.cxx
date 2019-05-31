@@ -60,14 +60,14 @@ static const int mxpart = 14;    // mcfm parameter : max number of partons in ev
 /// was 12 for mcfm 6.7
 /// static const int mxpart = 12;    // mcfm parameter : max number of partons in event record. defined in Inc/constants.f
 
-static const int _Ngrids = 1;
-static       int  Ngrids = 1;
+static const int _Ngrids = 2;
+static       int  Ngrids = 2;
 appl::mcfm_grid* mygrid[_Ngrids];
 
 static const char* gridFiles[_Ngrids] = {
-    "_eta4.root"};
-/*    "_pt3-etalt137.root",
-    "_eta4.root",
+    "_eta3.root",
+    "_pt4.root"};
+/*    "_eta4.root",
     "_pt3-eta152-237.root",
     "_pt4.root",
     "_eta5.root",
@@ -75,18 +75,19 @@ static const char* gridFiles[_Ngrids] = {
 };*/
 
 
-static double Observable[_Ngrids] = {  0};//,  0,  0,  0,  0,  0 };   // observable array
-int             nObsBins[_Ngrids] = { 40};//, 45, 40, 45, 40, 45 }; // eta4, pt4 cental eta-bin, pt4 forward eta-bin
+static double Observable[_Ngrids] = {  0,  0}; //,  0,  0,  0,  0 };   // observable array
+int             nObsBins[_Ngrids] = { 40, 50};//, 45, 40, 45, 40, 45 }; // eta4, pt4 cental eta-bin, pt4 forward eta-bin
 
 static const double eta[41] =  {
-  -4.0, -3.8, -3.6, -3.4, -3.2, 
-  -3.0, -2.8, -2.6, -2.4, -2.2, 
-  -2.0, -1.8, -1.6, -1.4, -1.2, 
-  -1.0, -0.8, -0.6, -0.4, -0.2,  0.0, 
-   0.2,  0.4,  0.6,  0.8,  1.0,  
-   1.2,  1.4,  1.6,  1.8,  2.0,  
-   2.2,  2.4,  2.6,  2.8,  3.0,  
-   3.2,  3.4,  3.6,  3.8,  4.0  
+     -4.0,-3.8,-3.6,-3.4,-3.2,
+     -3.0,-2.8,-2.6,-2.4,-2.2,
+     -2.0,-1.8,-1.6,-1.4,-1.2,
+     -1.0,-0.8,-0.6,-0.4,-0.2,
+      0.0, 0.2, 0.4, 0.6, 0.8,
+      1.0, 1.2, 1.4, 1.6, 1.8,
+      2.0, 2.2, 2.4, 2.6, 2.8,
+      3.0, 3.2, 3.4, 3.6, 3.8,
+      4.0
 };
 
 // int nObsBins[_Ngrids] = {13, 45, 40, 45, 40, 45};      // eta4, pt4 cental eta-bin, pt4 forward eta-bin
@@ -96,17 +97,18 @@ static const double eta[41] =  {
 // };
 
 
-static const double pt[46] =  { 
-      0.0,   5.0,   10.0,   15.0,   20.0, 
-     25.0,  30.0,   35.0,   40.0,   45.0, 
-     50.0,  55.0,   60.0,   65.0,   70.0, 
-     75.0,  80.0,   85.0,   90.0,   95.0, 
-    100.0, 105.0,  110.0,  115.0,  120.0, 
-    125.0, 130.0,  135.0,  140.0,  145.0,
-    150.0, 175.0,  200.0,  225.0,  250.0,
-    275.0, 300.0,  350.0,  400.0,  450.0,
-    500.0, 750.0, 1000.0, 1500.0, 2000.0,
-    2500.0
+static const double pt[51] =  { 
+       0.0,   2.0,   4.0,   6.0,   8.0, 
+      10.0,  12.0,  14.0,  16.0,  18.0,   
+      20.0,  22.0,  24.0,  26.0,  28.0,   
+      30.0,  32.0,  34.0,  36.0,  38.0,   
+      40.0,  42.0,  44.0,  46.0,  48.0,   
+      50.0,  52.0,  54.0,  56.0,  58.0,   
+      60.0,  62.0,  64.0,  66.0,  68.0,   
+      70.0,  72.0,  74.0,  76.0,  78.0,   
+      80.0,  82.0,  84.0,  86.0,  88.0,   
+      90.0,  92.0,  94.0,  96.0,  98.0, 
+     100.0  
 };
 
 
@@ -134,6 +136,7 @@ void book_grid()  // inital grid booking
   
   std::cout<<" ***********************************************"<<std::endl;
   std::cout<<" booking the grids " << date() << std::endl;
+      std::cout << " iterat_.ncall2 = " << iterat_.ncall2 << std::endl;     
   
   // binning information for the grid constructor
   double xLow    = 1.0e-9, xUp = 1.0;
@@ -154,7 +157,7 @@ void book_grid()  // inital grid booking
   
 
   // number of observables and binning for observables  
-  const double *obsBins[_Ngrids] = { eta};//, pt, eta, pt, eta, pt ;
+  const double *obsBins[_Ngrids] = { eta,pt};//, pt, eta, pt, eta, pt ;
     
   // Default pdf decomposition
   std::string pdf_function;
@@ -431,6 +434,7 @@ void book_grid()  // inital grid booking
       if ( create_new ) 
 	{ 
 	  std::cout << "Creating NEW grid... " << std::endl;
+      std::cout << " iterat_.ncall2 = " << iterat_.ncall2 << std::endl;     
 	  
 	  std::cout << "grid interpolation: " 
 		    << "\tQ2 " << nQ2bins << " " <<  q2Low << " " <<  q2Up << " " <<  qorder   
@@ -457,8 +461,8 @@ void book_grid()  // inital grid booking
 	  
 	  std::cout << "reference histo name = " 
 	       << mygrid[igrid]->getReference()->GetName() << std::endl;
-	  
-	  std::cout<<*mygrid[igrid]<<std::endl;  
+          mygrid[igrid]->getReference()->Print("all");	  
+//	  std::cout<<*mygrid[igrid]<<std::endl;  
 	}
       else 
 	{
@@ -469,7 +473,7 @@ void book_grid()  // inital grid booking
 	  mygrid[igrid]->getReference()->Reset();
 	  mygrid[igrid]->optimise(nQ2bins, nXbins);
 	  
-	  std::cout<<*(mygrid[igrid])<<std::endl;  
+//	  std::cout<<*(mygrid[igrid])<<std::endl;  
 	}
       // CTEQ like reweighting
       //      mygrid[igrid]->reweight( false );
@@ -483,6 +487,12 @@ void book_grid()  // inital grid booking
 
 void fill_grid( const double evt[][mxpart] )
 {
+  /* 
+  std::cout << ".............Print " << std::endl;
+  std::cout << " evt2  = " << evt[3][2] << "  " << evt[0][2] << "  " << evt[1][2] << "  " << evt[2][2] << std::endl;
+  std::cout << " evt 3 = " << evt[3][3] << "  " << evt[0][3] << "  " << evt[1][3] << "  " << evt[2][3] << std::endl;
+  std::cout << " evt  4= " << evt[3][4] << "  " << evt[0][4] << "  " << evt[1][4] << "  " << evt[2][4] << std::endl;
+  */
   static unsigned evtcounter = 1;
   if ( evtcounter%50000==0 ) std::cout << "fill_grid() filled " << evtcounter << " weights " << date(); 
   evtcounter++;
@@ -523,15 +533,15 @@ void Normalise(TH1D* h)
 void write_grid(double& xstotal)   // writes out grid after some events
 {
   std::cout<<"Write out grids ..."<<std::endl;
-
+  
   for(int igrid = 0; igrid < Ngrids; igrid++)
     {
-      std::cout << "saving grid N=" << igrid+1 << "\tof " << Ngrids << "\t";
+      std::cout << "saving grid N = " << igrid+1 << "\tof " << Ngrids << "\t" << std::endl;
 
       std::system("sleep 1");
-      
 
       mygrid[igrid]->setNormalised( false );
+     
       mygrid[igrid]->run() = (iterat_.ncall2)*(iterat_.itmx2);
       
       mygrid[igrid]->untrim();
@@ -542,13 +552,12 @@ void write_grid(double& xstotal)   // writes out grid after some events
 
       /// scale up by number of weights
       (*mygrid[igrid]) *= mygrid[igrid]->run();
-      
       // normalise the reference histogram by bin width
       Normalise( mygrid[igrid]->getReference() );
 
       /// now scale *down* the reference histogram because we've just 
       /// scaled it up ...
-      //      mygrid[igrid]->getReference()->Scale( 1/mygrid[igrid]->run() );
+      //mygrid[igrid]->getReference()->Scale( 1/mygrid[igrid]->run() );
 
       std::string filename = glabel+gridFiles[igrid];
 
@@ -582,8 +591,6 @@ void write_grid(double& xstotal)   // writes out grid after some events
       std::cout << "size(untrimmed)=" << untrim_size 
 		<< "\tsize(trimmed)=" << trim_size 
 		<< "\tfraction="      << 100.*trim_size/untrim_size << " %" << std::endl;
-
-
       delete mygrid[igrid];
       
     }
@@ -706,8 +713,8 @@ void getObservable(const double evt[][mxpart])
     //Observable[ 2 ] = rapidity4;
   }
   
-  //Observable[ 3 ] = pt4;
-  //Observable[ 4 ] = rapidity5;
+  Observable[ 0 ] = rapidity4;
+  Observable[ 1 ] = pt4;
   //Observable[ 5 ] = pt5;
 
 }
@@ -718,21 +725,16 @@ int cuts(int igrid)
   switch(igrid)
     {
     case(0):
-      if ( std::fabs(Observable[0])<4.0 ) fill = 1;
+      if(fabs(Observable[igrid]) <= 2.4) fill = 1;
       break;
     case(1):
-      if ( (nproc_.nproc >= 280) && (nproc_.nproc <= 286) ) { 
-	if ( std::fabs(Observable[0])<1.37 ) fill = 1;
-      }
-      else fill = 1;
+      if(Observable[1] <= 100.0 ) fill = 1;
       break;
     case(2):
-      if ( (nproc_.nproc >= 280) && (nproc_.nproc <= 286) ) { 
-	if ( std::fabs(Observable[0])>=1.52 && std::fabs(Observable[0])<2.37 ) fill = 1;
-      }
-      else fill = 1;
+      fill = 1;
       break;
     case(3):
+      fill = 1;
       break;
     case(4):
       fill = 1;

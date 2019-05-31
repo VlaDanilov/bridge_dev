@@ -30,7 +30,7 @@ static const bool _debug_ = false;
 
 void appl::mcfm_grid::fillMCFM(double obs)
 {
-  //  bool _debug_ = true;
+   bool _debug_ = false;
 
   if (_debug_) std::cout << __PRETTY_FUNCTION__ << "   --------------------------------------------- " << std::endl;
   
@@ -53,8 +53,10 @@ void appl::mcfm_grid::fillMCFM(double obs)
 	       <<" x2 = "<< _x2
 	       <<" Q  = "<< gridevent_.ag_scale
 	       <<" CON = "<< gridevent_.contrib
-	       <<std::endl;
+	       <<"obs = "<<obs
+               <<std::endl;
 
+/*
   double pdfarr10[13], pdfarr20[13], pdfarr1p[13], pdfarr2p[13];//, pdft1[13],pdft2[13];
   evolvepdf_( &gridevent_.ag_xx1, &gridevent_.ag_scale, pdfarr10 );
   evolvepdf_( &gridevent_.ag_xx2, &gridevent_.ag_scale, pdfarr20 );
@@ -88,7 +90,7 @@ void appl::mcfm_grid::fillMCFM(double obs)
 
 //  m_genpdf[0]->evaluate( pdft1, pdfarr20, Ht1);
 //  m_genpdf[0]->evaluate( pdfarr10, pdft2, Ht2);
-
+*/
 
 //std::cout << std::scientific;
 

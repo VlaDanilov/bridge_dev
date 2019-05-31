@@ -68,9 +68,13 @@ typedef struct  {
 } __energy__;
 
 
-
+/*
 typedef struct  {
     int itmx1, ncall1, itmx2, ncall2;
+} __iterat__;
+*/
+typedef struct  {
+    long long int ncall1, ncall2; int itmx1,  itmx2;
 } __iterat__;
 
 typedef struct {

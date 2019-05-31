@@ -77,7 +77,7 @@ public:
   /// initialise the factory  
   static bool create_map(); 
 
-  virtual void evaluate(const double* fA, const double* fB, double* H) const = 0; 
+  virtual void evaluate(const double* fA, const double* fB, double* H) const=0; 
 
   virtual int decideSubProcess( const int , const int  ) const;
 

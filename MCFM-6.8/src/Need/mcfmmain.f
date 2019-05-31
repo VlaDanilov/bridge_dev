@@ -105,10 +105,8 @@ c          call fill_stdhep(p,0,0,wt)
 c         call write_stdhep(6)
 c        enddo
       endif
-
 * final processing and print-out
       call mcfm_exit(itmxplots,integ,integ_err)
-      
       stop
       end
        

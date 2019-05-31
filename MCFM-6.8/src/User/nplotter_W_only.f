@@ -131,14 +131,16 @@ c---   llplot:  equal to "lin"/"log" for linear/log scale
        call bookplot(n,tag,'W ps-rap',eta34,wt,wt2,-6d0,6d0,0.2d0,'lin')
        n=n+1
       if(nproc .eq. 1) then
-         call bookplot(n,tag,'y(lep)',y4,wt,wt2,-ylep,ylep,0.2d0,'lin')
+         call bookplot(n,tag,'y(lep)',y4,wt,wt2,-2.4d0,2.4d0,0.2d0,'lin'
+     & )
          n=n+1
-         call bookplot(n,tag,'pt(lep)',pt4,wt,wt2,0d0,ptlep,2d0,'lin')
+         call bookplot(n,tag,'pt(lep)',pt4,wt,wt2,0d0,100d0,2d0,'lin')
          n=n+1
       else            
-         call bookplot(n,tag,'y(lep)',y3,wt,wt2,-ylep,ylep,0.2d0,'lin')
+         call bookplot(n,tag,'y(lep)',y3,wt,wt2,-2.4d0,2.4d0,0.2d0,'lin'
+     & )
          n=n+1
-         call bookplot(n,tag,'pt(lep)',pt3,wt,wt2,0d0,ptlep,2d0,'lin')
+         call bookplot(n,tag,'pt(lep)',pt3,wt,wt2,0d0,100d0,2d0,'lin')
          n=n+1
       endif
       call bookplot(n,tag,'DeltaRe5',Re5,wt,wt2,0d0,5d0,0.4d0,'lin')

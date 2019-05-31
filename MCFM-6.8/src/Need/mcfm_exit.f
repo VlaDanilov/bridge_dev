@@ -142,7 +142,6 @@ c------ loop over output units
         close(91)
       endif
       
-
    56 format('* PDF error set ',i3,' -->',f15.3,' fb  *')
    57 format('*   ',a16,f14.3,' fb      *')
    58 format(a44)
