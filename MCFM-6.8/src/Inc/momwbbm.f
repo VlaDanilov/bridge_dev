@@ -1,3 +1,0 @@
-      double precision mom(mxpart,4),bp,bm
-      common/momwbbm/mom,bp,bm
-
