@@ -13,7 +13,7 @@
 .false.		[writepwg]
 
 [General options to specify the process and execution]
-11	 	[nproc]
+1	 	[nproc]
 'nlo'           [part 'lo','nlo','nnlo','nlocoeff','nnlocoeff']
 '13TeV'		['runstring']
 13000d0		[sqrts in GeV]
