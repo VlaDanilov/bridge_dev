@@ -1,0 +1,982 @@
+2017-10-30  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS:
+	finalised NEWS file for 1.2.0 release
+
+	* src/welcome_message.f90 (HoppetWelcomeMessage):
+	changed version to 1.2.0
+
+	* src/new_as.f90 (na_Init): 
+	fixed bug that arises when nloop is not specified (use of optional
+	nloop argument instead of nah%nloop)
+
+	* doc/HOPPET-v1-doc.tex: 
+	* tarit.sh:
+	added pdf files to tarball and added a whole bunch of pdf files +
+	changed documentation so that it works with both pdflatex and
+	latex.
+	Also changed front page to reflect contributions from Frederic and
+	Alexander. 
+
+	* tests/README-hoppet-tests.org:
+	added some old test output (from April 22)
+
+2017-02-02  Gavin Salam  <gavin.salam@cern.ch>
+
+	* src/evolution.f90 (ev_CrossMassThreshold):
+	bug fix to address issue reported by Florian Lyonnet of error of
+
+	   FATAL ERROR in cobj_ConvMTM:
+           Mass threshold matrix is undefined
+
+	when using 2-loop cached evolution. It was caused by
+	evop%cross_mass_threshold not being properly initialised to
+	.false. in that situation. Also removed some redundant code
+	lines.
+
+2016-04-04  Gavin Salam  <gavin.salam@cern.ch>
+
+	* doc/HOPPET-v1-doc.tex:
+	added mention of running up to 4 loops
+
+	* src/new_as.f90 (na_Init):
+	added protection against 4-loop running with non-standard colour factors.
+
+	* src/welcome_message.f90 (HoppetWelcomeMessage):
+	added Frederic and Alexander as contributors.
+
+	* src/qcd.f90
+	* src/new_as.f90
+	* src/types.f90
+
+	Put in changes from Alexander Karlberg to support 4-loop running
+	of the coupling, including flavour thresholds. Alexander has
+	tested this against my python code (itself tested against
+	rundec). Note -- there's support only for QCD colour factors, not
+	general colour factors.
+
+2015-06-26  Gavin Salam  <gavin.salam@cern.ch>
+
+	* src/streamlined_interface.f90:
+	added some code to delete old tabulations and dglap holder if
+	hoppetStart is called more than once.
+
+2015-04-22  Gavin Salam  <gavin.salam@cern.ch>
+
+	* NEWS:
+	started work on comments for 1.2.0 release
+
+	* doc/HOPPET-v1-doc.tex:
+	added note on multi-splitting function support in
+	hoppetEvalSplit. 
+
+	* src/welcome_message.f90 (HoppetWelcomeMessage):
+	upped version number to 1.2.0-devel (will now try to follow
+	semantic version 2.0.0 numbering for releases, http://semver.org/,
+	so that patch number changes are mainly for bug fixes).
+
+	* tests/README-hoppet-tests.org: *** ADDED ***
+	added this file in order to keep track of future tests
+
+	* tests/streamlined_multisplit.f90: *** ADDED ***
+	added this routine for testing the nested splitting-function
+	convolutions.
+
+	* src/dummy_pdfs.f90: *** ADDED ***
+	added this module with dummy unpolarized PDFs (given how often
+	they are needed); interface of internal functions may still evolve
+
+	* src/streamlined_interface.f90:
+	removed commented bits of code and improved comments in some
+	places now that tests have been run for hoppetEvalSplit.
+
+2015-04-21  Gavin Salam  <gavin.salam@cern.ch>
+
+	* src/streamlined_interface.f90:
+	work in progress on getting support for composite iloop values
+	(e.g. 11, 12, 21, 111) in hoppetEvalSplit.
+
+2015-04-07  Gavin Salam  <gavin.salam@cern.ch>
+
+	* src/pdf_tabulate.f90 (EvalPdfTable_yQ):
+	removed redundant if statement for case where we are out of Q
+	bounds (correct handling was already taking place elsewhere).
+
+2015-03-24  Gavin Salam  <gavin.salam@cern.ch>
+
+	* scripts/makef95makefile:
+	removed perl warning message about unnecessary "defined" in a
+	couple of places; 
+
+2013-04-18  Gavin Salam  <gavin.salam@cern.ch>
+
+	* example_f77/Makefile (LHAPDFLIBS): 
+	  now set using lhapdf-config (assuming it's in your path).
+
+	* example_f77/compare_lhapdf_hoppet.f:
+	  now explicitly takes alphas(MZ) from LHAPDF (and set dlnlnQ
+	  automatically based on dy).
+
+2012-12-24  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* src/streamlined_interface.f90: 
+	  added a note that tables(0) should become a "preserved" part of
+	  the hoppet interface, for people who want the convenience of the
+	  streamlined interface, but also a little more power.
+
+2012-08-03  Gavin Salam  <gsalam@macth69.cern.ch>
+
+	* src/welcome_message.f90: 
+	  switched version over to 1.1.6-devel (but everything is for now
+	  still identical to 1.1.5)
+
+	* src/welcome_message.f90: 
+	  added publication reference to welcome message.
+
+2012-08-03  Gavin Salam  <gsalam@macth69.cern.ch>
+
+	* NEWS
+	* src/welcome_message.f90: 
+	  updated for release of version 1.1.5
+	  (HoppetWelcomeMessage): 
+
+	* doc/HOPPET-v1-doc.tex:
+	  documented PartonLuminosity(...) function.
+
+2012-07-30  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+
+	* scripts/makef95makefile: 
+	  --install-modules, if present, indicates that modules should be
+	  installed by default; --mod-prefix=... indicates a non-standard location
+
+	* configure:
+	  added support for --mod-prefix, and arranged for default
+	  mod-prefix to be PREFIX/include/hoppet + made use of the new
+	  --install-modules option of scripts/makef95makefile
+
+	* INSTALL:
+	  adapted the documentation to reflect the new module installation scheme
+
+	* hoppet-config.in:
+	  --fflags now handles the configurable modules location;
+	  --ldflags can now be used as a synonym for --libs
+
+
+2012-07-27  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* hoppet-config.in: 
+	  added error handling in case of unrecognized arguments;
+	  added an --fflags argument for flags to be used with fortran
+	  compilers.
+
+	* scripts/makef95makefile: 
+	  changed behaviour of install, so that it now also installs the
+	  .mod files (needed for programs like JetVHeto),
+	  without having to explicitly perform a "make install-mod".
+
+	  Also ensured that .h and .mod files are installed with -rw-r--r--
+	  permissions (rather than executable, as before).
+
+2012-05-17  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* README: 
+	  added a note about ranlib "no symbol" warnings. Thanks to Merjin
+	  van de Klundert for suggesting this.
+
+2012-05-13  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* README:
+	  a few small edits to update things re compilation
+
+	* tarit.sh: 
+	  ChangeLog had been left out of the tarball; so now include it.
+
+2012-05-11  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* src/pdf_tabulate.f90 (get_lnlnQ_wgts): 
+	  fixed bug that when Q was too small lnln came out as NaN, as did
+	  the PDF (while it should have been frozen or zero). The lnln
+	  function now returns a large negative number instead.
+
+	* src/dglap_objects.f90: 
+	  changed error message in case of mismatch of flavours between
+	  PDF and splitting function so that both nf values get printed.
+
+2012-04-17  Gavin Salam  <gsalam@macth69.cern.ch>
+
+	* src/qcd_coupling.f90 (qcd_coupling): 
+	  added RunningCoupling(...) interface as an alternative to the
+	  Value(...) function, whose name was rather meaningless when
+	  using the globally initialised coupling.
+
+2012-02-14  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* src/convolution.f90: 
+	  added a function PartonLuminosity(grid, gq1, gq2) to efficiently
+	  evaluate the partonic luminosity that comes from the "collision"
+	  of two grid quantities. Its accuracy currently relies on PDFs
+	  vanishing smoothly near y=0. While this routine functions
+	  adequately, the exact interface and internal implementation
+	  could change in the future.
+
+	* src/welcome_message.f90: 
+	  updated copyright date
+
+
+2012-01-20  Gavin Salam  <gsalam@macth69.cern.ch>
+
+	* scripts/makef95makefile:
+	  arranged for gfortran to be the default compiler for all
+	  architectures (previously was only for linux)
+
+	* scripts/check:
+	  fixed bug related to make check on mac (in if condition),
+	  following bug report by Aneesh Manohar and Juan Rojo.
+
+2011-11-23  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* src/welcome_message.f90 (HoppetWelcomeMessage): 
+	  updated version number to 1.1.4
+
+	* src/new_as.f90: 
+	* src/qcd_coupling.f90: 
+	  fixed a couple of issues with double-declared return-value
+	  variables. (Pointed out by Alberto Guffanti)
+
+2011-03-09  Gavin Salam  <gsalam@macth69.cern.ch>
+
+	* example_f77/variants/tabulation_example_exact_nnlo.f: ***ADDED***
+          variant that illustrates how to set the exact nnlo splitting
+	  functions rather than parametrised ones.
+
+2011-03-09  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* example_f77/tabulation_example.f:
+	  corrected wrong initial PDF function in the cached part of the
+	  tabulation example.
+
+2011-02-22  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* doc/HOPPET-v1-doc.tex: 
+	  documented streamlined interface to Pole v. MSbar mass choice.
+
+	* src/streamlined_interface.f90: 
+	* src/hoppet_v1.h: 
+	  added support for Pole v. MSbar masses in the streamlined
+	  interface, via the calls hoppetSetPoleMassVFN and
+	  hoppetSetMSbarMassVFN.
+
+	* src/welcome_message.f90: 
+	  updated version number to 1.1.4-devel
+
+	* src/evolution.f90: 
+	* src/dglap_holders.f90: 
+	  added support for PDF thresholds that take places at MSbar
+	  masses in the evolution. The type of masses present in the
+	  couplings determines what action occurs also in the PDF
+	  evolution. This also involved some extra "communication"
+	  functions (a little dirty?)
+
+	* src/dglap_objects.f90: 
+	  extended mass_threshold_mat so that it has all the info needed
+	  for PDF mass thresholds not just for pole-quark masses but also
+	  MSbar masses.
+
+	* src/qcd_coupling.f90: 
+	* src/new_as.f90: 
+	  added enquiry function about quark-mass scheme, 
+	  QuarkMassesAreMSbar	
+
+	* tests/msbar_tests.f90: *** ADDED ***
+	  used for checking that differences between different pole and
+	  MSbar choices are genuinely of the order they should be.
+
+2011-02-21  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* src/qcd_coupling.f90: 
+	* src/new_as.f90: 
+	  added support for MSbar masses to be used for crossing flavour
+	  thresholds, with the new masses_are_MSbar argument.
+	
+	* doc/HOPPET-v1-doc.tex: 
+	  added mention of MSbar masses in sections 2 and 6.1.
+	
+	* src/qcd.f90: 
+	  minor reformatting
+
+2010-11-07  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* scripts/makef95makefile: 
+
+	  added default -fPIC option to default ifort and gfortran options
+
+2010-06-17  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* src/welcome_message.f90: 
+	  upped version number to 1.1.3.1 (for new config file)
+
+	* tarit.sh: 
+	  fixed missing hoppet-config.in file.
+
+2010-05-31  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* INSTALL: 
+	* README: 
+	* Makefile: 
+	* scripts/makef95makefile: 
+	  added an install-mod target to install f90 module files and
+	  documented it.
+
+	* example_f77/Makefile: 
+	  modified things so that everything works out of the box if
+	  you're using gfortran/gcc.
+
+	* example_f77/cpp_tabulation_example.cc: 
+	  fixed missing include (cstdio)
+
+2010-05-30  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* src/dglap_objects.f90: 
+	  made cobj_InitSplitLinks public to allow a user to code other
+	  splitting matrices.
+
+2009-10-09  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* src/welcome_message.f90 (HoppetWelcomeMessage): 
+	  updated version to 1.1.3-devel
+
+	* hoppet-config.in:  *** ADDED ***
+	  template script which is processed to become hoppet-config
+	  which gives indications of library names, etc.
+	
+	* scripts/makef95makefile: 
+	  now outputs a .makef95.prefix file indicating what the prefix was
+
+	* Makefile (install): 
+	* configure: 
+	  adapted them so that hoppet-config is properly dealt with
+	
+2009-09-09  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* scripts/makef95makefile:
+	  fixed typo to do with LDFLAGS.
+
+2009-09-05  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* INSTALL:
+	  moved build / installation instructions into here.
+
+	* README:
+	  updated this for new build procedure
+
+	* configure:     *** ADDED ***
+	  script to allow for new configure/make procedure (autotools
+	  lookalike, at least in some simple respects). Is now the default.
+
+	* Makefile:      *** ADDED ***
+	  top-level Makefile added to go with the configure structure.
+
+	* scripts/makef95makefile: 
+	  added make install functionality, specification of compiler and
+	  its options via FC and FFLAGS.
+
+        * scripts/check   *** ADDED ***
+	  for running a check on the output.
+
+	* test.sh: 
+	  switched this over to the new build and test procedure
+
+	* scripts/install-sh:      *** ADDED ***
+	  to help with installation
+
+	* src/f77_pdftab.h: *** removed ***
+	  this was obsolete, so it has been removed
+
+2009-07-27  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* src/qcd.f90 (qcd): 
+	  corrected comment in 3-loop beta fn
+
+2008-11-22  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* src/dglap_choices.f90 (dglap_choices): 
+	* src/dglap_holders.f90 (InitDglapHolder): 
+
+    	  Following discussions with Wei-Tian Deng, introduced
+	  factscheme_FragMSbar, and added support for it at 1-loop; tested
+	  the momentum sum-rule and it is consistent.
+
+	  Note that for flavour thresholds to be dealt with correctly, in
+	  the initial condition one must set e.g. D_b(x,Q0^2) =
+	  D_b(x,mb^2) for Q0 < mb.
+
+2008-09-10  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* benchmarking/prec_and_timing.f90: 
+	  updated comments and fixed small warning that appears with gfortran.
+
+	* test.sh: 
+	  replaced make clean with realclean in some places (safer)
+
+	* src/convolution.f90: 
+	  small mod to out-of-range error message
+
+2008-08-04  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* example_f90/sumrules.f90 (truncated_sum_rules): 
+	  removed extraneous writes
+
+	* tarit.sh: 
+	  eliminated problem with multiple versions of .tex file ending up
+	  in tarball
+
+	* src/welcome_message.f90: 
+	  updated the version number to 1.1.1
+
+2008-08-01  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* example_f90/sumrules.f90 (truncated_sum_rules): 
+	  corrected buggy array bounds
+	
+2008-07-28  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* CHECKLIST: *** ADDED ***
+	  reminder of things to do before a new release
+
+	* doc/HOPPET-v1-doc.tex: 
+	  small typos and update of release info
+
+	* ReleaseNotes -> NEWS
+
+2008-07-26  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* doc/HOPPET-v1-doc.tex: 
+	  made a series of modifications to the documentation in line with
+	  referee requests (included moving some of the material on
+	  truncated moments).
+
+	* README: 
+	  updated this with warnings about gfortran and other
+	  typo-fixing. 
+
+	* example_f90/tabulation_example_2.f90: 
+	  added the routine tabulation_print_sum_rules(..) to show
+	  how to obtain sum rules from a tabulation
+	
+	* src/pdf_tabulate.f90: 
+	  switched evaluation of Q weights out into get_lnlnQ_wgts(...),
+	  and arranged for EvalPdfTable_yQ and EvalPdfTable_Q to make use
+	  of this.
+
+	* src/convolution.f90: 
+	* example_f90/sumrules.f90: 
+	  renamed GetTruncMoment -> TruncatedMoment
+	
+	* src/welcome_message.f90: 
+	  updated version number to 1.1.1-devel
+
+2008-07-16  Gavin SALAM  <salam@lpthe.jussieu.fr> & Juan
+
+	* src/pdf_tabulate.f90 (EvalPdfTable_Q): 
+	  added this routine to get the pdf at the given Q value [still to
+	  be completed]
+
+2008-07-15  Juan Rojo  <rojo@lpthe.jussieu.fr> 
+
+	* doc/HOPPET-v1-doc.tex
+	  Begin section on sum rules of the
+	  documentation
+
+2008-07-15  Juan Rojo  <rojo@lpthe.jussieu.fr> 
+
+	* example_f90/sumrules.f90     
+	  The computation of the sum rules is now performed
+	  with a single function the two times
+	  Sum rules are computed for a PDF set in an
+	  arbitrary representation
+
+	* src/convolution.f90
+	  Added comment on the function GetTruncMoment
+
+
+2008-07-11  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* example_f90/tabulation_example_2.f90: 
+          added comments at start to explain why we have a second example
+	  program. 
+	
+	* example_f90/sumrules.f90: 
+	  small changes to help readability, etc.
+
+2008-07-10  Juan Rojo  <rojo@lpthe.jussieu.fr> 
+
+	* src/convolution.f90
+	Updated functions to compute moments
+	arbitrary moments of grid quantities
+
+	* example_f90/sumrules.f90      *** ADDED ***
+	Added example code which shows how to compute the various
+	sum rules of a PDF set
+	
+2008-07-09  Gavin Salam  <salam@lpthe.jussieu.fr> & JR
+
+	* src/convolution.f90: 
+	  started work on one way of introducing calculation of moments of
+	  grid_quants.
+
+2008-05-13  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* src/evolution.f90: 
+	* src/dglap_holders.f90: 
+
+          added (mostly commented) changes as a skeleton outline for
+	  working with interpolated splitting functions.	
+	
+2008-05-06  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* mkmk: 
+	  replaced cp -pv with cp -p to get it to work on Solaris and
+	  added explicit verbose output.
+
+2008-04-28  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* src/streamlined_interface.f90 (hoppetAlphaS): 
+	  added error if hoppetAlphaS is called before coupling has been
+	  initialised. 
+
+2008-04-23  Gavin SALAM  <salam@lpthe.jussieu.fr> + Juan
+
+	* example_f90/tabulation_example_streamlined.f90: 
+          [ added previously by Juan ]
+	  tidied up some details.
+	
+	* src/welcome_message.f90 (HoppetWelcomeMessage): 
+	  updated the banner text and put the version number at 1.1.0
+
+2008-04-22  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* src/vanilla_interface.f90 -> src/streamlined_interface.f90: 
+	  remaned this so as to correspond to name used in docs.
+
+2008-01-30  Gavin SALAM  <salam@lpthe.jussieu.fr> + Juan
+
+	* src/evolution.f90 (EvolveGeneric): 
+	* src/dglap_objects.f90: 
+	* src/pdf_representation.f90: 
+
+	  changed pdf representation information, so that it now holds
+	  also the value for nf (to avoid incompatible PDF and spliting
+	  function nf values)
+
+	  Changes needed in manual:
+	      pdfr_Evln  ->   no longer exists
+	      GetPdfRep and LabelPdfAsRep now return number of flavours
+	                      for evolution representations
+	      GetDerivedSplitMatProbes requires an nf argument
+	                 
+	
+2008-01-30  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* scripts/makef95makefile: 
+	  modified it so that make all will now compile all programs.
+
+	* benchmarking/4pegasus    *** ADDED ***
+	  created this directory for tests with pegasus and moved some
+	  files into here
+	
+2008-01-28  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* **/Makefile
+	  removed all f90 makefiles from svn, since they are generated
+	  automatically 
+
+	* mkmk: 
+	  switched from sh to bash in order to deal with systems where sh
+	  is a more elementary shell
+
+	* README: 
+	* example_f90/tabulation_example_2.f90: 
+	  added this alternative example which does the same as
+	  tabulation_example.f90, but with the information accessed across
+	  several different modules. Noted this in the README
+	
+
+2008-01-19  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* src/SConstruct:       *** ADDED ***
+	  example build script for scons (should work with scons >= 0.97,
+	  maybe earlier too).
+
+	* src/dglap_objects.f90 (dglap_objects): 
+	  make some internal things non-public in the hope of eliminating
+	  some issues with ifort on windows reported by Wu-Ki
+
+2007-05-04  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+==================== tagged release 1.1.0b1 ==============================
+
+
+	* test.sh: *** ADDED ***
+	  for checking things compile and run OK; usage "test.sh compiler"
+
+	* src/welcome_message.f90
+	  updated release to 1.1.0b1
+	
+2007-05-03  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* benchmarking/test_acc/acc-pegasus.gp|eps:  *** ADDED ***
+	  results of accuracy tests with pegasus 
+
+	* benchmarking/prec_and_timing_pegasus.f90:  *** ADDED ***
+	  tool for running the accuracy and timing tests of pegasus.
+
+	* benchmarking/prec_and_timing.f90: 
+	  modified the comments at the beginning to reflect the current
+	  usage, and changed some default options.
+
+	* example_f90/tabulation_example.f90: 
+	  resolved name conflict with LHAPDF that had somehow been left
+	  in.
+
+2007-05-01  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* src/hoppet_v1.h:    *** ADDED ***
+	  added the defines needed for a C++ interface covering the
+	  contents of the vanilla interface.
+
+	* example_f77/cpp_tabulation_example.cc:   *** ADDED ***
+	  added example program that uses the C++ interface
+
+	* tarit.sh            *** ADDED ***
+          for making a tar archive to disttribute
+	
+	* scripts/makef95makefile: 
+	  eliminated -march=i686 with g95 option unless uname -a reveals
+	  it to be allowed.
+	
+	* src/convolution.f90: 
+	  tidied up a bunch of things highlighted with -Wall (unused
+	  variables mostly).
+	
+	* example_f90/tabulation_example.f90: 
+	* example_f77/tabulation_example.f: 
+
+	  modified both of these so that they now provide the output of a
+	  subset of table 15 of hep-ph/0511119, for ease of
+	  comparison. Parameters for the evolution grids now match those
+	  given in the documentation.
+
+	* example_f90/tabulation_example.default_output  *** ADDED *** 
+	  default output from the two above example programs.
+	
+	* example_f77/compare_lhapdf_hoppet.f: *** ADDED ***
+          example showing comparisons with LHAPDF.
+	
+	* scripts/makef95makefile: 
+	  corrected a bug in make clean
+	
+2007-04-30  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* src/vanilla_interface.f90: 
+	  changed the default vanilla grid to be based on 4grids
+	  (1:3:9:27), so as to correspond to what is now in paper
+	
+	* mkmk: 
+	  added this script to help automate generation of all the
+	  Makefiles
+
+	* src/new_as.f90: 
+	* src/qcd_coupling.f90: 
+	  Added SetDefaultCouplingDt(dt) and DefaultCouplingDt() in order
+	  to set and retrieve information about the coupling dt.
+	
+	* benchmarking/prec_and_timing.f90 (output_info): 
+          added -asdt and -eps options for setting DefaultCouplingDt and
+	  DefaultConvolutionEps.
+	
+2007-04-29  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* benchmarking/small_fast_tab.f90 -> prec_and_timing.f90 
+	
+	* benchmarking/small_fast_tab.f90: 
+	  added -outputgrid  option for grid output (-5:5 flavours)
+	  added -4grids option for having 4 subgrids (1:3:9:27)
+
+	  modified information in output so that one gets 
+	   (a) full info about evolution grids being used
+	   (b) printout of info on the cpu(s)
+
+	* benchmarking/test_acc/compare2files_v2.f90  *** ADDED ***
+
+	  new routine for benchmarking, which includes a "-summary" option
+	  for getting the general situation and a -channel option for
+	  examining the details of a given channel (11=all) 
+	
+	* benchmarking/       *** ADDED ***
+	  moved a whole bunch of things from the example_f90 directory
+	  into this one
+
+2007-04-23  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* src/pdf_tabulate.f90: 
+	  changed default lnlnQ_order -> 4
+
+	* src/vanilla_interface.f90: 
+	  changed default dlnlnQ -> dy/4
+
+2007-04-22  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* src/vanilla_interface.f90 (hoppetStartExtended): 
+          on basis of numerical studies, switched large-x grid to 15 times
+	  the base resolution.
+	
+2007-04-21  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* example_f90/benchmark.f90: *** ADDED ***
+	  added this for getting the HeraLHC benchmarks 
+
+	* example_f77/tabulation_example.f: 
+	  modified it so that it uses the new routines in the
+	  vanilla_interface.
+
+	* src/f77_pdftab.f90 -> src/vanilla_interface.f90 [later]: 
+          major extension of facilities offered, some renaming and chances
+	  of interface
+	
+	* src/pdf_tabulate.f90: 
+	  Long-overdue renaming of routines for pdf tables.
+	  Added Q_vals(:) to the tabulation.
+	  Reduced default dlnlnQ to 0.07.
+	
+	* src/f77_pdftab.f90 (dglapStart): 
+	  fixed missing initialization of order
+	  
+
+2007-03-06  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* src/f77_pdftab.f90: 
+	  added dglapStartExtended(...) to give user more control over how
+	  things are initialised
+
+	  added dglapEvolve(...) to allow a user to take an initial
+	  condition at some fixed scale and create a tabulation out of it
+
+          changed default value for dlnlnQ to be 0.5 in in the plain dglapStart.
+	
+
+	* example_f90/tabulation_example.f90:  *** ADDED ***
+          a simple example program using the f90 interface for
+	  evolving PDFs
+
+	* example_f77/tabulation_example.f:    *** ADDED ***
+	  a simple example program using the new f77 interface for
+	  evolving PDFs
+	
+2006-09-07  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+        * Added the f77_pdftab.h file (may change name at some point) to
+          provide an f77 interface to pdfs and their convolutions with
+          splitting functions.
+	
+2006-05-17  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* Added du option to the various routines in evolution.f90
+		
+	* Added test/split_mat_ops.f90 for testing operations with
+	  between splitting matrices
+
+	* fixed deallocation bug on coefficient functions in
+	  src/dglap_holder.f90 
+	
+2006-05-12  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* Added the RelaseNotes file
+	
+	* Ensured that makefiles can be generated entirely locally
+	  (including addition of a copy of makePNEW.perl as
+	  scripts/makef95makefile)
+	* Updated README to reflect current installation procedure
+
+2006-05-11  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* fixed another bug in sort routine (didn't seem to affect
+	results, but was dodgy anyway).
+
+2006-05-10  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+	* fixed bug in sort routine; more to come...
+	* added various facilities to tests/determine_accuracies.f90 
+	  (but probably needs more work) (still need to add dy_min?)
+	
+	* Changed some more names (ev_Setdu -> SetDefaultEvolutionDu)
+	* Allowed eps to be made an argument of a grid initialisation
+	* Introduced query functions for eps and du
+	  (DefaultConvolutionEps, DefaultEvolutionDu)
+	* Introduced GetGridInfoString(grid,string) to get a 
+	  description string for one's run...
+
+	* Changed default global access to be via hoppet_v1 module
+	* Changed default Qmax in f77_pdftab to 28TeV (2*LHC rts)
+	* Added: src/welcome_message.f90 + introduced "HOPPET" name
+	* Added: corresponding mods in convolution.
+
+2006-05-09  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* Added tests/determine_accuracies.f90 
+	* swtiched some errors in convolution.f90 (and elsewhere) over to
+	the "official" warnings_and_errors handling.
+
+2006-05-07  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+  	* Implemented deletion of grid_def's + some more name changes
+	(notably, pdfset -> pdf in evolution.f90
+	
+        * implemented direction=-1 for mass thresholds and tested that it
+	works properly, using the tests/birectional_mass_thresholds
+	program (and running it with various alphas values).
+
+	* more name changes (extra "Delete") + introduced InitEvlnOperator(...)
+	
+	* switched warnings_and_errors over to a new version.
+	
+	* changed interfaces in evolution.f90 and pdf_tabulate.f90 so as
+	to make nloop an optional argument, with the default number of
+	loops being deduced from the running_coupling object; also
+	introduced NumberOfLoops(coupling) function for the
+	running_coupling, allowing other routines to find out what is
+	going on.
+
+  	* changed directory structure (for now), with a new directory
+	tests/, while the old testing directory has become testing-other
+	(devoted to testing things that are not directly related the
+	program development).
+	
+	* some name changes in evolution.f90 designed to make things more
+	uniform wrt rest of program.
+
+2006-05-05  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* moved some arguments around for the running_coupling type, and
+	introduced an optional quark_masses(4:6) argument for setting the
+	charm, bottom and top (pole) masses.
+
+	* major name changes related to running coupling handling --
+	hopefully it should all become somwhat more logical...
+
+	
+2006-05-04  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* moved holders.f90 -> dglap_holders.f90 (so its name now
+	coincides with module name).
+
+	* various name changes in holders.f90 (and global name changes,
+	such that gd -> grid and sh -> dh).
+
+2006-05-02  Gavin SALAM  <salam@lpthe.jussieu.fr>
+
+   	* some more name changes in dglap_objects; removed limitation in
+	MTM convolution on absence of heavy flavour (necessary to allow
+	crossing of threshold when evolving downwards, where there is
+	almost bound to be some residual heavy-quark piece).
+
+	* one internal name change in convolution.f90 to avoid subsequent
+	problems with SetToCommutator.
+	
+	* merged dglap_objects and dglap_objects hidden (which were
+	separated only for support of legacy f90 compilers, hopefully no
+	longer in existence). Added SetToZero, SetToConvolution,
+	SetToCommutator. 
+	
+	* removed number of loops from the split_mat type (it wasn't being
+	used).
+
+2006-05-01  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+        * started work on giving consistent names to routines for
+	working with splitting functions in dglap_objects.f90
+	
+        * Moved conv_objects.f90 to dglap_objects.f90, changed 
+	  PMat -> split_mat
+	  CMat -> coeff_mat
+	  MassThresholdMat -> mass_threshold_mat
+	  
+	* Put some case-insensitivity into the convert.pl script.
+	
+        * Added version of CopyHumanPdfToEvln etc. where first argument
+	is nf (integer) rather than a pdf_rep -- that should makes its use
+	a bit more transparent to people. Also switched the rest of the
+	code to make use of the new call and removed all prep information
+	from sigma_holder. [Tested that answers are unchanged!]
+	
+	* further name changes throughout
+
+	* added Delete function for sigma_holder
+	
+        * convolution.f90: fixed various potential memory leaks automatic
+	detection of need to allocate grid_conv objects.
+	
+	* pdf_representation.f90: representation changes now leave decoupled
+	heavy flavours unchanged, rather than setting them to zero.
+
+2006-04-30  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* various name changes to simplify life for the user (mainly
+	removal of prefixes which add little information and just make for
+	more things to remember)
+
+	* added scripts/convert.pl which carries out most of the name
+	changes automatically (sometimes one or two resulting name clashes
+	then had to be fixed by hand). Hopefully this script can also be
+	used for conversion of existing example programs
+	
+	* documentation moving forwards. Section 3 on one-flavour problems
+	is now at the first draft stage. Should probably next move on to
+	section 4 for dealing with flavour problems.
+
+2006-04-28  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* switched sort.f90 to be my own version.
+  	* removed unused interpolation routines from interpolation.f90
+	
+2006-04-07  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	* Added the example_f90/small_fast_tab.f90 program to examine
+	timings and accuracies for a (by default) small tabulation.
+
+	Default parameters give 10^{-4} accuracy at 3 ms/evolution over
+	the small region (Rojo's request: 9-e3<x<0.75, Q<50). Timings
+	increase to about 8.5ms/evolution for a larger range (1e-6<x,
+	Q<14000) and I haven't checked accuracies (NB 6ms with better
+	ifort optimization). Note also that eps dependence in integrations
+	still needs to be checked.
+
+        Timings below are for small table, with default parameters (see
+	svn of this date!), on tycho and gaia (3.4GHz P4).
+	
+	                          init (s)   evln (ms)     x,Q point (mu s)
+	ifort -O                     2.2       3.0               2.8
+	ifort -O3 -axP               2.1       2.1               2.6
+        lf95 -O                      2.7       2.2               2.2 
+        gfortran -O3 -march=i686     5.9     130               180  
+	g95 -O3 -march=i686          7.8      21                22            
+	
+	* increased default interpolation order in the pdf_tabulation to 3
+	(2 was definitely too low and 4 might be better). Found that a
+	slightly small spacing than used in the f77 routine could be
+	beneficial (e.g. 0.07). NB: haven't checked correctness of results
+	with -axP on intel (there are reports [banfi] of sporadic
+	non-understood problems).
+	
+
+2006-04-06  Gavin Salam  <salam@lpthe.jussieu.fr>
+
+	Version 1.0
+	
+	* imported sources from the PDFevln package, with the addition of
+	some f77 hooks and the removal of all the main programs; also a
+	directory structure has been introduced so that the library source
+	in is src/ while the example and testing programs are in separate
+	directories.
+
+	

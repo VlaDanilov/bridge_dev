@@ -1,0 +1,135 @@
+----------------------------------------------------------
+HOPPET: Higher Order Perturbative Parton Evolution Toolkit
+----------------------------------------------------------
+
+HOPPET is a Fortran 95 package for carrying out DGLAP evolution and
+other common manipulations of parton distribution functions (PDFs).
+
+Within HOPPET, PDFs are represented on a grid in x-space so as to
+avoid limitations on the functional form of input
+distributions. Decent speed and accuracy are obtained through the
+representation of splitting functions in terms of their convolution
+with a set of piecewise polynomial basis functions, and Runge-Kutta
+techniques are used for the evolution in Q.
+
+Unpolarised evolution is provided in the MSbar scheme to NNLO in the
+coupling, including heavy-quark thresholds, and polarised evolution to
+NLO. The code is structured so as to provide simple access to the
+objects representing splitting function and PDFs, making it possible
+for a user to extend the facilities already provided.
+
+The latest version can always be obtained from
+
+    svn checkout http://svn.hepforge.org/hoppet/trunk hoppet
+
+Details of changes are to be found in the file ChangeLog, while
+summaries of changes between releases are in ReleaseNotes.
+
+
+----------------------------------------------------------------------
+F95 compilers
+-------------
+
+You will need a Fortran 95 compiler to compile this package. 
+
+The gfortran compiler is widespread. Versions upwards of a recent 4.3
+are OK. Older versions generate incorrect code for HOPPET and should
+be avoided. The code is acceptably fast, though not quite as fast as
+with commercial compilers.
+
+The free g95 (www.g95.org) compiler is another option, though when
+tested around 2008 its executables were fairly slow. It is easy to
+install if you don't already have a recent version on your system.
+
+The intel (ifort) compiler (versions 8.1.033 upwards) may still exist in a
+semi-free version for non-commercial use under linux and produces fast
+executables.
+
+The release has also been tested with the lahey lf95 commercial
+compiler, which also generates fast code.
+
+
+Compilation
+-----------
+For details see the INSTALL file. To get moving quickly, just specify
+an installation prefix and a fortran compiler (FC), and then do
+
+  ./configure --prefix="..."  FC="..."
+  make 
+  make check
+  make install      [if you're interested]
+  make install-mod  [if you want the f90 module files installed too]
+
+This is not autotools based: if you're used to more advanced usage of
+autotools scripts, you'll be disappointed here...
+
+Example programs
+----------------
+
+The main example program is examples_f90/tabulation_example.f90
+
+An equivalent program with the startup, pdf initialisation and
+evolution spread across different subroutines is given as
+tabulation_example_2.
+
+An equivalent program based on the streamlined interface is given as
+tabulation_example_streamlined.
+
+Compiling f77 example programs (examples_f77) using g77 is a little
+trickier because of the need to include the correct f95
+libraries. Look inside the suppplied Makefile and if need be edit it
+manually.
+
+     cd ../example_f77
+     # <edit the Makefile directly>
+     # compile
+     make tabulation_example
+     # run the program should give output identical to that from
+     # example_f90/tabulation_example
+     ./tabulation_example
+
+In the same directory there is a C++ example
+
+     make cpp_tabulation_example
+     ./cpp_tabulation_example
+
+which again does the same things (though in this case it uses the
+simpler of the two vanilla initialization calls).
+
+Other programs provided in the example_f77/ directory illustrate the
+use of the vanilla interface in conjunction with LHAPDF
+(compare_lhapdf_hoppet.f), and show how use the feature of getting
+convolutions with splitting functions (convolution_example.f).
+
+----------------------------------------------------------------------
+Documentation
+-------------
+
+Detailed documentation is available as doc/HOPPET-v1-doc.tex .
+
+
+----------------------------------------------------------------------
+Benchmarking
+------------
+
+The benchmarking/ directory contains the programs used for the full
+benchmarking, accuracy and precision testing. 
+
+
+----------------------------------------------------------------------
+Compiler warnings
+-----------------
+
+When the hoppet library is being built, on some systems the following
+warnings may be reported 
+
+  /usr/bin/ranlib: file: libhoppet_v1.a(hoppet_v1.o) has no symbols
+  /usr/bin/ranlib: file: libhoppet_v1.a(types.o) has no symbols
+  
+  ranlib: file: libhoppet_v1.a(hoppet_v1.o) has no symbols
+  ranlib: file: libhoppet_v1.a(types.o) has no symbols
+
+These warnings do not indicate an actual problem. They are simply a
+consequence of the fact that some of the source (.f90) files contain
+only information about interfaces and constants, so that the resulting
+object (.o) files are essentially empty.
