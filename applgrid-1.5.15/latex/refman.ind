@@ -1,0 +1,98 @@
+\begin{theindex}
+
+  \item {amconfig.h}, 3
+    \subitem {HAVE\_\-CERNROOT}, 3
+    \subitem {HAVE\_\-DLFCN\_\-H}, 3
+    \subitem {HAVE\_\-HOPPET}, 4
+    \subitem {HAVE\_\-INTTYPES\_\-H}, 4
+    \subitem {HAVE\_\-LHAPDF}, 4
+    \subitem {HAVE\_\-MEMORY\_\-H}, 4
+    \subitem {HAVE\_\-STDINT\_\-H}, 4
+    \subitem {HAVE\_\-STDLIB\_\-H}, 4
+    \subitem {HAVE\_\-STRING\_\-H}, 4
+    \subitem {HAVE\_\-STRINGS\_\-H}, 4
+    \subitem {HAVE\_\-SYS\_\-STAT\_\-H}, 4
+    \subitem {HAVE\_\-SYS\_\-TYPES\_\-H}, 4
+    \subitem {HAVE\_\-UNISTD\_\-H}, 4
+    \subitem {HAVE\_\-UTIME\_\-H}, 4
+    \subitem {HAVE\_\-UTIME\_\-NULL}, 5
+    \subitem {LHAPDF\_\-VERSION}, 5
+    \subitem {LT\_\-OBJDIR}, 5
+    \subitem {PACKAGE}, 5
+    \subitem {PACKAGE\_\-BUGREPORT}, 5
+    \subitem {PACKAGE\_\-NAME}, 5
+    \subitem {PACKAGE\_\-STRING}, 5
+    \subitem {PACKAGE\_\-TARNAME}, 5
+    \subitem {PACKAGE\_\-URL}, 5
+    \subitem {PACKAGE\_\-VERSION}, 5
+    \subitem {STDC\_\-HEADERS}, 5
+    \subitem {VERSION}, 5
+
+  \indexspace
+
+  \item {HAVE\_\-CERNROOT}
+    \subitem {amconfig.h}, 3
+  \item {HAVE\_\-DLFCN\_\-H}
+    \subitem {amconfig.h}, 3
+  \item {HAVE\_\-HOPPET}
+    \subitem {amconfig.h}, 4
+  \item {HAVE\_\-INTTYPES\_\-H}
+    \subitem {amconfig.h}, 4
+  \item {HAVE\_\-LHAPDF}
+    \subitem {amconfig.h}, 4
+  \item {HAVE\_\-MEMORY\_\-H}
+    \subitem {amconfig.h}, 4
+  \item {HAVE\_\-STDINT\_\-H}
+    \subitem {amconfig.h}, 4
+  \item {HAVE\_\-STDLIB\_\-H}
+    \subitem {amconfig.h}, 4
+  \item {HAVE\_\-STRING\_\-H}
+    \subitem {amconfig.h}, 4
+  \item {HAVE\_\-STRINGS\_\-H}
+    \subitem {amconfig.h}, 4
+  \item {HAVE\_\-SYS\_\-STAT\_\-H}
+    \subitem {amconfig.h}, 4
+  \item {HAVE\_\-SYS\_\-TYPES\_\-H}
+    \subitem {amconfig.h}, 4
+  \item {HAVE\_\-UNISTD\_\-H}
+    \subitem {amconfig.h}, 4
+  \item {HAVE\_\-UTIME\_\-H}
+    \subitem {amconfig.h}, 4
+  \item {HAVE\_\-UTIME\_\-NULL}
+    \subitem {amconfig.h}, 5
+
+  \indexspace
+
+  \item {LHAPDF\_\-VERSION}
+    \subitem {amconfig.h}, 5
+  \item {LT\_\-OBJDIR}
+    \subitem {amconfig.h}, 5
+
+  \indexspace
+
+  \item {PACKAGE}
+    \subitem {amconfig.h}, 5
+  \item {PACKAGE\_\-BUGREPORT}
+    \subitem {amconfig.h}, 5
+  \item {PACKAGE\_\-NAME}
+    \subitem {amconfig.h}, 5
+  \item {PACKAGE\_\-STRING}
+    \subitem {amconfig.h}, 5
+  \item {PACKAGE\_\-TARNAME}
+    \subitem {amconfig.h}, 5
+  \item {PACKAGE\_\-URL}
+    \subitem {amconfig.h}, 5
+  \item {PACKAGE\_\-VERSION}
+    \subitem {amconfig.h}, 5
+
+  \indexspace
+
+  \item {STDC\_\-HEADERS}
+    \subitem {amconfig.h}, 5
+
+  \indexspace
+
+  \item {VERSION}
+    \subitem {amconfig.h}, 5
+
+\end{theindex}
