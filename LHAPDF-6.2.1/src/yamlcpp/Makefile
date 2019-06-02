@@ -244,7 +244,7 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /usr/bin/ld -m elf_x86_64
-LDFLAGS = -L/nfs/dust/cms/user/volinar/tools/Test_AREA/Main/lib/: -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main/lib
+LDFLAGS = -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main/lib/: -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main/lib
 LHAPDF_CXX = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/g++ -std=c++11
 LHAPDF_CXXFLAGS = -O3
 LIBOBJS = 

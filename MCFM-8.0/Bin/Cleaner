@@ -1,5 +1,6 @@
 #!/bin/bash
 
+echo ""
 echo "Are You Sure You Want To Delete All in MCFM-8.0/Bin ???"
 echo ""
 echo "                y/n ?"
@@ -11,7 +12,7 @@ if [ $x != "y" ] && [ $x != "n" ]; then
 fi 
 case "$x" in
      y)
-        rm -r log_1run log_2run input_* Operator_* Operator2run_* Process_* Operator1run_*  grid* ratio* xsec* NLO* LO* *.top
+        rm -r log_1run log_2run input_* Operator_* Operator2run_* Process_* Operator1run_* *.grid grid* ratio* xsec* NLO* LO* *.top
         ;;
      n)
         exit 0

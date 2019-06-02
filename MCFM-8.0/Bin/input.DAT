@@ -14,7 +14,7 @@
 
 [General options to specify the process and execution]
 1	 	[nproc]
-'nlo'           [part 'lo','nlo','nnlo','nlocoeff','nnlocoeff']
+'lo'           [part 'lo','nlo','nnlo','nlocoeff','nnlocoeff']
 '13TeV'		['runstring']
 13000d0		[sqrts in GeV]
 +1		[ih1 =1 for proton and -1 for antiproton]
