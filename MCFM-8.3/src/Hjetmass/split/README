@@ -1,0 +1,3 @@
+This directory contains the functions in hjetmass_Hgggg.f, hjetmass_Hgggg_dp.f,
+  hjetmass_Hqqbgg.f and hjetmass_Hqqbgg_dp.f split up for one function per file
+  for increased compilation performance.

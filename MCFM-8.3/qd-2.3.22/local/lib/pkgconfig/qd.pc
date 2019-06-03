@@ -1,0 +1,14 @@
+/------------------ qd.pc ------------------------
+prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/MCFM-8.3/qd-2.3.22/local
+exec_prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/MCFM-8.3/qd-2.3.22/local
+libdir=/afs/desy.de/user/v/volinar/APPLgrid_development/MCFM-8.3/qd-2.3.22/local/lib
+includedir=/afs/desy.de/user/v/volinar/APPLgrid_development/MCFM-8.3/qd-2.3.22/local/include
+
+Name: qd
+Description: A C++/Fortran-90 double-double and quad-double package
+URL: http://crd-legacy.lbl.gov/~dhbailey/mpdist/
+Version: 2.3.22
+Requires:
+Libs: -L${exec_prefix}/lib -lqd
+Cflags: -I${prefix}/include
+\-------------------------------------------------------

@@ -1,0 +1,55 @@
+*~
+*.o
+*.a
+*.mod
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+Makefile
+autom4te.cache/
+bin/Makefile
+bin/qcdloop-config
+config.log
+config.status
+doc/html/
+examples/.deps/
+examples/.libs/
+examples/Makefile
+examples/test
+libtool
+src/.deps/
+src/.libs/
+src/Makefile
+src/qcdloop/config.h
+src/qcdloop/stamp-h1
+examples/cache_test
+examples/cmass_test
+examples/trigger_test
+local

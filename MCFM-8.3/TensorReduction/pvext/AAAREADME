@@ -1,0 +1,41 @@
+This is a tensor reduction routine
+based on the work of Passarino and Veltman
+
+@article{Passarino:1978jh,
+      author         = "Passarino, G. and Veltman, M.J.G.",
+      title          = "{One Loop Corrections for e+ e- Annihilation Into mu+ mu-
+                        in the Weinberg Model}",
+      journal        = "Nucl.Phys.",
+      volume         = "B160",
+      pages          = "151",
+      doi            = "10.1016/0550-3213(79)90234-7",
+      year           = "1979",
+      reportNumber   = "Print-79-0284 (UTRECHT)",
+      SLACcitation   = "%%CITATION = NUPHA,B160,151;%%",
+}
+
+The notation for the form factors 
+is slightly different that the notation
+of PV, i.e. the naming convention is more
+systematic. The formula implemented
+can be found in,
+
+@article{Ellis:2011cr,
+      author         = "Ellis, R. Keith and Kunszt, Zoltan and Melnikov, Kirill
+                        and Zanderighi, Giulia",
+      title          = "{One-loop calculations in quantum field theory: from
+                        Feynman diagrams to unitarity cuts}",
+      journal        = "Phys. Rept.",
+      volume         = "518",
+      year           = "2012",
+      pages          = "141-250",
+      doi            = "10.1016/j.physrep.2012.01.008",
+      eprint         = "1105.4319",
+      archivePrefix  = "arXiv",
+      primaryClass   = "hep-ph",
+      reportNumber   = "FERMILAB-PUB-11-195-T",
+      SLACcitation   = "%%CITATION = ARXIV:1105.4319;%%"
+}
+
+In addition in this version, as in the original PV paper, 
+the tensor integrals are expanded in the external momenta, p_i

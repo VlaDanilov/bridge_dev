@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+
+# exit on any errors
+set -e
+set -o pipefail
+
+# OS X users probably need some help
+# since g++ by default is linked to clang and not the gnu compiler.
+OSXGFORTRAN=`command -v gfortran-fsf-6 || command -v gfortran-fsf-7 || echo`
+OSXGPP=`command -v g++-fsf-6 || command -v g++-fsf-7 || echo`
+if [[ ! -z ${OSXGFORTRAN} ]] && [[ ! -z ${OSXGPP} ]] ; then
+    echo "You are probably running OS X. Setting up correct compilers in makefile."
+    # don't you dare using | in your path...
+    sed -i.bak "s|^OSXGFORTRAN.*|OSXGFORTRAN = ${OSXGFORTRAN}|" makefile
+    sed -i.bak "s|^OSXGPP.*|OSXGPP = ${OSXGPP}|" makefile
+    export FC=${OSXGFORTRAN}
+    export CXX=${OSXGPP}
+else
+    if [[ -z ${FC} ]] || [[ -z ${CXX} ]] || [[ -z ${CC} ]]; then
+        export FC=gfortran
+        export CXX=g++
+        export CC=gcc
+    fi
+fi
+
+# We require gnu make. If it doesn't exist, assume that make is gnu make.
+if (command -v gmake > /dev/null 2>&1); then
+    export MAKE=gmake
+else
+    export MAKE=make
+fi
+
+pushd () {
+    command pushd "$@" > /dev/null
+}
+
+popd () {
+    command popd "$@" > /dev/null
+}
+
+mkdir -p obj
+
+QCDLOOP_DIR="$( cd "$(dirname "$0")" ; pwd -P )"/qcdloop-2.0.2
+if getconf _NPROCESSORS_ONLN > /dev/null 2>&1; then
+    MAKETHREADS="$(getconf _NPROCESSORS_ONLN)"
+else
+    MAKETHREADS=1
+fi
+mkdir -p "$QCDLOOP_DIR"/local
+if [ ! -e "$QCDLOOP_DIR"/local/lib/libqcdloop.a ]; then
+    pushd "$QCDLOOP_DIR"
+    CXXFLAGS="-fopenmp -O2" ./configure --enable-shared=false --prefix="$QCDLOOP_DIR"/local
+    ${MAKE} -j$MAKETHREADS && ${MAKE} install
+    #$FC -c mod_qcdloop_c.f
+    popd
+fi
+
+QD_DIR="$( cd "$(dirname "$0")" ; pwd -P )"/qd-2.3.22
+mkdir -p "$QD_DIR"/local
+if [ ! -e "$QD_DIR"/local/lib/libqd.a ]; then
+    pushd "$QD_DIR"
+    ./configure --enable-fortran --enable-fma --prefix="$QD_DIR"/local
+    ${MAKE} -j$MAKETHREADS && ${MAKE} install
+    popd
+fi
+
+# mod_qcdloop_c.mod is needed by TensorReduction
+pushd obj
+${FC} -c ../src/Mods/mod_qcdloop_c.f
+popd
+
+# Compile TensorReduction libraries if necessary
+mkdir -p TensorReduction/ov/obj
+mkdir -p TensorReduction/pvext/obj
+mkdir -p TensorReduction/pv/obj
+mkdir -p TensorReduction/recur/smallF/obj
+mkdir -p TensorReduction/recur/smallG/obj
+mkdir -p TensorReduction/recur/smallP/obj
+mkdir -p TensorReduction/recur/smallY/obj
+
+if [ ! -e TensorReduction/pv/libpv.a ]; then
+  echo 'Compiling OMP TensorReduction library'
+  pushd TensorReduction
+  ${MAKE} -j$MAKETHREADS
+  popd
+fi
+
+echo ''
+echo 'Installation complete. You may now compile MCFM by running make'

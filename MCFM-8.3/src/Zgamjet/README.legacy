@@ -1,0 +1,3 @@
+These are remainders of the old Zaj implementation that are still used for
+src/Zgamgam. The new and fully self-contained Zaj process including all NLO
+contributions is in src/Zaj.

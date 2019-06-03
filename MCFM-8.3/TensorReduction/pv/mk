@@ -1,0 +1,2 @@
+gfortran test.f -L. -L../ov -L../pvext -lpvext -lpv -lov -I../Include/ -L../../QCDLoop/ql -lqcdloop -L../../QCDLoop/ff -lff ../../src/Need/olo_dummy.f \
+ -L../recur -lsmallY -lsmallG -lsmallF -lsmallP
