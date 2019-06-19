@@ -132,13 +132,13 @@ AUTOCONF = ${SHELL} /afs/desy.de/user/v/volinar/APPLgrid_development/mcfm-bridge
 AUTOHEADER = ${SHELL} /afs/desy.de/user/v/volinar/APPLgrid_development/mcfm-bridge-0.0.35/missing --run autoheader
 AUTOMAKE = ${SHELL} /afs/desy.de/user/v/volinar/APPLgrid_development/mcfm-bridge-0.0.35/missing --run automake-1.11
 AWK = gawk
-CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/gcc
+CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
-CPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/gcc -E
+CPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/gcc -E
 CPPFLAGS = 
-CXX = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/g++
-CXXCPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/g++ -E
+CXX = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/g++
+CXXCPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/g++ -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
@@ -154,7 +154,7 @@ EGREP = /bin/grep -E
 EXEEXT = 
 FGREP = /bin/grep -F
 GREP = /bin/grep
-HOPPETPATH = /afs/desy.de/user/v/volinar/APPLgrid_development/Main/bin//hoppet-config
+HOPPETPATH = no
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
@@ -183,7 +183,6 @@ PACKAGE_BUGREPORT = sutt@cern.ch
 PACKAGE_NAME = mcfm-bridge
 PACKAGE_STRING = mcfm-bridge 0.0.35
 PACKAGE_TARNAME = mcfm-bridge
-PACKAGE_URL = http://applgrid.hepforge.org
 PACKAGE_VERSION = 0.0.35
 PATH_SEPARATOR = :
 RANLIB = ranlib
@@ -198,7 +197,7 @@ abs_srcdir = /afs/desy.de/user/v/volinar/APPLgrid_development/mcfm-bridge-0.0.35
 abs_top_builddir = /afs/desy.de/user/v/volinar/APPLgrid_development/mcfm-bridge-0.0.35
 abs_top_srcdir = /afs/desy.de/user/v/volinar/APPLgrid_development/mcfm-bridge-0.0.35
 ac_ct_AR = ar
-ac_ct_CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/gcc
+ac_ct_CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/gcc
 ac_ct_CXX = 
 ac_ct_DUMPBIN = 
 am__include = include
@@ -264,7 +263,7 @@ FRTLIB = $(shell gfortran -print-file-name=libgfortran.a)
 # FRTLLIB  = -u _gfortran_runtime_error_at  -u _gfortran_os_error -L$(subst /libgfortran.a, ,$(FRTLIB) ) -lgfortran 
 FRTLLIB = -L$(subst /libgfortran.a, ,$(FRTLIB) ) -lgfortran 
 standSimple_SOURCES = standSimple.cxx 
-standSimple_CXXFLAGS = -O2 -Wall -fPIC -DPDFPATH=\"$(LHAPDFPATH)\" -I. -I.. -I$(srcdir)  $(LHAPDFCXXFLAGS) $(ROOTCFLAGS) $(APPLCFLAGS) $(ROOTCFLAGS) $(HOPPETCFLAGS)
+standSimple_CXXFLAGS = -O2 -Wall -fPIC -fopenmp -DPDFPATH=\"$(LHAPDFPATH)\" -I. -I.. -I$(srcdir)  $(LHAPDFCXXFLAGS) $(ROOTCFLAGS) $(APPLCFLAGS) $(ROOTCFLAGS) $(HOPPETCFLAGS)
 standSimple_LDFLAGS = $(ROOTARCH) -O2  $(ROOTLIBS) $(APPLLIBS) $(LHAPDFLIB) $(HOPPETLIB) $(FRTLLIB) $(FRTLIB) 
 # -L$(HOME)/lib -lAS
 lib_LIBRARIES = libmcfmbridge.a 
@@ -272,8 +271,8 @@ libmcfmbridge_a_SOURCES = mcfm_interface.cxx mcfm_grid.cxx mcfm_grid.h LHAPDF.h
 
 # library_includedir=$(includedir)/mcfmbridge
 # library_include_HEADERS=
-AM_CXXFLAGS = -O2 -Wall -fPIC  -I. -I.. -I$(srcdir)  $(ROOTCFLAGS) $(APPLCFLAGS) $(HOPPETCFLAGS) $(LHAPDFCXXFLAGS)
-AM_CFLAGS = -O2 -Wall -fPIC  -I. -I.. -I$(srcdir)  $(ROOTCFLAGS) $(APPLCFLAGS) $(HOPPETCFLAGS) $(LHAPDFCXXFLAGS)
+AM_CXXFLAGS = -O2 -Wall -fPIC -fopenmp -I. -I.. -I$(srcdir)  $(ROOTCFLAGS) $(APPLCFLAGS) $(HOPPETCFLAGS) $(LHAPDFCXXFLAGS)
+AM_CFLAGS = -O2 -Wall -fPIC -fopenmp -I. -I.. -I$(srcdir)  $(ROOTCFLAGS) $(APPLCFLAGS) $(HOPPETCFLAGS) $(LHAPDFCXXFLAGS)
 AM_LDFLAGS = $(ROOTARCH) -O2  $(ROOTLIBS) $(FCLIBS) $(APPLLIBS) $(LHAPDFLIB) $(FRTLLIB) $(HOPPETLIB)
 AM_FCFLAGS = -c
 AM_FCLIBS = $(FRTLLIB)

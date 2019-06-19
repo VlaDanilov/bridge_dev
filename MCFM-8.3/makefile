@@ -9,7 +9,13 @@ PDFROUTINES = LHAPDF
 # Replace this with the location of Cernlib on your system (if desired)
 CERNLIB     =
 # Replace this with the location of LHAPDF on your system (if desired)
-LHAPDFLIB   = /afs/desy.de/user/v/volinar/APPLgrid_development/Main/lib 
+LHAPDFLIB=/afs/desy.de/user/v/volinar/APPLgrid_development/Main/lib 
+
+LDFLAGS += -u book_gridptr $(shell mcfmbridge-config --ldflags)
+
+FASTJETINC  = $(shell fastjet-config --cxxflags)
+FASTJETLIB  = $(shell fastjet-config --libs)
+
 
 # Set this to NO/YES/FROOT
 #   NO  -- no n-tuple output or unweighting is possible
@@ -2748,8 +2754,10 @@ qqb_zbjet_v.o \
 qqb_zbjet_z.o
 
 APPLGRID= \
-gridwrap_dummy.o \
-fill_APPLgrid.o
+gridwrap.o 
+#gridwrap_dummy.o 
+#mcfm_grid.o \
+#fill_APPLgrid.o \
 
 MODFILES= \
 scaleset_m.o \
@@ -2804,6 +2812,7 @@ ifeq ($(PDFROUTINES),LHAPDF)
    fdist_lhapdf.o \
    pdfwrap_lhapdf.o
    LIBFLAGS += -lLHAPDF
+   LIBFLAGS += $(shell lhapdf-config --ldflags)
    ifeq ($(LHAPDFLIB),)
    else
      LIBDIR += -Wl,-rpath=$(LHAPDFLIB) -L$(LHAPDFLIB)
@@ -2881,7 +2890,7 @@ OURCODE = $(LIBFILES) $(NEEDFILES)  $(PROCDEPFILES) $(SPINORFILES) \
 	  $(PWGPLOTSFILES) \
 	  $(CHECKINGFILES) $(UTOOLSFILES) $(WBFFILES) \
           $(SCETFILES) $(SCET0jFILES) $(TDHPLFILES) $(WH1JETFILES) $(EWFILES) \
-		  $(INTEGRATEFILES) $(MODFILES)
+		  $(INTEGRATEFILES) $(MODFILES) $(APPLGRID)
           
 OTHER = $(PARTONFILES) $(WPWP2JFILES) $(F90FILES) 
 
@@ -2922,7 +2931,7 @@ FOROPTS = -include=$(INCPATH) -nonovice -nopretty -quiet
 
 Bin/mcfm_omp: $(ALLMCFM)
 	@$(FC) $(FFLAGS) -L$(LIBDIR) -L$(QDDIR) -L$(PVDIR) -L$(RECURDIR) -L$(OVDIR) -o $@ \
-	$(patsubst %,$(OBJNAME)/%,$(ALLMCFM)) $(LIBFLAGS) 
+	$(patsubst %,$(OBJNAME)/%,$(ALLMCFM)) $(LIBFLAGS) $(LDFLAGS)
 	@echo $(PDFMSG)
 	@echo $(NTUPMSG)
 	@echo "   ----> Executable is mcfm_omp <----"

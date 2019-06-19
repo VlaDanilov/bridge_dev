@@ -51,8 +51,8 @@ c--- by the strings 'lstring' and 'rstring'
       include 'ewcorr.f'
       include 'mpicommon.f'
 c--- APPLgrid - flag using grid
-c      include 'ptilde.f'
-c      include 'APPLinclude.f'
+      include 'ptilde.f'
+      include 'APPLinclude.f'
 c--- APPLgrid - end
       character*(*) tag,lstring,rstring
       character*72 f92,f93,f94,f95,f96,f97,f98,f99,f100
@@ -123,6 +123,9 @@ c--- f100 complex
 !      endif
       if ((tag == 'dswhisto') .or. (writeall)) then
       write(unitno,fmt=f98) dswhisto,'dswhisto'
+      endif
+      if ((tag == 'creategrid') .or. (writeall)) then
+      write(unitno,fmt=f98) creategrid,'creategrid'
       endif
       if ((tag == 'writerefs') .or. (writeall)) then
       write(unitno,fmt=f98) writerefs,'writerefs'

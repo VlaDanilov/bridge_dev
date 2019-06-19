@@ -63,10 +63,6 @@
       include 'scalevar.f'
       include 'asymptotic.f'
       include 'specialcuts.f'
-c--- APPLgrid - flag using grid
-c      include 'ptilde.f'
-c      include 'APPLinclude.f'
-c--- APPLgrid - end
       character*256 workdir,inputfile
       character*90 line
       character*15 part
@@ -93,11 +89,19 @@ c--- APPLgrid - end
       common/seedBlock/seed
       integer :: tid
       integer :: omp_get_thread_num, omp_get_max_threads
+
+      integer:: mxpart
+      parameter(mxpart=14)
+
 !$omp threadprivate(/seedBlock/)
 
       real(dp), save :: realSeed
 !$omp threadprivate(realSeed)
-      
+c--- APPLgrid - flag using grid
+      include 'ptilde.f'
+      include 'APPLinclude.f'
+c--- APPLgrid - end   
+    
       common/writerefs/writerefs
       common/spira/spira
       common/nmin/nmin
@@ -143,6 +147,10 @@ c--- flags for the mode of MCFM
 !      if (verbose) call writeinput(6,' * ',' ','skipnt')
       read(20,*) dswhisto
       if (verbose) call writeinput(6,' * ',' ','dswhisto')
+c--- APPLgrid - added to read flag for grids
+      read(20,*) creategrid
+      if (verbose) call writeinput(6,' * ',' ','creategrid')
+c--- APPLgrid - end      
       read(20,*) writerefs
       if (verbose) call writeinput(6,' * ',' ','writerefs')
       read(20,*) writetop

@@ -134,13 +134,13 @@ AUTOCONF = ${SHELL} /afs/desy.de/user/v/volinar/APPLgrid_development/mcfm-bridge
 AUTOHEADER = ${SHELL} /afs/desy.de/user/v/volinar/APPLgrid_development/mcfm-bridge-0.0.35/missing --run autoheader
 AUTOMAKE = automake
 AWK = gawk
-CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/gcc
+CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
-CPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/gcc -E
+CPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/gcc -E
 CPPFLAGS = 
-CXX = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/g++
-CXXCPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/g++ -E
+CXX = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/g++
+CXXCPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/g++ -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -g -O2
 CYGPATH_W = echo
@@ -156,7 +156,7 @@ EGREP = /bin/grep -E
 EXEEXT = 
 FGREP = /bin/grep -F
 GREP = /bin/grep
-HOPPETPATH = /afs/desy.de/user/v/volinar/APPLgrid_development/Main/bin//hoppet-config
+HOPPETPATH = no
 INSTALL = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
@@ -185,7 +185,6 @@ PACKAGE_BUGREPORT = sutt@cern.ch
 PACKAGE_NAME = mcfm-bridge
 PACKAGE_STRING = mcfm-bridge 0.0.35
 PACKAGE_TARNAME = mcfm-bridge
-PACKAGE_URL = http://applgrid.hepforge.org
 PACKAGE_VERSION = 0.0.35
 PATH_SEPARATOR = :
 RANLIB = ranlib
@@ -200,7 +199,7 @@ abs_srcdir = /afs/desy.de/user/v/volinar/APPLgrid_development/mcfm-bridge-0.0.35
 abs_top_builddir = /afs/desy.de/user/v/volinar/APPLgrid_development/mcfm-bridge-0.0.35
 abs_top_srcdir = /afs/desy.de/user/v/volinar/APPLgrid_development/mcfm-bridge-0.0.35
 ac_ct_AR = ar
-ac_ct_CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/gcc
+ac_ct_CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/gcc
 ac_ct_CXX = 
 ac_ct_DUMPBIN = 
 am__include = include
@@ -596,7 +595,7 @@ distcheck: dist
 	*.zip*) \
 	  unzip $(distdir).zip ;;\
 	esac
-	chmod -R a-w $(distdir); chmod a+w $(distdir)
+	chmod -R a-w $(distdir); chmod u+w $(distdir)
 	mkdir $(distdir)/_build
 	mkdir $(distdir)/_inst
 	chmod a-w $(distdir)

@@ -37,7 +37,7 @@
      $          Hr4(n1:n2,n1:n2,n1:n2,n1:n2) 
       dimension Hi1(n1:n2),Hi2(n1:n2,n1:n2),Hi3(n1:n2,n1:n2,n1:n2), 
      $          Hi4(n1:n2,n1:n2,n1:n2,n1:n2) 
-      common /fillred/infilldim,infill(3) 
+      common /fillred/infilldim,infill(3)
       parameter (r2   = 1.4142135623730950488d0) 
 ** check on the weight nw 
       if ( (nw.lt.1).or.(nw.gt.4) ) then 

@@ -41,8 +41,8 @@ C -- GZ
       include 'vegas_damp.f'
 
 c--- for APPLgrid
-c      include 'ptilde.f'
-c      include 'APPLinclude.f'
+      include 'ptilde.f'
+      include 'APPLinclude.f'
       real(dp):: rtsmin,p1ext(4),p2ext(4),p(mxpart,4),val
       integer:: j,k
       character*256 inputfile,workdir

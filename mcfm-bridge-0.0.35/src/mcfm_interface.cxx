@@ -44,7 +44,6 @@
 
 
 
-
 bool file_exists( const std::string& filename ) { 
   struct stat sb;
   if ( stat( filename.c_str(), &sb)==0 ) return true; // && S_ISREG(sb.st_mode ))
@@ -708,7 +707,7 @@ void getObservable(const double evt[][mxpart])
     //Observable[ 2 ] = pt3;
   }
   else {
-    Observable[ 0 ] = rapidity3;
+    //Observable[ 0 ] = rapidity3;
     //Observable[ 1 ] = pt3;
     //Observable[ 2 ] = rapidity4;
   }

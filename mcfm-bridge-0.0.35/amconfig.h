@@ -11,7 +11,7 @@
 #define HAVE_DLFCN_H 1
 
 /* Define 1 if hoppet is installed */
-#define HAVE_HOPPET 1
+/* #undef HAVE_HOPPET */
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
@@ -67,9 +67,6 @@
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "mcfm-bridge"
-
-/* Define to the home page for this package. */
-#define PACKAGE_URL "http://applgrid.hepforge.org"
 
 /* Define to the version of this package. */
 #define PACKAGE_VERSION "0.0.35"

@@ -38,7 +38,7 @@ tmp=$( echo "$*" | egrep -- '--\<incdir\>')
 test -n "$tmp" && OUT="$OUT ${prefix}/include"
 
 tmp=$( echo "$*" | egrep -- '--\<cxx\>')
-test -n "$tmp" && OUT="$OUT /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/g++ -std=c++11"
+test -n "$tmp" && OUT="$OUT /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/g++ -std=c++11"
 
 tmp=$( echo "$*" | egrep -- '--\<cflags|cppflags|cxxflags\>')
 test -n "$tmp" && OUT="$OUT -O3 -I${prefix}/include"

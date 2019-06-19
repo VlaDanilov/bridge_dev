@@ -183,7 +183,6 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
 PACKAGE_NAME = @PACKAGE_NAME@
 PACKAGE_STRING = @PACKAGE_STRING@
 PACKAGE_TARNAME = @PACKAGE_TARNAME@
-PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
 RANLIB = @RANLIB@
@@ -264,7 +263,7 @@ FRTLIB = $(shell gfortran -print-file-name=libgfortran.a)
 # FRTLLIB  = -u _gfortran_runtime_error_at  -u _gfortran_os_error -L$(subst /libgfortran.a, ,$(FRTLIB) ) -lgfortran 
 FRTLLIB = -L$(subst /libgfortran.a, ,$(FRTLIB) ) -lgfortran 
 standSimple_SOURCES = standSimple.cxx 
-standSimple_CXXFLAGS = -O2 -Wall -fPIC -DPDFPATH=\"$(LHAPDFPATH)\" -I. -I.. -I$(srcdir)  $(LHAPDFCXXFLAGS) $(ROOTCFLAGS) $(APPLCFLAGS) $(ROOTCFLAGS) $(HOPPETCFLAGS)
+standSimple_CXXFLAGS = -O2 -Wall -fPIC -fopenmp -DPDFPATH=\"$(LHAPDFPATH)\" -I. -I.. -I$(srcdir)  $(LHAPDFCXXFLAGS) $(ROOTCFLAGS) $(APPLCFLAGS) $(ROOTCFLAGS) $(HOPPETCFLAGS)
 standSimple_LDFLAGS = $(ROOTARCH) -O2  $(ROOTLIBS) $(APPLLIBS) $(LHAPDFLIB) $(HOPPETLIB) $(FRTLLIB) $(FRTLIB) 
 # -L$(HOME)/lib -lAS
 lib_LIBRARIES = libmcfmbridge.a 
@@ -272,8 +271,8 @@ libmcfmbridge_a_SOURCES = mcfm_interface.cxx mcfm_grid.cxx mcfm_grid.h LHAPDF.h
 
 # library_includedir=$(includedir)/mcfmbridge
 # library_include_HEADERS=
-AM_CXXFLAGS = -O2 -Wall -fPIC  -I. -I.. -I$(srcdir)  $(ROOTCFLAGS) $(APPLCFLAGS) $(HOPPETCFLAGS) $(LHAPDFCXXFLAGS)
-AM_CFLAGS = -O2 -Wall -fPIC  -I. -I.. -I$(srcdir)  $(ROOTCFLAGS) $(APPLCFLAGS) $(HOPPETCFLAGS) $(LHAPDFCXXFLAGS)
+AM_CXXFLAGS = -O2 -Wall -fPIC -fopenmp -I. -I.. -I$(srcdir)  $(ROOTCFLAGS) $(APPLCFLAGS) $(HOPPETCFLAGS) $(LHAPDFCXXFLAGS)
+AM_CFLAGS = -O2 -Wall -fPIC -fopenmp -I. -I.. -I$(srcdir)  $(ROOTCFLAGS) $(APPLCFLAGS) $(HOPPETCFLAGS) $(LHAPDFCXXFLAGS)
 AM_LDFLAGS = $(ROOTARCH) -O2  $(ROOTLIBS) $(FCLIBS) $(APPLLIBS) $(LHAPDFLIB) $(FRTLLIB) $(HOPPETLIB)
 AM_FCFLAGS = -c
 AM_FCLIBS = $(FRTLLIB)

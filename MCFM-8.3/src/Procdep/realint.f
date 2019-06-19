@@ -56,9 +56,11 @@
       include 'ewcorr.f'
 
 c--- APPLgrid - enable grids
-c      include 'APPLinclude.f'
+      include 'APPLinclude.f'
 c      include 'qcdcouple.f'
-c      real(dp):: psCR
+c      include 'nlooprun.f'
+c      include 'couple.f' 
+      double precision psCR, currason2pi
 c--- APPLgrid - end
 
 c---- SSbegin
@@ -913,6 +915,19 @@ c        call compare_madgraph(p,qqb_tottth_g,qqb_tottth_g_mad)
       xmsq = 0._dp
       xmsq_bypart = 0._dp
       bbfrac = 0._dp
+ 
+c--- APPLgrid - initialize array
+      if (creategrid.and.bin) then
+       do nd=0,ndmax
+         do j=-nf,nf
+            do k=-nf,nf
+               weightr(nd,j,k) = 0d0
+            enddo
+         enddo
+       enddo  
+      weightfactor = 1d0
+      endif
+c--- APPLgrid - end
 
       currentPDF=0
             
@@ -1179,6 +1194,11 @@ c--- for single top + b, make sure to use two different scales
 
          if (currentPDF == 0) then
            xmsq_bypart(0,sgnj,sgnk)=xmsq_bypart(0,sgnj,sgnk)+xmsqjk
+c--- APPLgrid - save weight nd = 0 
+           if (creategrid.and.bin) then
+              weightr(0,j,k) = weightr(0,j,k) + msq(j,k)
+           endif
+c--- APPLgrid - end
          endif
 
          ! add dipole contributions
@@ -1214,6 +1234,11 @@ c       endif
          xmsq(nd)=xmsq(nd)+xmsqjk
          if (currentPDF == 0) then
            xmsq_bypart(nd,sgnj,sgnk)=xmsq_bypart(nd,sgnj,sgnk)+xmsqjk
+c--- APPLgrid - save weight nd = 1,ndmax 
+           if (creategrid.and.bin) then
+              weightr(nd,j,k) = weightr(nd,j,k) + (-msqc(nd,j,k))
+           endif
+c--- APPLgrid - end
          endif
          enddo
          
@@ -1381,6 +1406,50 @@ c--- catch NaN before it enters histograms
 
 c---if we're binning, add to histo too
         if (bin) then
+c--- APPLgrid - writing out the common block
+           if (creategrid) then
+
+              if (dynamicscale) then
+                currason2pi = alphas(dipscale(nd),amz,nlooprun)/twopi
+              else
+                currason2pi = ason2pi
+              endif
+
+              psCR = (1d0/currason2pi)**(lowest_order+1)
+              do j=-nflav,nflav
+                 do k=-nflav,nflav
+                    weightr(nd,j,k)=weightr(nd,j,k)*psCR
+                 enddo
+              enddo
+              contrib = 200
+              dipole  = nd
+              weightfactor = wgt*flux*pswt/BrnRat/dfloat(itmx)
+c              weightfactor = weightfactor * eight*pisq/gsq
+              ag_xx1       = xx1
+              ag_xx2       = xx2
+              if (dynamicscale) then
+                ag_scale     = dipscale(nd)
+              else
+                ag_scale     = facscale
+              endif
+              refwt        = val/dfloat(itmx)
+              refwt2       = val2/dfloat(itmx)
+C               print*,"*************************************************"
+C               print*, "meWeightFactor = ", weightfactor," D =
+C               ",dipole,
+C      *       " me(0, 2,-1) = " ,  weightr(0, 2 ,-1) ," ", msq(2,-1),
+C      *       " me(0, -1,2) = " ,  weightr(0, -1 ,2) ," ", msq(-1,2),
+C      *       " me(1, 2,-1) = " ,  weightr(1, 2 ,-1) ," ",
+C      -msqc(1,2,-1),
+C      *       " me(1, -1,2) = " ,  weightr(1, -1 ,2) ," ",
+C      -msqc(1,-1,2)
+C               print*, " x1 = ",xx1," x2 = ",xx2," sca = ",facscale
+C               print *, "rewt = ", refwt
+C               print*,"*************************************************"
+C               flush(6)
+           endif
+c--- APPLgrid - end
+        
           call getptildejet(nd,pjet)
           call dotem(nvec,pjet,s)
           call nplotter(pjet,val,val2,nd)

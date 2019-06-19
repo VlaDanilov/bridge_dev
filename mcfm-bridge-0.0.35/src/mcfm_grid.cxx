@@ -11,6 +11,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <ostream>
+#include <errno.h>
 
 #include "mcfm_grid.h"
 #include "appl_grid/lumi_pdf.h"
@@ -30,7 +31,7 @@ static const bool _debug_ = false;
 
 void appl::mcfm_grid::fillMCFM(double obs)
 {
-   bool _debug_ = false;
+  bool _debug_ = false;
 
   if (_debug_) std::cout << __PRETTY_FUNCTION__ << "   --------------------------------------------- " << std::endl;
   

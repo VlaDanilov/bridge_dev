@@ -12,8 +12,10 @@
 #ifndef __MCFM_GRID_H
 #define __MCFM_GRID_H
 
-#include <iostream>
+#define _Thread_local thread_local
 
+#include <iostream>
+#include <thread>
 #include "appl_grid/appl_grid.h"
 
 
@@ -62,7 +64,6 @@ typedef struct {
   int nflav;
 } __nflav__;
 
-
 typedef struct  {
     double sqrts;
 } __energy__;
@@ -93,6 +94,9 @@ extern "C" __energy__ energy_;
 extern "C" __iterat__ iterat_;
 extern "C" __gridorder__ gridorder_;
 
+#pragma omp threadprivate(gridevent_)
+#pragma omp threadprivate(gridweight_)
+#pragma omp threadprivate(nflav_)
 
 namespace appl { 
 

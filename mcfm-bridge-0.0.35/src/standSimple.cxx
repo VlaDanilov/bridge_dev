@@ -139,7 +139,7 @@ int main(int argc, char** argv) {
 //    const std::string _pdfname = "cteq66";
   int Npdf = 0;
   // setup gavins code
-  LHAPDF::initPDFSet(_pdfname.c_str(), Npdf);
+  LHAPDF::initPDFSet("CT14nnlo_as_0118", Npdf);
 //  initPDF(Npdf);
 
   Directory xsDir("xSection");

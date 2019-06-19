@@ -8,7 +8,7 @@
 #define HAVE_DLFCN_H 1
 
 /* Define 1 if hoppet is installed */
-#define HAVE_HOPPET 1
+/* #undef HAVE_HOPPET */
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1

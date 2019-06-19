@@ -30,8 +30,8 @@
 
 c--- APPLgrid - to use grids
 c      include 'constants.f'
-c      include 'ptilde.f'
-c      include 'APPLinclude.f'
+      include 'ptilde.f'
+      include 'APPLinclude.f'
 c--- APPLgrid -end
       
       logical:: bin
@@ -260,7 +260,9 @@ c---  DSW histograms - output and close file
          endif
       endif
 c--- APPLgrid - creating grid
-c     call write_grid(xinteg)
+      if (creategrid)then
+       call write_grid(xinteg)
+      endif
 c--- APPLgrid - end
 
 c--- Write out references 

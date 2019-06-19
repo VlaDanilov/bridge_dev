@@ -256,13 +256,13 @@ AUTOCONF = ${SHELL} /afs/desy.de/user/v/volinar/APPLgrid_development/LHAPDF-6.2.
 AUTOHEADER = ${SHELL} /afs/desy.de/user/v/volinar/APPLgrid_development/LHAPDF-6.2.1/config/missing autoheader
 AUTOMAKE = ${SHELL} /afs/desy.de/user/v/volinar/APPLgrid_development/LHAPDF-6.2.1/config/missing automake-1.15
 AWK = gawk
-CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/gcc
+CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
-CPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/gcc -E
+CPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/gcc -E
 CPPFLAGS =  -I/afs/desy.de/user/v/volinar/APPLgrid_development/Main/include
-CXX = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/g++ -std=c++11
-CXXCPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/g++ -std=c++11 -E
+CXX = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/g++ -std=c++11
+CXXCPP = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/g++ -std=c++11 -E
 CXXDEPMODE = depmode=gcc3
 CXXFLAGS = -O3
 CYGPATH_W = echo
@@ -287,7 +287,7 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /usr/bin/ld -m elf_x86_64
 LDFLAGS = -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main/lib/: -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main/lib
-LHAPDF_CXX = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/g++ -std=c++11
+LHAPDF_CXX = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/g++ -std=c++11
 LHAPDF_CXXFLAGS = -O3
 LIBOBJS = 
 LIBS = 
@@ -332,7 +332,7 @@ abs_srcdir = /afs/desy.de/user/v/volinar/APPLgrid_development/LHAPDF-6.2.1
 abs_top_builddir = /afs/desy.de/user/v/volinar/APPLgrid_development/LHAPDF-6.2.1
 abs_top_srcdir = /afs/desy.de/user/v/volinar/APPLgrid_development/LHAPDF-6.2.1
 ac_ct_AR = ar
-ac_ct_CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8/x86_64-slc6/bin/gcc
+ac_ct_CC = /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/bin/gcc
 ac_ct_CXX = 
 ac_ct_DUMPBIN = 
 am__include = include

@@ -52,6 +52,12 @@ c --- DSW.
       include 'x1x2.f'
       include 'bypart.f'
       include 'taucut.f' ! for usescet
+c--- APPLgrid - to use grids
+      include 'ptilde.f'
+      include 'APPLinclude.f'
+c      include 'qcdcouple.f'
+      double precision psCR
+c--- APPLgrid - end
       integer:: pflav,pbarflav
 c--- To use VEGAS random number sequence :
       real(dp):: ran2
@@ -739,6 +745,17 @@ c      call checkgvec(-1,2,5,p,qq_tbg,qq_tbg_gvec)
         write(6,*) 'Unimplemented process in lowint : kcase=',kcase
         stop 
       endif
+c--- APPLgrid - initialize array
+      if (creategrid.and.bin) then
+         do j=-nf,nf
+            do k=-nf,nf
+               weightb(j,k) = 0d0
+            enddo
+         enddo
+         weightfactor = 1d0
+      endif
+c--- APPLgrid - end
+
 ! code to find power of alpha-s for scale variation
       if ((doscalevar) .and. (foundpow .eqv. .false.)) then
         if (itrial == 1) then
@@ -955,6 +972,12 @@ c--- DEFAULT
 
       if (currentPDF == 0) then
         xmsq_bypart(sgnj,sgnk)=xmsq_bypart(sgnj,sgnk)+xmsqjk
+c--- APPLgrid - save weight
+        if(creategrid.and.bin)then
+c---- print*,j,k,msq(j,k)
+           weightb(j,k) =  weightb(j,k) + msq(j,k)
+        endif
+c--- APPLgrid - end
       endif
       
       enddo
@@ -1042,6 +1065,39 @@ c--- for EW corrections, make additional weight available inside common block
         if (kewcorr /= knone) then
           wt_noew=lowint_noew*wgt
         endif
+c     APPLgrid - multiply by totalFactor
+            if (creategrid) then ! P.S. scale with factor
+               psCR = (1d0/ason2pi)**lowest_order
+               do j=-nflav,nflav
+                  do k=-nflav,nflav
+                    weightb(j,k)=weightb(j,k)*psCR
+                 enddo
+              enddo
+              contrib      = 100
+              weightfactor = flux*pswt*wgt/BrnRat/dfloat(itmx)
+              ag_xx1       = xx(1)
+              ag_xx2       = xx(2)
+              ag_scale     = facscale
+              refwt        = val/dfloat(itmx)
+              refwt2       = val2/dfloat(itmx)
+c      print*,"  *******************************************"
+c      print*, "meWeightFactor = ", weightfactor,
+c     *             " me(2,-1) = " ,  weightb(2 ,-1) ," ", msq(2,-1),
+c     *             " me(-1,2) = " ,  weightb(-1 ,2) ," ", msq(-1,2),
+c     *             " me(1,-1) = " ,  weightb(1 ,-1) ," ", msq(1,-1),
+c     *             " me(-2,2) = " ,  weightb(-2 ,2) ," ", msq(-2,2)
+c      print*, " x1 = ",xx(1)," x2 = ",xx(2)," sca = ",facscale
+c      print *, "rewt = ", refwt
+c      print *, "flux = ", flux
+c      print *, "pswt = ", pswt
+c      print *, "wgt = ", wgt
+c      print *, "BrnRat = ", BrnRat
+c      print *, "itmx = ", itmx
+c      print*,"  *********************************************"
+c      flush(6)
+
+           endif
+c---  APPLgrid - end        
         call nplotter(pjet,val,val2,0)
 c---  POWHEG-style output if requested
         if (writepwg) then
