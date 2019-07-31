@@ -1087,17 +1087,18 @@ c     *             " me(-1,2) = " ,  weightb(-1 ,2) ," ", msq(-1,2),
 c     *             " me(1,-1) = " ,  weightb(1 ,-1) ," ", msq(1,-1),
 c     *             " me(-2,2) = " ,  weightb(-2 ,2) ," ", msq(-2,2)
 c      print*, " x1 = ",xx(1)," x2 = ",xx(2)," sca = ",facscale
-c      print *, "rewt = ", refwt
+c      print *, "lowint: refwt =", refwt
+c      print *, "lowint: val = ", val
 c      print *, "flux = ", flux
 c      print *, "pswt = ", pswt
 c      print *, "wgt = ", wgt
 c      print *, "BrnRat = ", BrnRat
-c      print *, "itmx = ", itmx
+c      print *, "lowint: itmx = ", itmx
 c      print*,"  *********************************************"
 c      flush(6)
 
            endif
-c---  APPLgrid - end        
+c---  APPLgrid - end       
         call nplotter(pjet,val,val2,0)
 c---  POWHEG-style output if requested
         if (writepwg) then
@@ -1120,8 +1121,8 @@ c         write(6,*) 'Keep event with weight',val
             newwt = wtabs/wtmax
           endif
           if (newwt > 1.0_dp) then
-            write(6,*) 'WARNING : lowint : event with |weight| > 1.',
-     &                 ' |weight| = ',newwt
+            write(6,*) ' WARNING : lowint : event with |weight| > 1. ',
+     &                 ' |weight| =  ',newwt
           endif
 c ---     just in case the weight was negative :
           newwt = newwt*sign(one,val)

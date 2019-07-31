@@ -628,12 +628,12 @@ void appl::igrid::fill_DIS(const double x1, const double Q2, const double* weigh
 
 void appl::igrid::fill(const double x1, const double x2, const double Q2, const double* weight) 
 {  
-
   // find preferred node for low end of interpolation range
   int k1=fk1(x1);
   int k2=fk2(x2);
   int k3=fkappa(Q2);
-  
+ 
+ 
   double u_y1  = ( fy(x1)-gety1(k1) )/deltay1();
   double u_y2  = ( fy(x2)-gety2(k2) )/deltay2();
   double u_tau = ( ftau(Q2)-gettau(k3))/deltatau();

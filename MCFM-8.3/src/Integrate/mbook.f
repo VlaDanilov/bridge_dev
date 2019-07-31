@@ -129,8 +129,17 @@ C--------------------------------------------------------------------------
 !$omp atomic
       IHIS(N,I)=IHIS(N,I)+1
       Yadd=Y/hdel(n)
+c      print*,"mbook.f: N = ", N
+c      print*,"mbook.f: X = ", X
+c      print*,"mbook.f: Y = ", Y
+c      print*,"mbook.f: HIST(N,I) = ", HIST(N,I)
 !$omp atomic
       HIST(N,I)=HIST(N,I)+Yadd
+c      print*,"mbook.f: HIST(N,I) = HIST(N,I)+Yadd:"
+c      print*,"mbook.f: Yadd = Y/hdel :", Yadd
+c      print*,"mbook.f: hdel(n) = ", hdel(n)
+c      print*,"mbook.f: HIST(N,I) ", HIST(N,I)
+c      print*,"-----------------------------------------------"
 c     we are renormalising the weights by the bin width
       ELSEIF(I.LE.0) THEN
 !$omp atomic
@@ -272,6 +281,7 @@ c      DO 2, J=1,NBIN(N)
 c   2  SIG=HIST(N,J)*(XHIS(N,J)-HAVG(N))**2+SIG
 c      IF(SIG.GE.0.)HSIG(N)=SQRT(SIG/XIN)
       HINT(N)=XIN*hdel(n)
+      print*, "mbook(MFINAL):",  XHIS(N,J),HIST(N,J)
       RETURN
   10  BOOK(N)=' NO'
       END               
@@ -389,6 +399,7 @@ c      IF(HIST(N,J).EQ.0.) GO TO 1
       else
       WRITE(99,'(3X,G13.6,2(2X,G13.4))')  
      &                            XHIS(N,J),HIST(N,J),HIST(M,J)
+      print*, "mbook(MTOP):",  XHIS(N,J),HIST(N,J),HIST(M,J)
       endif
     1 CONTINUE
       WRITE(99,200)

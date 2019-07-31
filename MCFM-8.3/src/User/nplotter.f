@@ -280,6 +280,7 @@ c         call nplotter_generic(p,wt,wt2,switch)
       end select
 
 c--- APPLgrid - filling applgrid
+c      print *, "In nplotter p = ", p
       if (creategrid) call fill_grid(p)
 c--- APPLgrid - end
 

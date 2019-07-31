@@ -105,7 +105,6 @@
 * So far we have not used VEGAS to generate any events.
 * Make sure future calls to "getevent" are aware of this :
       numstored = 0
-
 c--- nevtrequested is the number of unweighted events to produce
 c--- (so this stage is skipped if nevtrequested <= 0)
       if (nevtrequested > 0) then

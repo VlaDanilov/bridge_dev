@@ -146,7 +146,8 @@ int main(int argc, char** argv) {
   xsDir.push();
   
 //  TH1D* xsec = g.convolute(evolvepdf_, alphaspdf_, nLoops); 
-  TH1D* xsec = g.convolute(GetPdf, alphaspdf_, nLoops); 
+  TH1D* xsec = g.convolute(GetPdf, alphaspdf_, nLoops);
+  std::cout << " GetPdf  ;  aplhaspdf_ = " << alphaspdf_ << "  ;  nLoops = " << nLoops << std::endl;
   xsec->SetName("xsec");
   xsec->SetTitle(reference->GetTitle());
 

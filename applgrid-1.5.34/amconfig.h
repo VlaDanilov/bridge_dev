@@ -47,7 +47,7 @@
 #define HAVE_UTIME_NULL 1
 
 /* LHAPDF version */
-#define LHAPDF_VERSION "6.2.1"
+#define LHAPDF_VERSION "6.2.3"
 
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #define LT_OBJDIR ".libs/"

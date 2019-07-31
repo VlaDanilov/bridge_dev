@@ -1449,7 +1449,7 @@ C               print*,"*************************************************"
 C               flush(6)
            endif
 c--- APPLgrid - end
-        
+C          print *, "In realint pjet = ", pjet    
           call getptildejet(nd,pjet)
           call dotem(nvec,pjet,s)
           call nplotter(pjet,val,val2,nd)

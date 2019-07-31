@@ -302,11 +302,6 @@ standSimple-standSimple.o: standSimple.cxx \
  /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/bits/unique_ptr.h \
  /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/sstream \
  /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/bits/sstream.tcc \
- /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/fstream \
- /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/x86_64-unknown-linux-gnu/bits/basic_file.h \
- /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/x86_64-unknown-linux-gnu/bits/c++io.h \
- /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/bits/fstream.tcc \
- /usr/include/sys/stat.h /usr/include/bits/stat.h \
  /afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/LHAPDF/Paths.h \
  /afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/LHAPDF/Exceptions.h \
  /afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/LHAPDF/Factories.h \
@@ -977,18 +972,6 @@ standSimple-standSimple.o: standSimple.cxx \
 /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/sstream:
 
 /cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/bits/sstream.tcc:
-
-/cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/fstream:
-
-/cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/x86_64-unknown-linux-gnu/bits/basic_file.h:
-
-/cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/x86_64-unknown-linux-gnu/bits/c++io.h:
-
-/cvmfs/sft.cern.ch/lcg/contrib/gcc/5.1.0/x86_64-slc6/include/c++/5.1.0/bits/fstream.tcc:
-
-/usr/include/sys/stat.h:
-
-/usr/include/bits/stat.h:
 
 /afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/LHAPDF/Paths.h:
 

@@ -1077,7 +1077,7 @@ D["HAVE_UTIME_H"]=" 1"
 D["HAVE_UTIME_NULL"]=" 1"
 D["HAVE_CERNROOT"]=" 1"
 D["HAVE_LHAPDF"]=" 1"
-D["LHAPDF_VERSION"]=" \"6.2.1\""
+D["LHAPDF_VERSION"]=" \"6.2.3\""
   for (key in D) D_is_set[key] = 1
   FS = ""
 }

@@ -1295,11 +1295,12 @@ c--- usual case
 
       endif
       endif
-      
+
 c--- APPLgrid - set factor
       f_X1overZ = 1._dp
       f_X2overZ = 1._dp
 c--- APPLgrid - end
+      
       
       do j=-nflav,nflav
       do k=-nflav,nflav
@@ -1779,6 +1780,27 @@ c---   (interchange colour structures 1 and 2)
      &                  +R2(a,a,a,cs,2)+R2(a,a,a,cs,3))
      & + msq_cs(ics,j,g)*(AP(g,a,2)+R2(g,a,a,cs,2)))*fx1(j)*fx2z(k)/z
 
+c--- APPLgrid - collect weights for antiquark-quark
+       if((currentPDF.eq.0).and.creategrid.and.bin)then
+        weightb(j,k)  = weightb(j,k)
+     &                     +  0d0
+        weightv(j,k)  = weightv(j,k)
+     & +msq_cs(cs,j,k)*(AP(a,a,1)-AP(a,a,3)
+     &                 +R1(ia,ia,iq,cs,1)-R1(ia,ia,iq,cs,3)
+     &                 +AP(q,q,1)-AP(q,q,3)
+     &                 +R2(iq,iq,ia,cs,1)-R2(iq,iq,ia,cs,3)
+     &                   )!*fx1(j)*fx2(k)
+        weightv1(j,k) = weightv1(j,k)
+     & +(msq_cs(cs,j,k)*(AP(a,a,2)+AP(a,a,3)
+     &                  +R1(ia,ia,iq,cs,2)+R1(ia,ia,iq,cs,3))
+     & + msq_cs(cs,g,k)*(AP(g,a,2)+R1(g,a,q,cs,2)))!*fx1z(j)/z*fx2(k)
+        weightv2(j,k) = weightv2(j,k)                     
+     & +(msq_cs(cs,j,k)*(AP(q,q,2)+AP(q,q,3)
+     &                  +R2(iq,iq,ia,cs,2)+R2(iq,iq,ia,cs,3))
+     & + msq_cs(cs,j,g)*(AP(g,q,2)+R2(g,q,a,cs,2)))!*fx1(j)*fx2z(k)/z
+       endif
+c--- APPLgrid - end
+
       enddo
       elseif ((j > 0) .and. (k<0)) then
 c--- handle the Z+b jet case where identity of 5 and 6 are switched
@@ -1892,7 +1914,6 @@ c--- APPLgrid - end
      & +(msq_cs(cs,g,g)*(AP(g,g,2)+AP(g,g,3)
      &                  +R2(g,g,g,cs,3)+R2(g,g,g,cs,2))
      & + msq_gq*(AP(q,g,2)+R2(q,g,g,cs,2)))*fx1(g)*fx2z(g)/z
-      enddo
 
 c--- APPLgrid - collect weights for gluon-gluon
        if((currentPDF.eq.0).and.creategrid.and.bin)then
@@ -1913,7 +1934,8 @@ c--- APPLgrid - collect weights for gluon-gluon
      & + msq_gq*(AP(q,g,2)+R2(q,g,g,cs,2)))!*fx1(g)*fx2z(g)/z
        endif
 c--- APPLgrid - end
-
+      
+      enddo
       elseif ((j == g) .and. (k > 0)) then
 c--- special case for W+bj - remove b-PDF contribution
       if ((kcase==kW_bjet) .and. (k .ne. 5)) then
@@ -2854,7 +2876,7 @@ c
          endif
 c--- APPLgrid - end
 
-
+c        print *, "In virtint pjet = ", pjet
         call nplotter(pjet,val,val2,0)
 c--- POWHEG-style output if requested
         if (writepwg) then

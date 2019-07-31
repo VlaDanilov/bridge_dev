@@ -24,12 +24,45 @@ c--- compute errors from n, maxhisto+n and store in 2*maxhisto+n
         do j=1,nbin(n)
           ! assuming we don't integrate something that results in a
           ! tiny error, like maybe a constant?
+          
           if (abs(hist(2*maxhisto+n,j)) > 100*tiny) then
-            accumhist(part,ips,n,j) = accumhist(part,ips,n,j)
+c            print*, " updatehisto.f:updatehisto: " 
+c            print*, " accumhist(part,ips,n,j) 
+c     &      =", accumhist(part,ips,n,j)
+c            print*, " hist(maxhisto+n,j)", maxhisto+n,j,hist(maxhisto+n,
+c     &      j)
+c            print*, " hist(maxhisto+n,j)/hdel(n) = ",
+c     &      hist(maxhisto+n,j)/hdel(n)
+c            print*, " hist(n,j)**2/ncall = ", hist(n,j)**2/ncall
+c            print*, " hist(n,j) = ", n, j, 
+c     &      hist(n,j)
+c            print*, " hist(2*maxhisto+n,j) = ",
+c     &      2*maxhisto+n, j, hist(2*maxhisto+n,j) 
+c            print*, " hist(n,j)/hist(2*maxhist
+c     &      o+n, j)**2 = ", hist(n,j)/hist(2*maxhisto+n, j)**2
+c            print*, " part = ", part
+c            print*, " ips = ", ips            
+            accumhist(part,ips,n,j) =  accumhist(part,ips,n,j)
      &            + hist(n,j)/hist(2*maxhisto+n, j)**2
+c           print*, " accumhist(part,ips,n,j)
+c    &            + hist(n,j)/hist(2*maxhisto+n, j)**2
+c     &      = ", accumhist(part,ips,n,j)
+c            print*,"............................................"
+c            print*, " accumhist(part,ips,
+c     &      2*maxhisto+n,j)=accumhist(part,ips,2*maxhisto+n,j)
+c     &      + 1/hist(2*maxhisto+n,j)**2"
+c            print*, "accumhist(part,ips,2*maxhisto+n,j) =
+c     &      ", accumhist(part,ips,2*maxhisto+n,j)
+c            print*," accumhist(part,ips,
+c     &       2*maxhisto+n,j) =", accumhist(part,ips,2*maxhisto+n,j)
             accumhist(part,ips,2*maxhisto+n,j) = 
      &                 accumhist(part,ips,2*maxhisto+n,j)
-     &                  + 1/hist(2*maxhisto+n,j)**2
+     &                  + 1/hist(2*maxhisto+n, j)**2
+c            print*, " 1/hist(2*maxhisto+n,j)**
+c     &      2 = ", 1/hist(2*maxhisto+n,j)**2
+c            print*," accumhist(part,ips,
+c     &       2*maxhisto+n,j)=", accumhist(part,ips,2*maxhisto+n,j)
+c            print*, "-----------updatehisto end-----------------"
           endif
         enddo
       enddo
@@ -60,11 +93,22 @@ c--- compute errors from n, maxhisto+n and store in 2*maxhisto+n
             do ips=1,maxIps
               do part=1,maxParts
                 if (accumhist(part,ips,2*maxhisto+n,j) > 100*tiny) then
-                  finalhist(n,j) = finalhist(n,j) +
+c                  print*, "finalhist(n,j) = finalhist(n,j)+accumhist(
+c     &            part,ips,n,j)/accumhist(part,ips,2*maxhisto+n,j)"
+c                  print*, "finalhist(n,j) = ", finalhist(n,j)
+c                  print*, "updatehisto.f:finalizehist accumhist(part,
+c     &            ips,n,j) = ", part, ips, n, j, accumhist(part,ips,n,j)
+c                  print*, "updatehisto.f:finalizehist accumhist(part,
+c     &            ips,2*maxhisto+n,j) = ", part, ips, n, j, 
+c     &            accumhist(part,ips,2*maxhisto+n,j)
+                  finalhist(n,j) = finalhist(n,j) + 
      &                  accumhist(part,ips,n,j)
      &                    /accumhist(part,ips,2*maxhisto+n,j)
                   finalhist(2*maxhisto+n,j) = finalhist(2*maxhisto+n,j) +
      &                      1._dp/accumhist(part,ips,2*maxhisto+n,j)
+c                 print*, "updatehisto.f:finalizehist FINAL 
+c     &            finalhist(n,j) = ", n, j , finalhist(n,j)
+c                  print*, "--------------------------------------------"
                 endif
               enddo
             enddo

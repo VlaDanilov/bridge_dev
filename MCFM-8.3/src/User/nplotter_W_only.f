@@ -124,6 +124,7 @@ c---     xmax:  highest value to bin
 c---       dx:  bin width
 c---   llplot:  equal to "lin"/"log" for linear/log scale
 
+c       print *, "nplotter_W_: wt = ", wt
        call bookplot(n,tag,'xsec',0.5_dp,wt,wt2,0._dp,1._dp,1._dp,'lin')
        n=n+1
 
@@ -133,7 +134,7 @@ c---   llplot:  equal to "lin"/"log" for linear/log scale
        call bookplot(n,tag,'W ps-rap',eta34,wt,wt2,-6._dp,6._dp,0.2_dp,'lin')
        n=n+1
       if(nwz == +1) then
-         call bookplot(n,tag,'y(lep)',y4,wt,wt2,-2.4_dp,2.4_dp,0.2_dp,'lin')
+         call bookplot(n,tag,'y(lep)',y4,wt,wt2,-4.2_dp,4.2_dp,0.2_dp,'lin')
          n=n+1
          call bookplot(n,tag,'pt(lep)',pt4,wt,wt2,0._dp,100._dp,2._dp,'lin')
          n=n+1
@@ -150,7 +151,6 @@ c---   llplot:  equal to "lin"/"log" for linear/log scale
       call bookplot(n,tag,'pt5',pt5,wt,wt2,0._dp,80._dp,2._dp,'lin')
       n=n+1
 
-  
 ************************************************************************
 *                                                                      *
 *     FINAL BOOKKEEPING                                                *

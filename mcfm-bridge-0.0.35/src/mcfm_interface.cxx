@@ -59,13 +59,13 @@ static const int mxpart = 14;    // mcfm parameter : max number of partons in ev
 /// was 12 for mcfm 6.7
 /// static const int mxpart = 12;    // mcfm parameter : max number of partons in event record. defined in Inc/constants.f
 
-static const int _Ngrids = 2;
-static       int  Ngrids = 2;
+static const int _Ngrids = 1;
+static       int  Ngrids = 1;
 appl::mcfm_grid* mygrid[_Ngrids];
 
 static const char* gridFiles[_Ngrids] = {
-    "_eta3.root",
-    "_pt4.root"};
+    "_pt4.root",};
+//    "_eta4.root"};
 /*    "_eta4.root",
     "_pt3-eta152-237.root",
     "_pt4.root",
@@ -74,8 +74,8 @@ static const char* gridFiles[_Ngrids] = {
 };*/
 
 
-static double Observable[_Ngrids] = {  0,  0}; //,  0,  0,  0,  0 };   // observable array
-int             nObsBins[_Ngrids] = { 40, 50};//, 45, 40, 45, 40, 45 }; // eta4, pt4 cental eta-bin, pt4 forward eta-bin
+static double Observable[_Ngrids] = {  0};//,  0}; //,  0,  0,  0,  0 };   // observable array
+int             nObsBins[_Ngrids] = { 50};//, 50};//, 45, 40, 45, 40, 45 }; // eta4, pt4 cental eta-bin, pt4 forward eta-bin
 
 static const double eta[41] =  {
      -4.0,-3.8,-3.6,-3.4,-3.2,
@@ -109,7 +109,6 @@ static const double pt[51] =  {
       90.0,  92.0,  94.0,  96.0,  98.0, 
      100.0  
 };
-
 
 long unsigned int runs  =  0;
 bool isBooked           =  false;
@@ -151,12 +150,12 @@ void book_grid()  // inital grid booking
 
   // lowest order in alphas	
   gridorder_.lowest_order=0;
+  
   // how many loops
   int nloops = 1;
   
-
   // number of observables and binning for observables  
-  const double *obsBins[_Ngrids] = { eta,pt};//, pt, eta, pt, eta, pt ;
+  const double *obsBins[_Ngrids] = {pt};// eta,pt};//, pt, eta, pt, eta, pt ;
     
   // Default pdf decomposition
   std::string pdf_function;
@@ -186,7 +185,7 @@ void book_grid()  // inital grid booking
       std::cout << " W+ production"; 
       pdf_function = "mcfmwp.config"; 
       glabel+="-Wplus";
-      q2Low   = 6440.99, q2Up = 6480.01;
+      q2Low   = 6399.99, q2Up = 6462.01;
       nQ2bins = 3;
       qorder  = 1;
     }  
@@ -195,7 +194,7 @@ void book_grid()  // inital grid booking
       std::cout << " W- production"; 
       pdf_function = "mcfmwm.config"; 
       glabel+="-Wminus";
-      q2Low   = 6440.99, q2Up = 6480.01;
+      q2Low   = 6399.99, q2Up = 6462.01;
       nQ2bins = 3;
       qorder  = 1;
     }  
@@ -433,7 +432,7 @@ void book_grid()  // inital grid booking
       if ( create_new ) 
 	{ 
 	  std::cout << "Creating NEW grid... " << std::endl;
-      std::cout << " iterat_.ncall2 = " << iterat_.ncall2 << std::endl;     
+          std::cout << " iterat_.ncall2 = " << iterat_.ncall2 << std::endl;     
 	  
 	  std::cout << "grid interpolation: " 
 		    << "\tQ2 " << nQ2bins << " " <<  q2Low << " " <<  q2Up << " " <<  qorder   
@@ -461,6 +460,7 @@ void book_grid()  // inital grid booking
 	  std::cout << "reference histo name = " 
 	       << mygrid[igrid]->getReference()->GetName() << std::endl;
           mygrid[igrid]->getReference()->Print("all");	  
+          
 //	  std::cout<<*mygrid[igrid]<<std::endl;  
 	}
       else 
@@ -486,8 +486,9 @@ void book_grid()  // inital grid booking
 
 void fill_grid( const double evt[][mxpart] )
 {
-  /* 
+  /*
   std::cout << ".............Print " << std::endl;
+  std::cout << " evt1  = " << evt[3][1] << "  " << evt[0][1] << "  " << evt[1][1] << "  " << evt[2][1] << std::endl;
   std::cout << " evt2  = " << evt[3][2] << "  " << evt[0][2] << "  " << evt[1][2] << "  " << evt[2][2] << std::endl;
   std::cout << " evt 3 = " << evt[3][3] << "  " << evt[0][3] << "  " << evt[1][3] << "  " << evt[2][3] << std::endl;
   std::cout << " evt  4= " << evt[3][4] << "  " << evt[0][4] << "  " << evt[1][4] << "  " << evt[2][4] << std::endl;
@@ -500,13 +501,13 @@ void fill_grid( const double evt[][mxpart] )
     {    
       book_grid();
       return;
-    }
+    } 
 
   getObservable( evt );
   
   for(int igrid = 0; igrid < Ngrids; igrid++)
     if(cuts(igrid)){
- 
+      //std::cout << "Observable before fillMCFM = " << Observable[igrid] << std::endl; 
       mygrid[igrid]->fillMCFM( Observable[igrid] );
     }
 
@@ -522,7 +523,7 @@ void Normalise(TH1D* h)
   for ( int ibin=1 ; ibin<=h->GetNbinsX() ; ibin++ ) 
     { 
       double width = h->GetBinLowEdge(ibin+1) - h->GetBinLowEdge(ibin);
-      h->SetBinContent( ibin, h->GetBinContent(ibin)/width );
+      h->SetBinContent( ibin, (h->GetBinContent(ibin))/width );
     }
   return;
 }
@@ -535,14 +536,16 @@ void write_grid(double& xstotal)   // writes out grid after some events
   
   for(int igrid = 0; igrid < Ngrids; igrid++)
     {
-      std::cout << "saving grid N = " << igrid+1 << "\tof " << Ngrids << "\t" << std::endl;
+      std::cout << "saving grid N =" << igrid+1 << "\tof " << Ngrids << "\t" << std::endl;
 
       std::system("sleep 1");
 
       mygrid[igrid]->setNormalised( false );
-     
-      mygrid[igrid]->run() = (iterat_.ncall2)*(iterat_.itmx2);
-      
+      //mygrid[igrid]->run() = (iterat_.ncall2)*(iterat_.itmx2);
+      std::cout << " iterat_.ncall2 = " << iterat_.ncall2 << std::endl;      
+      std::cout << " iterat_.itmx2 = " << iterat_.itmx2 << std::endl;      
+      std::cout << " mygrid[igrid]->run() = " << mygrid[igrid]->run() << std::endl;      
+
       mygrid[igrid]->untrim();
       int untrim_size = mygrid[igrid]->size();
 
@@ -550,13 +553,14 @@ void write_grid(double& xstotal)   // writes out grid after some events
       int trim_size = mygrid[igrid]->size();
 
       /// scale up by number of weights
-      (*mygrid[igrid]) *= mygrid[igrid]->run();
+      //(*mygrid[igrid]) *= mygrid[igrid]->run();
+      
       // normalise the reference histogram by bin width
-      Normalise( mygrid[igrid]->getReference() );
+      //Normalise( mygrid[igrid]->getReference() );
 
       /// now scale *down* the reference histogram because we've just 
       /// scaled it up ...
-      //mygrid[igrid]->getReference()->Scale( 1/mygrid[igrid]->run() );
+      //      mygrid[igrid]->getReference()->Scale( 1/mygrid[igrid]->run() );
 
       std::string filename = glabel+gridFiles[igrid];
 
@@ -619,7 +623,7 @@ void getObservable(const double evt[][mxpart])
   // calculate observables
   for(int igrid = 0; igrid < Ngrids; igrid++)Observable[igrid] = 0.0; // initialize
   
-  double p3[4] = {evt[3][2],evt[0][2],evt[1][2],evt[2][2]}; // (E,x,y,z)
+  double p3[4] = {evt[3][2],evt[0][2],evt[1][2],evt[2][2]}; // (E,px,py,pz)
   double p4[4] = {evt[3][3],evt[0][3],evt[1][3],evt[2][3]};
   double p5[4] = {evt[3][4],evt[0][4],evt[1][4],evt[2][4]};
   double p6[4] = {evt[3][5],evt[0][5],evt[1][5],evt[2][5]};
@@ -712,10 +716,9 @@ void getObservable(const double evt[][mxpart])
     //Observable[ 2 ] = rapidity4;
   }
   
-  Observable[ 0 ] = rapidity4;
-  Observable[ 1 ] = pt4;
+  Observable[ 0 ] = pt4;
+  Observable[ 1 ] = rapidity4;
   //Observable[ 5 ] = pt5;
-
 }
 
 int cuts(int igrid)
@@ -724,10 +727,12 @@ int cuts(int igrid)
   switch(igrid)
     {
     case(0):
-      if(fabs(Observable[igrid]) <= 2.4) fill = 1;
+      //if(fabs(Observable[igrid]) < 2.4) fill = 1;
+      fill = 1;
       break;
     case(1):
-      if(Observable[1] <= 100.0 ) fill = 1;
+      //if(Observable[1] < 10.0 ) fill = 1;
+      fill = 1;    
       break;
     case(2):
       fill = 1;

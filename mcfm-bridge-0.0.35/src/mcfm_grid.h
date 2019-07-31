@@ -18,7 +18,7 @@
 #include <thread>
 #include "appl_grid/appl_grid.h"
 
-
+#include "TH1D.h"
 
 
 
@@ -27,8 +27,17 @@
 static const int __nf__   = 5;
 static const int __nf2__  = 11;
 static const int __maxd__ = 41;
+/*
+TH1D* h_ref = new TH1D("ref", "ref", 50, 0.0, 100.0);
+TH1D* h_ref2 = new TH1D("ref2", "ref2", 50, 0.0, 100.0);
 
+TH1D* h_accumHist = new TH1D("accumHist ", "accumHist", 50, 0.0, 100.0);
+TH1D* h_accumHistErr = new TH1D("accumHistErr", "accumHistErr", 50, 0.0, 100.0);
 
+float hdel = 2.0;
+double ref_err_val = 0.0;
+int itmx=1;
+*/
 typedef struct {
   double weightfactor;
   double weightb [ __nf2__ ][ __nf2__ ];
@@ -74,7 +83,7 @@ typedef struct  {
     int itmx1, ncall1, itmx2, ncall2;
 } __iterat__;
 */
-typedef struct  {
+typedef struct  {// new stucture according to MCFM-8.3
     long long int ncall1, ncall2; int itmx1,  itmx2;
 } __iterat__;
 
@@ -82,7 +91,6 @@ typedef struct {
    int lowest_order;
   }__gridorder__;
 
- 
 
 extern "C" __ckm__   ckm_;
 extern "C" __cabib__ cabib_;
@@ -94,6 +102,8 @@ extern "C" __energy__ energy_;
 extern "C" __iterat__ iterat_;
 extern "C" __gridorder__ gridorder_;
 
+// Since MCFM-8.1 removed noomp version.  
+// If just a single thread is wanted, please set OMP_NUM_THREADS to 1.
 #pragma omp threadprivate(gridevent_)
 #pragma omp threadprivate(gridweight_)
 #pragma omp threadprivate(nflav_)

@@ -2753,11 +2753,15 @@ qqb_zbjet_gs.o \
 qqb_zbjet_v.o \
 qqb_zbjet_z.o
 
-APPLGRID= \
-gridwrap.o 
+#APPLGRID = \
+#gridwrap.o 
+
 #gridwrap_dummy.o 
 #mcfm_grid.o \
 #fill_APPLgrid.o \
+
+USERFILES += gridwrap.o
+
 
 MODFILES= \
 scaleset_m.o \
@@ -2890,7 +2894,7 @@ OURCODE = $(LIBFILES) $(NEEDFILES)  $(PROCDEPFILES) $(SPINORFILES) \
 	  $(PWGPLOTSFILES) \
 	  $(CHECKINGFILES) $(UTOOLSFILES) $(WBFFILES) \
           $(SCETFILES) $(SCET0jFILES) $(TDHPLFILES) $(WH1JETFILES) $(EWFILES) \
-		  $(INTEGRATEFILES) $(MODFILES) $(APPLGRID)
+		  $(INTEGRATEFILES) $(MODFILES) #$(APPLGRID)
           
 OTHER = $(PARTONFILES) $(WPWP2JFILES) $(F90FILES) 
 

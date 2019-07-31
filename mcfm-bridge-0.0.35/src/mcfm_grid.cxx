@@ -10,8 +10,11 @@
 
 #include <cstdlib>
 #include <iomanip>
+#include <cmath>
+
 #include <ostream>
 #include <errno.h>
+
 
 #include "mcfm_grid.h"
 #include "appl_grid/lumi_pdf.h"
@@ -26,8 +29,28 @@ extern "C" __qcdcouple__ qcdcouple_;
 //---------------------------------------------------------------------------
 
 static const bool _debug_ = false;
-
 /// special mcfm specific methods
+double hist = 0.0;
+double accumhist = 0.0;
+double accumhist2 = 0.0;
+double finalhist = 0.0;
+double refwt = 0.0;
+
+double histmaxhisto = 0.0;
+
+TH1D* h_ref = new TH1D("ref", "ref", 50, 0.0, 100.0);
+TH1D* h_ref2 = new TH1D("ref2", "ref2", 50, 0.0, 100.0);
+
+TH1D* h_accumHist = new TH1D("accumHist ", "accumHist", 50, 0.0, 100.0);
+TH1D* h_accumHistErr = new TH1D("accumHistErr", "accumHistErr", 50, 0.0, 100.0);
+
+float hdel = 2.0;
+double ref_err_val = 0.0;
+int itmx=0;
+static unsigned long long int count = 0;
+
+
+
 
 void appl::mcfm_grid::fillMCFM(double obs)
 {
@@ -54,7 +77,7 @@ void appl::mcfm_grid::fillMCFM(double obs)
 	       <<" x2 = "<< _x2
 	       <<" Q  = "<< gridevent_.ag_scale
 	       <<" CON = "<< gridevent_.contrib
-	       <<"obs = "<<obs
+	       <<" obs = "<<obs
                <<std::endl;
 
 /*
@@ -174,9 +197,114 @@ void appl::mcfm_grid::fillMCFM(double obs)
     std::cout <<__PRETTY_FUNCTION__<<" Unknown contribution!!!!!!!!!"<< std::endl; 
     std::cout <<__PRETTY_FUNCTION__<<" Unknown contribution!!!!!!!!!"<< std::endl; 
   }
-
   //  double binWidth = deltaobs(obsbin(obs));
-  getReference()->Fill( obs, gridevent_.refwt );
+  
+  count++; // starting event counting (1:ncall2)
+  //std::cout << " mcfm_grid.cxx: gridevent_.refwt = " << gridevent_.refwt << std::endl;
+  
+  refwt = gridevent_.refwt * iterat_.itmx2; //getting original weight
+  //hist = hist + refwt/hdel; // fillinf bin in current iteration and devide by the bin width as in MFILL routine
+  //std::cout << " mcfm_grid.cxx: hist = " << hist << std::endl;
+  
+  //histmaxhisto = histmaxhisto + (refwt*refwt)/hdel; // same for weight^2
+  //std::cout << " mcfm_grid.cxx: histmaxhisto = " << histmaxhisto << std::endl;
+  
+  //std::cout << " histmaxhisto/hdel = " << histmaxhisto/hdel << std::endl;
+  
+  //std::cout << " (hist*hist)/iterat_.ncall2 = " << (hist*hist)/iterat_.ncall2 << std::endl;
+
+  //double hist2maxhisto = sqrt(std::abs( ( histmaxhisto/hdel ) - ( (hist*hist)/iterat_.ncall2 ) ) ); // calculate errors
+
+  //std::cout << " mcfm_grid.cxx: hist2maxhisto = "  <<  hist2maxhisto << std::endl;
+
+  //std::cout << " mcfm_grid.cxx: hist/(hist2maxhisto*hist2maxhisto) = " << hist/(hist2maxhisto*hist2maxhisto) << std::endl; 
+ 
+  //std::cout << " mcfm_grid.cxx: accumhist before  = " << accumhist  << std::endl;
+
+  //std::cout << "   ---------------------------------------------   " << std::endl;
+
+  // Implementation with histograms
+
+  // analog of hist and histmaxhisto:
+  h_ref->Fill( obs , refwt/hdel );
+  h_ref2->Fill( obs ,(refwt*refwt)/hdel );
+
+  //std::cout << " count = " << count << std::endl;  
+   
+  if( (count%iterat_.ncall2==0) || (itmx+1==iterat_.itmx2 && (count+1)%iterat_.ncall2==0)){ // if the iteration ends and 1 event failed cuts...
+
+  itmx++;// iteration counter
+  
+  //-------------
+  // One Bin test
+  // ------------ 
+  //accumhist  = accumhist + hist/(hist2maxhisto*hist2maxhisto) ; //calculate accumhist with values devided by squared errors
+  //std::cout << " mcfm_grid.cxx: accumhist + hist/(hist2maxhisto*hist2maxhisto): " << accumhist  << std::endl;
+
+  //accumhist2 = accumhist2 + 1./(hist2maxhisto*hist2maxhisto)  ; // calculate accumhist = inversed squared errors
+  //std::cout << " mcfm_grid.cxx: accumhist2 = accumhist2 + 1./(hist2maxhisto*hist2maxhisto): " << accumhist2 << std::endl;
+
+  //std::cout << " mcfm_grid.cxx: finalhist before: " << finalhist << std::endl; 
+  
+  //finalhist = accumhist/accumhist2; // calculate final histogram
+  //std::cout << " mcfm_grid.cxx: finalhist = accumhist/accumhist2: " << finalhist << std::endl;
+
+   //------------------
+   //Histo format check
+   //------------------
+   for(int i=1; i<=h_ref2->GetNbinsX(); i++){ // loop over bins
+   
+    double  refErrVal = sqrt( std::abs( (h_ref2->GetBinContent(i)/hdel) - (((h_ref->GetBinContent(i))*(h_ref->GetBinContent(i)))/iterat_.ncall2) ) );
+    //std::cout << " initial h_accumHist->GetBinContent(" << i << ") = " << h_accumHist->GetBinContent(i) << std::endl; 
+    //std::cout << " h_ref->GetBinContent(" << i << ") = " << h_ref->GetBinContent(i) << std::endl; 
+    //std::cout << " refErrVal(" << i << ") = " << refErrVal << std::endl; 
+    
+    if(std::isnan(h_accumHist->GetBinContent(i))) h_accumHist->SetBinContent(i,0.000001);   
+    if(std::isnan(h_accumHistErr->GetBinContent(i))) h_accumHistErr->SetBinContent(i,0.000001);
+    //std::cout << " after IsNan check h_accumHist->GetBinContent(" << i << ") = " << h_accumHist->GetBinContent(i) << std::endl;
+    
+    if(h_ref->GetBinContent(i)<0.00000001){
+     if(itmx==iterat_.itmx2){
+       //std::cout << " Last iteration h_accumHist->GetBinContent(" << i << ") = " << h_accumHist->GetBinContent(i) << std::endl;
+       //std::cout << " Last iteration h_accumHistErr->GetBinContent(" << i << ") = " << h_accumHistErr->GetBinContent(i) << std::endl;
+       getReference()->SetBinContent(i,h_accumHist->GetBinContent(i)/h_accumHistErr->GetBinContent(i));
+       if(h_accumHist->GetBinContent(i) == 0.0 && h_accumHistErr->GetBinContent(i) == 0.0 ) getReference()->SetBinContent(i,0.0);   
+       //std::cout << " getReference()->GetBinContent(" << i << ") = " << getReference()->GetBinContent(i) << std::endl;
+       //std::cout << "   --------------------------------------------- " << std::endl;
+     } 
+     else  continue;
+     
+    } 
+    else {
+ 
+     h_accumHist->AddBinContent(i,h_ref->GetBinContent(i)/(refErrVal*refErrVal));
+      //std::cout << " Added bin h_accumHist->GetBinContent(" << i << ") = " << h_accumHist->GetBinContent(i) << std::endl;
+      //std::cout << " itmx = " << itmx << std::endl;
+      //std::cout << " " << std::endl;
+     h_accumHistErr->AddBinContent(i,1/(refErrVal*refErrVal));
+
+     if(itmx==iterat_.itmx2){
+      //std::cout << " Last iteration h_accumHist->GetBinContent(" << i << ") = " << h_accumHist->GetBinContent(i) << std::endl;
+      //std::cout << " Last iteration h_accumHistErr->GetBinContent(" << i << ") = " << h_accumHistErr->GetBinContent(i) << std::endl;
+      getReference()->SetBinContent(i,h_accumHist->GetBinContent(i)/h_accumHistErr->GetBinContent(i));
+      //std::cout << " getReference()->GetBinContent(" << i << ") = " << getReference()->GetBinContent(i) << std::endl;
+      //std::cout << "   --------------------------------------------- " << std::endl;
+     }
+    }
+   }
+   
+  count = 0;
+  //hist = 0.0;
+  //histmaxhisto = 0.0;
+  
+   for(int j=1; j<=h_ref2->GetNbinsX(); j++) {
+    h_ref->SetBinContent(j,0);
+    h_ref2->SetBinContent(j,0);
+   }
+ 
+  }
+
+  //if(itmx==iterat_.itmx2) return;
 
   if (false)
     std::cout << "   --------------------------------------------- " << std::endl;
@@ -184,7 +312,7 @@ void appl::mcfm_grid::fillMCFM(double obs)
 
   //  std::cout << "delete" << std::endl;
   //  delete [] weight;
-
+ 
   return;
 }
 
