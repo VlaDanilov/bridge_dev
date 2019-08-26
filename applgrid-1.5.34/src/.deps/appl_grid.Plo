@@ -225,7 +225,7 @@ appl_grid.lo: appl_grid.cxx \
  /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/include/TMatrixTSym.h \
  /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/include/TMatrixTSparse.h \
  ../amconfig.h Splitting.h hoppet_init.h \
- /afs/desy.de/user/v/volinar/APPLgrid_development/Main//include/hoppet_v1.h
+ /afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/hoppet_v1.h
 
 /cvmfs/sft.cern.ch/lcg/contrib/gcc/4.8.4/x86_64-slc6/include/c++/4.8.4/cstdlib:
 
@@ -761,4 +761,4 @@ Splitting.h:
 
 hoppet_init.h:
 
-/afs/desy.de/user/v/volinar/APPLgrid_development/Main//include/hoppet_v1.h:
+/afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/hoppet_v1.h:

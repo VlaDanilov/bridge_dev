@@ -87,7 +87,7 @@ int usage(std::ostream& s, int argc, char** argv) {
   s << "        --verbose  \t display grid documentation during add\n";
   s << "    -v, --version  \t displays the APPLgrid version\n";
   s << "    -h, --help     \t display this help\n";
-  s << "\nSee " << PACKAGE_URL << " for more details\n"; 
+//  s << "\nSee " << PACKAGE_URL << " for more details\n"; 
   s << "\nReport bugs to <" << PACKAGE_BUGREPORT << ">";
   s << std::endl;
   return 0;

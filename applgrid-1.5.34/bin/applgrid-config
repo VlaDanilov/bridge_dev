@@ -41,13 +41,13 @@ test -n "$tmp" && OUT="$OUT ${prefix}${exec_prefix}/lib"
 
 
 tmp=$( echo "$*" | egrep -- '--\<ldfflags\>')
-test -n "$tmp" && OUT="$OUT -L${prefix}${exec_prefix}/lib -lfAPPLgrid -lAPPLgrid  -m64 -L/cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/lib -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -pthread -lm -ldl -rdynamic -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main//lib -lhoppet_v1" 
+test -n "$tmp" && OUT="$OUT -L${prefix}${exec_prefix}/lib -lfAPPLgrid -lAPPLgrid  -m64 -L/cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/lib -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -pthread -lm -ldl -rdynamic -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main/lib -lhoppet_v1" 
 
 tmp=$( echo "$*" | egrep -- '--\<ldcflags\>')
-test -n "$tmp" && OUT="$OUT -L${prefix}${exec_prefix}/lib -lAPPLgrid  -m64 -L/cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/lib -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -pthread -lm -ldl -rdynamic -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main//lib -lhoppet_v1"
+test -n "$tmp" && OUT="$OUT -L${prefix}${exec_prefix}/lib -lAPPLgrid  -m64 -L/cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/lib -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -pthread -lm -ldl -rdynamic -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main/lib -lhoppet_v1"
 
 tmp=$( echo "$*" | egrep -- '--\<ldflags\>')
-test -n "$tmp" && OUT="$OUT -L${prefix}${exec_prefix}/lib -lAPPLgrid -m64 -L/cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/lib -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -pthread -lm -ldl -rdynamic -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main//lib -lhoppet_v1"
+test -n "$tmp" && OUT="$OUT -L${prefix}${exec_prefix}/lib -lAPPLgrid -m64 -L/cvmfs/sft.cern.ch/lcg/app/releases/ROOT/5.34.19/x86_64-slc6-gcc48-opt/root/lib -lCore -lCint -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lTree -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -pthread -lm -ldl -rdynamic -L/afs/desy.de/user/v/volinar/APPLgrid_development/Main/lib -lhoppet_v1"
 
 tmp=$( echo "$*" | egrep -- '--\<share\>')
 test -n "$tmp" && OUT="$OUT ${prefix}/share/applgrid"

@@ -1,5 +1,5 @@
 # Makefile generated automatically with
-# ../scripts/makef95makefile "libhoppet_v1.a" "--install-script=../scripts/install-sh" "--prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main/" "--mod-prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main//include/hoppet" "--install-modules"
+# ../scripts/makef95makefile "libhoppet_v1.a" "--install-script=../scripts/install-sh" "--prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main" "--mod-prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/hoppet" "--install-modules"
 # default program to compile
 PROG =	libhoppet_v1.a
 
@@ -64,15 +64,15 @@ realclean:
 	rm -f libhoppet_v1.a $(ALLPROG) $(ALLPROGOBJ) $(OBJS) $(POSTOBJS) *.mod *.d
 
 make:
-	../scripts/makef95makefile  "libhoppet_v1.a" "--install-script=../scripts/install-sh" "--prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main/" "--mod-prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main//include/hoppet" "--install-modules"
+	../scripts/makef95makefile  "libhoppet_v1.a" "--install-script=../scripts/install-sh" "--prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main" "--mod-prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/hoppet" "--install-modules"
 
 install: libhoppet_v1.a  hoppet_v1.h install-mod
-	../scripts/install-sh libhoppet_v1.a /afs/desy.de/user/v/volinar/APPLgrid_development/Main//lib/libhoppet_v1.a
-	../scripts/install-sh -m 644 hoppet_v1.h /afs/desy.de/user/v/volinar/APPLgrid_development/Main//include/hoppet_v1.h
+	../scripts/install-sh libhoppet_v1.a /afs/desy.de/user/v/volinar/APPLgrid_development/Main/lib/libhoppet_v1.a
+	../scripts/install-sh -m 644 hoppet_v1.h /afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/hoppet_v1.h
 
 install-mod: libhoppet_v1.a  
-	../scripts/install-sh -d /afs/desy.de/user/v/volinar/APPLgrid_development/Main//include/hoppet
-	../scripts/install-sh -m 644 -t /afs/desy.de/user/v/volinar/APPLgrid_development/Main//include/hoppet *.mod 
+	../scripts/install-sh -d /afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/hoppet
+	../scripts/install-sh -m 644 -t /afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/hoppet *.mod 
 
 .SUFFIXES: $(SUFFIXES) .f90
 

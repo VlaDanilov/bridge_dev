@@ -88,7 +88,7 @@ ARFLAGS = cru
 libmcfmbridge_a_AR = $(AR) $(ARFLAGS)
 libmcfmbridge_a_LIBADD =
 am_libmcfmbridge_a_OBJECTS = mcfm_interface.$(OBJEXT) \
-	mcfm_grid.$(OBJEXT)
+	mcfm_grid.$(OBJEXT) grid_input.$(OBJEXT)
 libmcfmbridge_a_OBJECTS = $(am_libmcfmbridge_a_OBJECTS)
 PROGRAMS = $(bin_PROGRAMS)
 am_standSimple_OBJECTS = standSimple-standSimple.$(OBJEXT)
@@ -183,7 +183,6 @@ PACKAGE_BUGREPORT = sutt@cern.ch
 PACKAGE_NAME = mcfm-bridge
 PACKAGE_STRING = mcfm-bridge 0.0.35
 PACKAGE_TARNAME = mcfm-bridge
-PACKAGE_URL = http://applgrid.hepforge.org
 PACKAGE_VERSION = 0.0.35
 PATH_SEPARATOR = :
 RANLIB = ranlib
@@ -268,7 +267,7 @@ standSimple_CXXFLAGS = -O2 -Wall -fPIC -DPDFPATH=\"$(LHAPDFPATH)\" -I. -I.. -I$(
 standSimple_LDFLAGS = $(ROOTARCH) -O2  $(ROOTLIBS) $(APPLLIBS) $(LHAPDFLIB) $(HOPPETLIB) $(FRTLLIB) $(FRTLIB) 
 # -L$(HOME)/lib -lAS
 lib_LIBRARIES = libmcfmbridge.a 
-libmcfmbridge_a_SOURCES = mcfm_interface.cxx mcfm_grid.cxx mcfm_grid.h LHAPDF.h
+libmcfmbridge_a_SOURCES = mcfm_interface.cxx mcfm_grid.cxx mcfm_grid.h grid_input.cxx grid_input.h LHAPDF.h
 
 # library_includedir=$(includedir)/mcfmbridge
 # library_include_HEADERS=
@@ -401,6 +400,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/grid_input.Po
 include ./$(DEPDIR)/mcfm_grid.Po
 include ./$(DEPDIR)/mcfm_interface.Po
 include ./$(DEPDIR)/standSimple-standSimple.Po

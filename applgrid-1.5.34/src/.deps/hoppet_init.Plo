@@ -117,7 +117,7 @@ hoppet_init.lo: hoppet_init.cxx hoppet_init.h \
  /usr/include/bits/inf.h /usr/include/bits/nan.h \
  /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h \
  /usr/include/bits/mathinline.h ../amconfig.h \
- /afs/desy.de/user/v/volinar/APPLgrid_development/Main//include/hoppet_v1.h
+ /afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/hoppet_v1.h
 
 hoppet_init.h:
 
@@ -407,4 +407,4 @@ hoppet_init.h:
 
 ../amconfig.h:
 
-/afs/desy.de/user/v/volinar/APPLgrid_development/Main//include/hoppet_v1.h:
+/afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/hoppet_v1.h:

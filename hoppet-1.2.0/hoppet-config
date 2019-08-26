@@ -2,8 +2,8 @@
 # copied in part from fastjet-config
 # Licensed under the GPL v2.
 
-installationdir=/afs/desy.de/user/v/volinar/APPLgrid_development/Main/
-moddir=/afs/desy.de/user/v/volinar/APPLgrid_development/Main//include/hoppet
+installationdir=/afs/desy.de/user/v/volinar/APPLgrid_development/Main
+moddir=/afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/hoppet
 
 # print a usage message and exit
 # exit code passed as argument:

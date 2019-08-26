@@ -1,5 +1,5 @@
 # Makefile generated automatically with
-# ../scripts/makef95makefile "tabulation_example" "-L../src" "-lhoppet_v1" "-I../src" "--prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main/" "--mod-prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main//include/hoppet"
+# ../scripts/makef95makefile "tabulation_example" "-L../src" "-lhoppet_v1" "-I../src" "--prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main" "--mod-prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/hoppet"
 # default program to compile
 PROG =	tabulation_example
 
@@ -60,7 +60,7 @@ realclean:
 	rm -f  $(ALLPROG) $(ALLPROGOBJ) $(OBJS) $(POSTOBJS) *.mod *.d
 
 make:
-	../scripts/makef95makefile  "tabulation_example" "-L../src" "-lhoppet_v1" "-I../src" "--prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main/" "--mod-prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main//include/hoppet"
+	../scripts/makef95makefile  "tabulation_example" "-L../src" "-lhoppet_v1" "-I../src" "--prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main" "--mod-prefix=/afs/desy.de/user/v/volinar/APPLgrid_development/Main/include/hoppet"
 
 install:
 

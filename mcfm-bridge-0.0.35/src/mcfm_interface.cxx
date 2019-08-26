@@ -8,41 +8,30 @@
 //   $Id: mcfm_interfce.cxx, v   Fri  8 Nov 2013 09:07:01 CET sutt
 
 
+//
+//   modified by Vladyslav Danilov(vladyslav.danilov@cern.ch)
+//   Monday 19 August 2019
+//
+
 #include <iostream>
 #include <sstream>
 #include <iomanip>
 #include <string>
 #include <sys/stat.h>
+#include <map>
 
 #include <cstdlib> 
 #include <sys/time.h> 
 
-
 #include "TFile.h"
 #include "TH1D.h"
-// #include "TMatrixT.h"
 #include "TVectorT.h"
+#include "TLorentzVector.h"
 #include "TString.h"
 
 #include "mcfm_grid.h"
-
-  
-// extern "C" struct {
-//  bool creategrid;
-//  int nSubProcess;
-// } grid_;
-
-
-// bool file_exists(const std::string& s) {   
-//
-//  if ( FILE* testfile=fopen(s.c_str(),"r") ) { 
-//    fclose(testfile);
-//    return true;
-//  }
-//  else return false;
-// }
-
-
+#include "grid_input.h"   // Steering file reader class
+#include "mcfm_procmap.h" // Map with process' default parameters   
 
 
 bool file_exists( const std::string& filename ) { 
@@ -51,351 +40,122 @@ bool file_exists( const std::string& filename ) {
   else return false;
 }
 
+// Check if the process number exists in process map
+// Maybe it's better to make an option for user to define his own parameters for a certain(undefined in the map) process but with basic pdf decomposition?
+bool proc_exists(int &num) {
+  if(procmap.count(num) > 0) return false;
+  else return true;
+}
 
-/// mcfm changed the the mxpart size between 6.7 and 6.8
-// extern "C" int getmxpart_(void);
+ static const int mxpart = 14;    // mcfm parameter : max number of partons in event record. defined in Inc/constants.f
 
-static const int mxpart = 14;    // mcfm parameter : max number of partons in event record. defined in Inc/constants.f
+ // Initialize object of a reader class
+ grid_input *steeringFile   = new grid_input();
+ unsigned short int  ngrids = std::stoi(steeringFile->gridNumber());
 
-/// was 12 for mcfm 6.7
-/// static const int mxpart = 12;    // mcfm parameter : max number of partons in event record. defined in Inc/constants.f
+ // Grids
+ appl::mcfm_grid* onegrid;
+ std::vector<appl::mcfm_grid*> mygrid(ngrids);
+ std::vector<std::string> gridFiles(ngrids);
 
-static const int _Ngrids = 2;
-static       int  Ngrids = 2;
-appl::mcfm_grid* mygrid[_Ngrids];
+ // Particles to make a kinematic cuts on
+ std::vector <unsigned short int> k_zoo;
+ // Numbers of particles to fill a grid(according to process description MCFM)
+ std::vector <unsigned short int> g_zoo;
+ 
+ // Observable
+ std::vector <double> Observable(ngrids);
+ 
+ // Containers for values of kinematic cuts
+ std::vector<double> Kinematics_pt(std::stoi(steeringFile->nKinPar()));
+ std::vector<double> Kinematics_eta(std::stoi(steeringFile->nKinPar()));
 
-static const char* gridFiles[_Ngrids] = {
-    "_eta3.root",
-    "_pt4.root"};
-/*    "_eta4.root",
-    "_pt3-eta152-237.root",
-    "_pt4.root",
-    "_eta5.root",
-    "_pt5.root"
-};*/
+ long unsigned int runs  =  0;
+ bool isBooked           =  false;
+ std::string glabel      =  "";
 
+ void getObservable( const double evt[][mxpart] );
 
-static double Observable[_Ngrids] = {  0,  0}; //,  0,  0,  0,  0 };   // observable array
-int             nObsBins[_Ngrids] = { 40, 50};//, 45, 40, 45, 40, 45 }; // eta4, pt4 cental eta-bin, pt4 forward eta-bin
+ int  cuts(int);
 
-static const double eta[41] =  {
-     -4.0,-3.8,-3.6,-3.4,-3.2,
-     -3.0,-2.8,-2.6,-2.4,-2.2,
-     -2.0,-1.8,-1.6,-1.4,-1.2,
-     -1.0,-0.8,-0.6,-0.4,-0.2,
-      0.0, 0.2, 0.4, 0.6, 0.8,
-      1.0, 1.2, 1.4, 1.6, 1.8,
-      2.0, 2.2, 2.4, 2.6, 2.8,
-      3.0, 3.2, 3.4, 3.6, 3.8,
-      4.0
-};
-
-// int nObsBins[_Ngrids] = {13, 45, 40, 45, 40, 45};      // eta4, pt4 cental eta-bin, pt4 forward eta-bin
-// static const double eta[] =   {
-//     -4.0,  -3.4, -2.8,  -2.2,  -1.6, -1.0, -0.4,  0.2,   0.8,  
-//      1.4,  2.0,  2.6,  3.2,   3.8
-// };
-
-
-static const double pt[51] =  { 
-       0.0,   2.0,   4.0,   6.0,   8.0, 
-      10.0,  12.0,  14.0,  16.0,  18.0,   
-      20.0,  22.0,  24.0,  26.0,  28.0,   
-      30.0,  32.0,  34.0,  36.0,  38.0,   
-      40.0,  42.0,  44.0,  46.0,  48.0,   
-      50.0,  52.0,  54.0,  56.0,  58.0,   
-      60.0,  62.0,  64.0,  66.0,  68.0,   
-      70.0,  72.0,  74.0,  76.0,  78.0,   
-      80.0,  82.0,  84.0,  86.0,  88.0,   
-      90.0,  92.0,  94.0,  96.0,  98.0, 
-     100.0  
-};
-
-
-long unsigned int runs  =  0;
-bool isBooked           =  false;
-std::string glabel      =  "";
-
-void getObservable( const double evt[][mxpart] );
-
-int  cuts(int);
-
-
-std::string date() { 
+ std::string date() { 
   time_t _t;
   time(&_t);
   return ctime(&_t);
-}
+ }
 
 void book_grid()  // inital grid booking
 {
   if (isBooked) return;
+
+  // Filling containers 
+  k_zoo.clear(); g_zoo.clear();
+  for(int nk = 0 ; nk < std::stoi(steeringFile->nKinPar()); nk++) k_zoo.push_back(std::stoi(steeringFile->customKinematics(nk,0)));
+  for(int ng = 0 ; ng < ngrids ; ng++)                            g_zoo.push_back(std::stoi(steeringFile->customGrid(ng,1)));
+
+  std::cout << "-------------------------------------------------------------------------------------------------" << std::endl;
+  std::cout << " Date: " << date() << std::endl;
+  std::cout << " Booking " << ngrids << " grids" << std::endl;     
   
-  //  time_t _t;
-  //  time(&_t);
-  
-  std::cout<<" ***********************************************"<<std::endl;
-  std::cout<<" booking the grids " << date() << std::endl;
-      std::cout << " iterat_.ncall2 = " << iterat_.ncall2 << std::endl;     
-  
-  // binning information for the grid constructor
-  double xLow    = 1.0e-9, xUp = 1.0;
-  int    nXbins  = 40;
-  int    xorder  = 6;
-  double q2Low   = 1.0*1.0;
-  double q2Up    = 4000*4000;
-  int    nQ2bins = 15;
-  int    qorder  = 3;
   // set transform2 value
   double apramval=5.;
   appl::grid::transformvar(apramval);
-
-  // lowest order in alphas	
-  gridorder_.lowest_order=0;
-  // how many loops
-  int nloops = 1;
+   
+  std::cout << "  MCFM process number : " << nproc_.nproc << std::endl;
+  std::cout << "  Number of particles with kinematic cuts = " << steeringFile->nKinPar() << std::endl;
+ 
+  // filling structure 'info' with a certain process parameters from the process' map 
+  info myprocess = procmap[nproc_.nproc];
   
+  // Checking if the process exists in the map
+  if(proc_exists(nproc_.nproc)){
+    std::cerr << " Error! Process " << nproc_.nproc << " doesn't exist ! " << std::endl;
+    exit(0);
+  }
+ 
+  //Lowest order in alpha_s
+  gridorder_.lowest_order=myprocess.LowestOrder; 
 
-  // number of observables and binning for observables  
-  const double *obsBins[_Ngrids] = { eta,pt};//, pt, eta, pt, eta, pt ;
-    
-  // Default pdf decomposition
-  std::string pdf_function;
-  pdf_function = "basic";  
-
-  glabel = "grid-40-6-15-3";
-/*
+  // If grid_setup.txt has values written as 'default' - those values will be taken from process map.
+  if(steeringFile->pdfFun()      != "default") myprocess.pdf_fun     =           steeringFile->pdfFun()      ;
+  if(steeringFile->gLab()        != "default") myprocess.glab        =           steeringFile->gLab()        ;
+  if(steeringFile->q2Up()        != "default") myprocess.q2up        = std::stod(steeringFile->q2Up())       ;
+  if(steeringFile->q2Low()       != "default") myprocess.q2low       = std::stod(steeringFile->q2Low())      ;
+  if(steeringFile->nQ2Bins()     != "default") myprocess.nq2bins     = std::stoi(steeringFile->nQ2Bins())    ;
+  if(steeringFile->qOrder()      != "default") myprocess.qOrder      = std::stoi(steeringFile->qOrder())     ;
+  if(steeringFile->nXBins()      != "default") myprocess.nxbins      = std::stoi(steeringFile->nXBins())     ;
+  if(steeringFile->xOrder()      != "default") myprocess.xOrder      = std::stoi(steeringFile->xOrder())     ;
+  if(steeringFile->lowestOrder() != "default") myprocess.LowestOrder = std::stoi(steeringFile->lowestOrder());
+   
+  std::cout << " Channel            = " << myprocess.chan        << std::endl;
+  std::cout << " Pdf fun            = " << myprocess.pdf_fun     << std::endl;
+  std::cout << " glab               = " << myprocess.glab        << std::endl;
+  std::cout << " Q^2 Low            = " << myprocess.q2low       << std::endl;
+  std::cout << " Q^2 Up             = " << myprocess.q2up        << std::endl;
+  std::cout << " Number of Q^2 bins = " << myprocess.nq2bins     << std::endl;
+  std::cout << " Interpolation order of Q = " << myprocess.qOrder      << std::endl;
+  std::cout << " Number of x bins   = " << myprocess.nxbins      << std::endl;
+  std::cout << " Interpolation order of x = " << myprocess.xOrder      << std::endl;
+  std::cout << " Lowest order       = " << myprocess.LowestOrder << std::endl;
+  
+  std::cout << " ------------------------------------------------------------------------------------------------" << std::endl;
+ 
+  glabel = "grid-"+std::to_string(myprocess.nxbins)+"-"+std::to_string(myprocess.xOrder)+"-"+std::to_string(myprocess.nq2bins)+"-"+std::to_string(myprocess.qOrder); 
+ 
   const char* basename = std::getenv("appl_basename");
   if ( basename && std::string(basename)!="" ) glabel = basename;
-
+   
   const char* q2upper = std::getenv("appl_q2up");
-  if ( q2upper && std::string(q2upper)!="" ) q2Up = std::atof(q2upper);
-
+  if ( q2upper && std::string(q2upper)!="" ) myprocess.q2up = std::atof(q2upper);
+   
   const char* q2lower = std::getenv("appl_q2low");
-  if ( q2lower && std::string(q2lower)!="" ) q2Low = std::atof(q2lower);
-
+  if ( q2lower && std::string(q2lower)!="" ) myprocess.q2low = std::atof(q2lower);
+   
   const char* q2order = std::getenv("appl_q2order");
-  if ( q2order && std::string(q2order)!="" ) qorder = std::atoi(q2order);
+  if ( q2order && std::string(q2order)!="" ) myprocess.qOrder = std::atoi(q2order); 
+
+  // std::cout << "q2low " << q2lower << "\tq2up " << q2upper << std::endl;
   
-
-  std::cout << "q2low " << q2lower << "\tq2up " << q2upper << std::endl;
-*/
-  std::cout << "Process : " << nproc_.nproc << std::endl;
-
-  if      ( nproc_.nproc == 1 )  
-    {
-      std::cout << " W+ production"; 
-      pdf_function = "mcfmwp.config"; 
-      glabel+="-Wplus";
-      q2Low   = 6440.99, q2Up = 6480.01;
-      nQ2bins = 3;
-      qorder  = 1;
-    }  
-  else if ( nproc_.nproc == 6 )  
-    {
-      std::cout << " W- production"; 
-      pdf_function = "mcfmwm.config"; 
-      glabel+="-Wminus";
-      q2Low   = 6440.99, q2Up = 6480.01;
-      nQ2bins = 3;
-      qorder  = 1;
-    }  
-  else if ( nproc_.nproc == 11 )  
-    {
-      std::cout << " W+ + jet production"; 
-      pdf_function = "mcfm-wpjet"; 
-      glabel+="-WplusJet";
-      gridorder_.lowest_order = 1;
-    }
-  else if ( nproc_.nproc == 12 )
-    {
-      std::cout << " W+ + bbar production";
-      glabel+="-WplusBbar";
-      gridorder_.lowest_order = 1;
-    }
-  else if ( nproc_.nproc == 16 )  
-    {
-      std::cout << " W- + jet production"; 
-      pdf_function = "mcfm-wmjet"; 
-      glabel+="-WminusJet";
-      gridorder_.lowest_order = 1;
-    }
-  else if ( nproc_.nproc == 17 )
-    {
-      std::cout << " W- + b quark production";
-      glabel+="-WminusBquark";
-      gridorder_.lowest_order = 1;
-    }  
-  else if ( nproc_.nproc == 31 ) 
-    {
-      std::cout << " Z production"; 
-      pdf_function = "mcfm-z"; 
-      glabel+="-Z0";
-     // q2Low = 8280.99, q2Up = 8281.01;
-     // nQ2bins = 3;
-     // qorder  = 1;
-    }
-  else if ( nproc_.nproc == 33 )
-    {
-      std::cout << " Z0 to bbbar production";
-      //pdf_function = "mcfm-z";
-      glabel+="-Z0_to_bbbar";
-    }  
-  else if ( nproc_.nproc == 36 )
-    {
-      std::cout << " Z0 to ttbar production only in LO";
-      //pdf_function = "mcfm-z";
-      glabel+="-Z0_to_ttbar";
-     }
-  else if ( (nproc_.nproc >= 41) && (nproc_.nproc <= 43)) 
-    {
-      std::cout << " Z-jet production"; 
-      pdf_function = "mcfm-zjet"; 
-      glabel+=TString::Format("-Zjet_%d",nproc_.nproc).Data();
-      gridorder_.lowest_order = 1;
-    }  
-  else if ( (nproc_.nproc >= 280) && (nproc_.nproc <= 286)) 
-    {
-      nXbins  = 30;
-      xorder  = 6;
-
-      //      q2Low = 8280.99, q2Up = 8281.01;
-      //      q2Up    = 7000*7000;
-      //      q2Up    = 1.01e8;
-      //      nQ2bins = 15;
-      //      qorder  = 4;
-
-      Ngrids  = 3;
-
-      nObsBins[0] = 12;
-      nObsBins[1] = 13;
-      nObsBins[2] = 10;
-      
-      double _eta[13] = { 0.0, 0.2, 0.4, 0.6, 0.8, 1.0, 1.2, 1.37, 1.52, 1.8, 2.0, 2.2, 2.37 };
-      double  _pt[14] = { 100, 125, 150, 175, 200, 250, 300, 350, 400, 500, 600, 700, 800, 1000 };
-      double _ptf[11] = { 100, 125, 150, 175, 200, 250, 300, 350, 400, 500, 600 };
-
-      obsBins[0] = _eta;
-      obsBins[1] = _pt;
-      obsBins[2] = _ptf;
-
-      std::cout << " Photon production"; 
-      pdf_function = "photonLO.config:photonNLO.config";
-      glabel += TString::Format("-GammaProd_%d",nproc_.nproc).Data();
-    }  
-  else if ( nproc_.nproc == 13 )  
-    {
-      std::cout << " W+ + Cbar production"; 
-      pdf_function = "mcfm-wpc"; 
-      glabel+="-WplusCbar";
-      gridorder_.lowest_order = 1;
-    }  
-  else if ( nproc_.nproc == 18 )  
-    {
-      std::cout << " W- + C production"; 
-      pdf_function = "mcfm-wmc"; 
-      glabel+="-WminusC";
-      
-      gridorder_.lowest_order = 1;
-    }
-  else if ( (nproc_.nproc == 141) || (nproc_.nproc == 142) || (nproc_.nproc==143) || (nproc_.nproc==144) ||
-	    (nproc_.nproc == 145) || (nproc_.nproc == 146) || (nproc_.nproc==147) ||
-	    (nproc_.nproc == 148) || (nproc_.nproc == 149) || (nproc_.nproc==150) || (nproc_.nproc==151) ||
-	    (nproc_.nproc == 157) || (nproc_.nproc == 158) || (nproc_.nproc==159) )
-    {
-      gridorder_.lowest_order = 2;
-      
-      if (nproc_.nproc == 141)
-	{
-	  std::cout << " TTbar production with 2 semi-leptonic decays"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-141";
-	}
-      else if (nproc_.nproc == 142)
-	{
-	  std::cout << " TTbar production with 2 semi-leptonic decays, corrections only in decays"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-142";
-	}
-      else if (nproc_.nproc == 143)
-        {
-          std::cout << " TTbar production with 2 semi-leptonic decays + jet, only in LO";
-          glabel+="-TTbar-143";
-          gridorder_.lowest_order = 3;
-        }
-      else if (nproc_.nproc == 144)
-	{
-	  std::cout << " TTbar production with 2 semi-leptonic decays, no correlations"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-144";
-	}
-      else if (nproc_.nproc == 145)
-	{
-	  std::cout << " TTbar production with 2 semi-leptonic decays, no spin correlations in top decays"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-145";
-	}
-      else if (nproc_.nproc == 146)
-	{
-	  std::cout << " TTbar production with Tbar hadronic decay, radiative corrections in production and decay"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-146";
-	}
-      else if (nproc_.nproc == 147)
-	{
-	  std::cout << " TTbar production with Tbar hadronic decay, radiative corrections in Tbar decay"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-147";
-	}
-      else if (nproc_.nproc == 148)
-	{
-	  std::cout << " TTbar production with Tbar hadronic decay, radiative corrections in W decay"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-148";
-	}
-      else if (nproc_.nproc == 149)
-	{
-	  std::cout << " TTbar production with T hadronic decay, radiative corrections in production and decay"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-149";
-	}
-      else if (nproc_.nproc == 150)
-	{
-	  std::cout << " TTbar production with T hadronic decay, radiative corrections in T decay"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-150";
-	}
-      else if (nproc_.nproc == 151)
-	{
-	  std::cout << " TTbar production with T hadronic decay, radiative correstions in W decay"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar-151";
-	}
-      else if (nproc_.nproc == 157)
-	{
-	  std::cout << " TTbar production"; 
-	  pdf_function = "mcfm-TT"; 
-	  glabel+="-TTbar";
-	}
-      else if(nproc_.nproc == 158)
-	{
-	  std::cout << " BBbar production"; 
-	  pdf_function = "mcfm-BB"; 
-	  glabel+="-BBbar";
-	}
-      else if (nproc_.nproc == 159)
-	{
-	  std::cout << " CCbar production"; 
-	  pdf_function = "mcfm-CC"; 
-	  glabel+="-CCbar";
-	}
-    }  
-  else                           
-    { 
-      std::cerr << "don't know which process in interface" << std::endl; 
-      std::exit(-1); 
-    } 
-  std::cout << std::endl;
 
   /// Read the ckm matrix from mcfm to store in the grid automatically
   /// NB: we store 13 x 13 ckm matrix - mcfm only stores 11 x 11 so we 
@@ -415,10 +175,15 @@ void book_grid()  // inital grid booking
   __ckm[1][1] = cabib_.Vcs;
   __ckm[1][2] = cabib_.Vcb;
 
+  std::fill(mygrid.begin(),mygrid.end(),onegrid);
 
-  for(int igrid=0; igrid < Ngrids; igrid++) 
+  for(int igrid=0; igrid < ngrids; igrid++) 
     {
-    
+      std::cout << " ************************************************************************************************ "<<std::endl;
+      gridFiles[igrid] = "_p"+steeringFile->customGrid(igrid,1)+"_"+steeringFile->customGrid(igrid,0)+".root";
+      std::cout <<" Grid file suffix : " << gridFiles[igrid] << std::endl;
+      std::cout <<" Number of observable bins = " << std::stoi(steeringFile->customGrid(igrid,2))  << std::endl; 
+
       bool create_new = false;
 
       // if the file does not exist, create a new grid...
@@ -431,68 +196,71 @@ void book_grid()  // inital grid booking
 	testFile.Close();
       }
 
+      // Define a custom size for observable
+      double *obs = new double[std::stoi(steeringFile->customGrid(igrid,2))+1];
+
+      // Read, fill and print observable binning
+      std::cout << " < Binning for observable " << steeringFile->customGrid(igrid,0) << " of particle " << steeringFile->customGrid(igrid,1) << " in process " <<  myprocess.chan << " > :"  << std::endl;
+      for(int b=0; b<(std::stoi(steeringFile->customGrid(igrid,2))+1); b++){
+           obs[b] =  std::stod(steeringFile->customGrid(igrid,b+3));
+           if(b==0) continue;
+           std::cout << " Bin " << b << " = [" <<  std::stod(steeringFile->customGrid(igrid,b+2)) << " - "<< std::stod(steeringFile->customGrid(igrid,b+3))<< "];" << std::endl;
+      }
+
       if ( create_new ) 
 	{ 
-	  std::cout << "Creating NEW grid... " << std::endl;
-      std::cout << " iterat_.ncall2 = " << iterat_.ncall2 << std::endl;     
+	  std::cout << " Creating NEW grid... " << std::endl;
 	  
-	  std::cout << "grid interpolation: " 
-		    << "\tQ2 " << nQ2bins << " " <<  q2Low << " " <<  q2Up << " " <<  qorder   
-		    << "\tx "  <<  nXbins << " " <<   xLow << " " <<   xUp << " " <<  xorder
-		    << std::endl; 
-	    
+          std::cout << " grid interpolation: " 
+		    << "\n Q^2: " << myprocess.nq2bins << " bins in range[" <<  myprocess.q2low   << "-" <<  myprocess.q2up   << "], interpolation order " <<  myprocess.qOrder   
+		    << "\n   x: " << myprocess.nxbins  << " bins in range[" <<  std::stod(steeringFile->xLow()) << "-" <<  std::stod(steeringFile->xUp()) << "], interpolation order " <<  myprocess.xOrder
+		    << std::endl;	  
 
-
-	  mygrid[igrid] = new appl::mcfm_grid( nObsBins[igrid], obsBins[igrid],      // obs bins
-					       nQ2bins, q2Low, q2Up, qorder,         // Q2 bins and interpolation order
-					       nXbins,   xLow,  xUp, xorder,         // x bins and interpolation order
-					       pdf_function, gridorder_.lowest_order, nloops ); 
-	  /// try reweighting for a bit
-	  mygrid[igrid]->reweight(true);
+	  mygrid[igrid] = new appl::mcfm_grid( std::stoi(steeringFile->customGrid(igrid,2)), obs,      // obs bins
+					       myprocess.nq2bins, myprocess.q2low,   myprocess.q2up,   myprocess.qOrder,         // Q2 bins and interpolation order
+					       myprocess.nxbins,  std::stod(steeringFile->xLow()), std::stod(steeringFile->xUp()), myprocess.xOrder,         // x bins and interpolation order
+					       myprocess.pdf_fun, gridorder_.lowest_order,     std::stoi(steeringFile->nLoops()) ); 
+	  
+          /// try reweighting for a bit
+          mygrid[igrid]->reweight(true);
 	  mygrid[igrid]->setCMSScale( energy_.sqrts );
 
-
 	  /// store the ckm matrix
-	  //	  mygrid[igrid]->setckm2( ckm_vsq );
+	  // mygrid[igrid]->setckm2( ckm_vsq );
 
 	  mygrid[igrid]->setckm( __ckm );
 
-	  //	  grid_.nSubProcess = mygrid[igrid]->subProcesses();
+	  // grid_.nSubProcess = mygrid[igrid]->subProcesses();
 	  
-	  std::cout << "reference histo name = " 
-	       << mygrid[igrid]->getReference()->GetName() << std::endl;
-          mygrid[igrid]->getReference()->Print("all");	  
-//	  std::cout<<*mygrid[igrid]<<std::endl;  
+	  std::cout << " reference histo name : " << mygrid[igrid]->getReference()->GetName() << std::endl;
+
+	  //std::cout<<*mygrid[igrid]<<std::endl;  
 	}
       else 
 	{
-	  std::cout << "Using existing grid file " << (glabel+gridFiles[igrid]) << std::endl;
+	  std::cout << " Using existing grid file : " << (glabel+gridFiles[igrid]) << std::endl;
 	  
 	  mygrid[igrid] = new appl::mcfm_grid(glabel+gridFiles[igrid]); //optimise grid x,Q2 bins
-	  //       grid_.nSubProcess = mygrid[igrid]->subProcesses();
+	  // grid_.nSubProcess = mygrid[igrid]->subProcesses();
 	  mygrid[igrid]->getReference()->Reset();
-	  mygrid[igrid]->optimise(nQ2bins, nXbins);
+	  mygrid[igrid]->optimise(myprocess.nq2bins, myprocess.nxbins);
 	  
-//	  std::cout<<*(mygrid[igrid])<<std::endl;  
+	  // std::cout<<*(mygrid[igrid])<<std::endl;  
 	}
       // CTEQ like reweighting
-      //      mygrid[igrid]->reweight( false );
+      // mygrid[igrid]->reweight( false );
+        
+      delete [] obs;
     }
 
   runs = 0;
   isBooked = true;
-  std::cout<<" ***********************************************"<<std::endl;
+  std::cout << " ************************************************************************************************ "<<std::endl;
 }
 
 
 void fill_grid( const double evt[][mxpart] )
 {
-  /* 
-  std::cout << ".............Print " << std::endl;
-  std::cout << " evt2  = " << evt[3][2] << "  " << evt[0][2] << "  " << evt[1][2] << "  " << evt[2][2] << std::endl;
-  std::cout << " evt 3 = " << evt[3][3] << "  " << evt[0][3] << "  " << evt[1][3] << "  " << evt[2][3] << std::endl;
-  std::cout << " evt  4= " << evt[3][4] << "  " << evt[0][4] << "  " << evt[1][4] << "  " << evt[2][4] << std::endl;
-  */
   static unsigned evtcounter = 1;
   if ( evtcounter%50000==0 ) std::cout << "fill_grid() filled " << evtcounter << " weights " << date(); 
   evtcounter++;
@@ -505,12 +273,9 @@ void fill_grid( const double evt[][mxpart] )
 
   getObservable( evt );
   
-  for(int igrid = 0; igrid < Ngrids; igrid++)
-    if(cuts(igrid)){
- 
-      mygrid[igrid]->fillMCFM( Observable[igrid] );
-    }
-
+  for(int igrid = 0; igrid < ngrids; igrid++)
+    if(cuts(igrid)) mygrid[igrid]->fillMCFM( Observable[igrid] );
+    
   runs++; // counter of number of events (shouldn't this be after cuts)? or is it the number of runs?"
 }
 
@@ -534,14 +299,17 @@ void write_grid(double& xstotal)   // writes out grid after some events
 {
   std::cout<<"Write out grids ..."<<std::endl;
   
-  for(int igrid = 0; igrid < Ngrids; igrid++)
+  for(int igrid = 0; igrid < ngrids; igrid++)
     {
-      std::cout << "saving grid N = " << igrid+1 << "\tof " << Ngrids << "\t" << std::endl;
+      std::cout << "saving grid N = " << igrid+1 << "\tof " << ngrids << "\t" << std::endl;
 
       std::system("sleep 1");
 
       mygrid[igrid]->setNormalised( false );
-     
+ 
+      // Define number of iterations times number of events and 
+      // make scaling condition to be true.
+      // In Wirte() method this condition can be used to scale before writing the grid    
       mygrid[igrid]->run() = (iterat_.ncall2)*(iterat_.itmx2);
       
       mygrid[igrid]->untrim();
@@ -552,12 +320,14 @@ void write_grid(double& xstotal)   // writes out grid after some events
 
       /// scale up by number of weights
       (*mygrid[igrid]) *= mygrid[igrid]->run();
+      
       // normalise the reference histogram by bin width
       Normalise( mygrid[igrid]->getReference() );
 
-      /// now scale *down* the reference histogram because we've just 
-      /// scaled it up ...
-      //mygrid[igrid]->getReference()->Scale( 1/mygrid[igrid]->run() );
+      // now scale *down* the reference histogram because we've just 
+      // scaled it up ...
+      /// We had to scale it before this procedure was moved into the Write() method, now it's a rudiment piece of code. 
+      //  mygrid[igrid]->getReference()->Scale( 1/mygrid[igrid]->run() );
 
       std::string filename = glabel+gridFiles[igrid];
 
@@ -587,14 +357,15 @@ void write_grid(double& xstotal)   // writes out grid after some events
 
 #endif
 
-
       std::cout << "size(untrimmed)=" << untrim_size 
 		<< "\tsize(trimmed)=" << trim_size 
 		<< "\tfraction="      << 100.*trim_size/untrim_size << " %" << std::endl;
-      delete mygrid[igrid];
       
+      delete mygrid[igrid];
     }
   
+  delete steeringFile;
+ 
   time_t _t;
   time(&_t);
   
@@ -602,8 +373,6 @@ void write_grid(double& xstotal)   // writes out grid after some events
   std::cout<<" saved grids " << ctime(&_t);
   std::cout<<" ***********************************************"<<std::endl;
 }
- 
-
 
 //
 // ----------------------------------------------
@@ -613,139 +382,64 @@ void write_grid(double& xstotal)   // writes out grid after some events
 
 void getObservable(const double evt[][mxpart])
 {
-  // evt[momentum][particle number-1]
-  // momentum[0,1,2,3] = (x,y,z,E)
-  //
+ // evt[momentum][particle number-1]
+ // momentum[0,1,2,3] = (px,py,pz,E)
 
-  // calculate observables
-  for(int igrid = 0; igrid < Ngrids; igrid++)Observable[igrid] = 0.0; // initialize
-  
-  double p3[4] = {evt[3][2],evt[0][2],evt[1][2],evt[2][2]}; // (E,x,y,z)
-  double p4[4] = {evt[3][3],evt[0][3],evt[1][3],evt[2][3]};
-  double p5[4] = {evt[3][4],evt[0][4],evt[1][4],evt[2][4]};
-  double p6[4] = {evt[3][5],evt[0][5],evt[1][5],evt[2][5]};
-  double p7[4] = {evt[3][6],evt[0][6],evt[1][6],evt[2][6]};
-  double p8[4] = {evt[3][7],evt[0][7],evt[1][7],evt[2][7]};
-
-  double rapidity3 = 0.0;
-  rapidity3 = (p3[0] + p3[3])/(p3[0] - p3[3]);
-  (rapidity3 < 1e-13) ? rapidity3 = 100.0 : rapidity3 = 0.5*std::log(rapidity3);
-  
-  double rapidity4 = 0.0;
-  rapidity4 = (p4[0] + p4[3])/(p4[0] - p4[3]);
-  (rapidity4 < 1e-13) ? rapidity4 = 100.0 : rapidity4 = 0.5*std::log(rapidity4);
-
-  double rapidity5 = 0.0;
-  rapidity5 = (p5[0] + p5[3])/(p5[0] - p5[3]);
-  (rapidity5 < 1e-13) ? rapidity3 = 100.0 : rapidity5 = 0.5*std::log(rapidity5);
-
-  double rapidity6 = 0.0;
-  rapidity6 = (p6[0] + p6[3])/(p6[0] - p6[3]);
-  (rapidity6 < 1e-13) ? rapidity6 = 100.0 : rapidity6 = 0.5*std::log(rapidity6);
-
-  double rapidity7 = 0.0;
-  rapidity7 = (p7[0] + p7[3])/(p7[0] - p7[3]);
-  (rapidity7 < 1e-13) ? rapidity7 = 100.0 : rapidity7 = 0.5*std::log(rapidity7);
-  
-  double rapidity8 = 0.0;
-  rapidity8 = (p8[0] + p8[3])/(p8[0] - p8[3]);
-  (rapidity8 < 1e-13) ? rapidity8 = 100.0 : rapidity8 = 0.5*std::log(rapidity8);
-  
-  double rapidity34 = 0.0;                      // rapidity of particle (3+4) in event record
-  rapidity34  = (p3[0] + p4[0]) + (p3[3] + p4[3]);
-  rapidity34 /= (p3[0] + p4[0]) - (p3[3] + p4[3]);  
-  (rapidity34 < 1e-13) ? rapidity34 = 100.0 : rapidity34 = 0.5*std::log(rapidity34);
-
-  double rapidity56 = 0.0;                      // rapidity of particle (5+6) in event record
-  rapidity56  = (p5[0] + p6[0]) + (p5[3] + p6[3]);
-  rapidity56 /= (p5[0] + p6[0]) - (p5[3] + p6[3]);
-  (rapidity56 < 1e-13) ? rapidity56 = 100.0 : rapidity56 = 0.5*std::log(rapidity56);
-
-  double rapidity345 = 0.0;                      // rapidity of particle (3+4+5) in event record
-  rapidity345  = (p3[0] + p4[0] + p5[0]) + (p3[3] + p4[3] + p5[3]);
-  rapidity345 /= (p3[0] + p4[0] + p5[0]) - (p3[3] + p4[3] + p5[3]);  
-  (rapidity345 < 1e-13) ? rapidity345 = 100.0 : rapidity345 = 0.5*std::log(rapidity345);
-
-  double rapidity678 = 0.0;                      // rapidity of particle (7+6+8) in event record
-  rapidity678  = (p6[0] + p7[0] + p8[0]) + (p6[3] + p7[3] + p8[3]);
-  rapidity678 /= (p6[0] + p7[0] + p8[0]) - (p6[3] + p7[3] + p8[3]);  
-  (rapidity678 < 1e-13) ? rapidity678 = 100.0 : rapidity678 = 0.5*std::log(rapidity678);
-
-  
-  double pt3 = 0;
-  pt3 = std::sqrt( p3[1]*p3[1] + p3[2]*p3[2] );
-  
-  double pt4 = 0;
-  pt4 = std::sqrt( p4[1]*p4[1] + p4[2]*p4[2] );
-
-  double pt5 = 0;
-  pt5 = std::sqrt( p5[1]*p5[1] + p5[2]*p5[2] );
-
-  double pt6 = 0;
-  pt6 = std::sqrt( p6[1]*p6[1] + p6[2]*p6[2] );
-  
-  double pt7 = 0;
-  pt7 = std::sqrt( p7[1]*p7[1] + p7[2]*p7[2] );
-
-  double pt8 = 0;
-  pt8 = std::sqrt( p8[1]*p8[1] + p8[2]*p8[2] );
-  
-  double pt34 = 0;
-  pt34 = std::sqrt( std::pow(p3[1] + p4[1],2) + std::pow(p3[2] + p4[2],2) );
-
-  double pt56 = 0;
-  pt56 = std::sqrt( std::pow(p5[1] + p6[1],2) + std::pow(p5[2] + p6[2],2) );
-  
-  double pt345 = 0;
-  pt345 = std::sqrt( std::pow(p3[1] + p4[1] + p5[1],2) + std::pow(p3[2] + p4[2] + p5[2],2) );
-
-  double pt678 = 0;
-  pt678 = std::sqrt( std::pow(p6[1] + p7[1] + p8[1],2) + std::pow(p6[2] + p7[2] + p8[2],2) );
-
-  if ( (nproc_.nproc >= 280) && (nproc_.nproc <= 286)) {
-    Observable[ 0 ] = std::fabs(rapidity3);
-    //Observable[ 1 ] = pt3;
-    //Observable[ 2 ] = pt3;
+  // Select particles for kinematic cuts
+  for(unsigned short int ik=0; ik<std::stoi(steeringFile->nKinPar()); ik++){
+    TLorentzVector kp(evt[0][k_zoo[ik]-1],evt[1][k_zoo[ik]-1],evt[2][k_zoo[ik]-1],evt[3][k_zoo[ik]-1]);
+    Kinematics_pt[ik]  = kp.Pt();   
+    Kinematics_eta[ik] = kp.Eta();
   }
-  else {
-    Observable[ 0 ] = rapidity3;
-    //Observable[ 1 ] = pt3;
-    //Observable[ 2 ] = rapidity4;
-  }
-  
-  Observable[ 0 ] = rapidity4;
-  Observable[ 1 ] = pt4;
-  //Observable[ 5 ] = pt5;
 
+  // Select particles as observables
+  for(unsigned short int ig=0; ig<ngrids; ig++){
+    Observable[ig] = 0.0;
+    TLorentzVector gp(evt[0][g_zoo[ig]-1],evt[1][g_zoo[ig]-1],evt[2][g_zoo[ig]-1],evt[3][g_zoo[ig]-1]); //particle to fill grid  (number-1)
+
+    // Matching and defining* requested observable 
+    // *Here for observables calculation ROOT methods are used 
+         if( (steeringFile->customGrid(ig,0) == "Eta")      || ((steeringFile->customGrid(ig,0)) == "eta") ) Observable[ig] = gp.Eta(); 
+    else if( (steeringFile->customGrid(ig,0) == "Pt")       || ((steeringFile->customGrid(ig,0)) == "pt")  ) Observable[ig] = gp.Pt(); 
+    else if( (steeringFile->customGrid(ig,0) == "Et")                                                      ) Observable[ig] = gp.Et(); 
+    else if( (steeringFile->customGrid(ig,0) == "M")        || ((steeringFile->customGrid(ig,0)) == "m")   ) Observable[ig] = gp.M(); 
+    else if( (steeringFile->customGrid(ig,0) == "Energy")   || ((steeringFile->customGrid(ig,0)) == "E")   ) Observable[ig] = gp.E(); 
+    else if( (steeringFile->customGrid(ig,0) == "Rapidity") || ((steeringFile->customGrid(ig,0)) == "y")   ) Observable[ig] = gp.Rapidity();
+    else {
+          std::cerr << "\n"; 
+          std::cerr << " =====================> ERROR <=================== \n";
+          std::cerr << "  \"The Observable name '" << (steeringFile->customGrid(ig,0))  << "' is UNKNOWN\"\n ";
+          std::cerr << "  Available names:\n";
+          std::cerr << "   rapidity: 'Rapidity', 'y'\n" ;
+          std::cerr << "   energy:   'Energy', 'E'\n" ;
+          std::cerr << "   pseudorapidity: 'Eta', 'eta'\n" ;
+          std::cerr << "   transverse momentum: 'Pt',  'pt'\n" ;
+          std::cerr << "   mass : 'M',   'm'\n" ;
+          std::cerr << "   transverse energy: 'Et'\n" ;
+          std::cerr << " \"Please check the steering file\"\n "  ;
+          std::cerr << " Terminating...\n" ;
+          std::cerr << " ================================================= \n";
+          std::cerr << " " << std::endl; 
+          exit(0);
+         }
+  }
 }
 
 int cuts(int igrid)
 {
-  int fill = 0;
-  switch(igrid)
-    {
-    case(0):
-      if(fabs(Observable[igrid]) <= 2.4) fill = 1;
-      break;
-    case(1):
-      if(Observable[1] <= 100.0 ) fill = 1;
-      break;
-    case(2):
-      fill = 1;
-      break;
-    case(3):
-      fill = 1;
-      break;
-    case(4):
-      fill = 1;
-      break;
-    case(5):
-      fill = 1;
-      break;
-    default: 
-      std::cerr<<" In gridwrap.cpp::cuts(int). No such process : "<<igrid<<std::endl;
-      std::exit(-1);
+  int fill = 1;
+  // Loop over kinematic particles to perform pt and eta custom cuts defined in a steering file(grid_setup.txt)
+  for(unsigned short int kp=0; kp<std::stoi(steeringFile->nKinPar()); kp++){
+    if(          Kinematics_pt[kp]   <  std::stod(steeringFile->customKinematics(kp,1))){
+      fill = 0;
     }
+    // Here, probably, is better to remove abs value of eta as default option and add a boolian condition, 
+    // then kinematic parameters in steering file would look like [numberOfParticle ptCut -etaCut +etaCut doAbsEta(1 or 0)] 
+    // if( Kinematics_eta[kp] <= std::stod(steeringFile->customKinematics(kp,2)) && Kinematics_eta[kp] >= std::stod(steeringFile->customKinematics(kp,3)) ){
+    if(std::fabs(Kinematics_eta[kp]) >= std::stod(steeringFile->customKinematics(kp,2))){
+      fill = 0;
+    }   
+  }
   return fill;
 }
 
