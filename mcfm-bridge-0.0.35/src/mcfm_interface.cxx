@@ -182,7 +182,7 @@ void book_grid()  // inital grid booking
       std::cout << " ************************************************************************************************ "<<std::endl;
       gridFiles[igrid] = "_p"+steeringFile->customGrid(igrid,1)+"_"+steeringFile->customGrid(igrid,0)+".root";
       std::cout <<" Grid file suffix : " << gridFiles[igrid] << std::endl;
-      std::cout <<" Number of observable bins = " << std::stoi(steeringFile->customGrid(igrid,2))  << std::endl; 
+      std::cout <<" Number of observable bins = " << std::stoi(steeringFile->customGrid(igrid,3))  << std::endl; 
 
       bool create_new = false;
 
@@ -197,14 +197,14 @@ void book_grid()  // inital grid booking
       }
 
       // Define a custom size for observable
-      double *obs = new double[std::stoi(steeringFile->customGrid(igrid,2))+1];
+      double *obs = new double[std::stoi(steeringFile->customGrid(igrid,3))+1];
 
       // Read, fill and print observable binning
       std::cout << " < Binning for observable " << steeringFile->customGrid(igrid,0) << " of particle " << steeringFile->customGrid(igrid,1) << " in process " <<  myprocess.chan << " > :"  << std::endl;
-      for(int b=0; b<(std::stoi(steeringFile->customGrid(igrid,2))+1); b++){
-           obs[b] =  std::stod(steeringFile->customGrid(igrid,b+3));
+      for(int b=0; b<(std::stoi(steeringFile->customGrid(igrid,3))+1); b++){
+           obs[b] =  std::stod(steeringFile->customGrid(igrid,b+4));
            if(b==0) continue;
-           std::cout << " Bin " << b << " = [" <<  std::stod(steeringFile->customGrid(igrid,b+2)) << " - "<< std::stod(steeringFile->customGrid(igrid,b+3))<< "];" << std::endl;
+           std::cout << " Bin " << b << " = [" <<  std::stod(steeringFile->customGrid(igrid,b+3)) << " - "<< std::stod(steeringFile->customGrid(igrid,b+4))<< "];" << std::endl;
       }
 
       if ( create_new ) 
@@ -216,7 +216,7 @@ void book_grid()  // inital grid booking
 		    << "\n   x: " << myprocess.nxbins  << " bins in range[" <<  std::stod(steeringFile->xLow()) << "-" <<  std::stod(steeringFile->xUp()) << "], interpolation order " <<  myprocess.xOrder
 		    << std::endl;	  
 
-	  mygrid[igrid] = new appl::mcfm_grid( std::stoi(steeringFile->customGrid(igrid,2)), obs,      // obs bins
+	  mygrid[igrid] = new appl::mcfm_grid( std::stoi(steeringFile->customGrid(igrid,3)), obs,      // obs bins
 					       myprocess.nq2bins, myprocess.q2low,   myprocess.q2up,   myprocess.qOrder,         // Q2 bins and interpolation order
 					       myprocess.nxbins,  std::stod(steeringFile->xLow()), std::stod(steeringFile->xUp()), myprocess.xOrder,         // x bins and interpolation order
 					       myprocess.pdf_fun, gridorder_.lowest_order,     std::stoi(steeringFile->nLoops()) ); 
@@ -276,7 +276,7 @@ void fill_grid( const double evt[][mxpart] )
   for(int igrid = 0; igrid < ngrids; igrid++)
     if(cuts(igrid)) mygrid[igrid]->fillMCFM( Observable[igrid] );
     
-  runs++; // counter of number of events (shouldn't this be after cuts)? or is it the number of runs?"
+  runs++;
 }
 
 
@@ -422,6 +422,9 @@ void getObservable(const double evt[][mxpart])
           std::cerr << " " << std::endl; 
           exit(0);
          }
+   
+    if(std::stoi(steeringFile->customGrid(ig,2)) == 1) Observable[ig] = std::fabs(Observable[ig]);
+
   }
 }
 
@@ -435,8 +438,7 @@ int cuts(int igrid)
     }
     // Here, probably, is better to remove abs value of eta as default option and add a boolian condition, 
     // then kinematic parameters in steering file would look like [numberOfParticle ptCut -etaCut +etaCut doAbsEta(1 or 0)] 
-    // if( Kinematics_eta[kp] <= std::stod(steeringFile->customKinematics(kp,2)) && Kinematics_eta[kp] >= std::stod(steeringFile->customKinematics(kp,3)) ){
-    if(std::fabs(Kinematics_eta[kp]) >= std::stod(steeringFile->customKinematics(kp,2))){
+    if( Kinematics_eta[kp] <= std::stod(steeringFile->customKinematics(kp,2)) || Kinematics_eta[kp] >= std::stod(steeringFile->customKinematics(kp,3)) ){
       fill = 0;
     }   
   }
